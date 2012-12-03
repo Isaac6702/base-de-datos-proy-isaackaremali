@@ -364,8 +364,8 @@ create table PERSONAJE (
 create table ELENCO (
     pkPersonaje             number(10)                          not null,
     pkCantante              number(10)                          not null,
-    pkFecha                 date                                not null,
-    CONSTRAINT              pkElenco_idElenco                   PRIMARY KEY (pkPersonaje, pkCantante, pkFecha)
+    pkFechaPresentacion     number(10)                          not null,
+    CONSTRAINT              pkElenco_idElenco                   PRIMARY KEY (pkPersonaje, pkCantante, pkFechaPresentacion)
 );
 
 create table HECHO_BIOGRAFICO (
