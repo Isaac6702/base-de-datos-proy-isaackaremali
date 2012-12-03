@@ -171,7 +171,7 @@ create table PARTE (
     fkParte                 number(10)                                  ,
     fkObra                  number(10)                          not null, 
     CONSTRAINT              pkParte_idParte                     PRIMARY KEY (idParte),
-    CONSTRAINT              chParte_tipo                        CHECK (tipo IN ('acto', 'cavatina', 'barcarola', 'aria', 'obertura', 'recitativo', 'coro', 'duo', 'trio', 'cuarteto', 'concertante'))
+    CONSTRAINT              chParte_tipo                        CHECK (tipo IN ('acto', 'cavatina', 'barcarola', 'aria', 'obertura', 'recitativo', 'coro', 'duo', 'trio', 'cuarteto', 'concertante','romanza'))
 );
 
 create table AUDIO (
