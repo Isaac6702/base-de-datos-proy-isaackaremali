@@ -364,6 +364,12 @@ foreign key (pkCantante)
 references CANTANTE(idCantante)
 on delete cascade;
 
+alter table ELENCO
+add constraint elenco_fkfechaPresentaicon
+foreign key (pkFechaPresentacion)
+references FECHA_PRESENTACION(idFP)
+on delete cascade;
+
 alter table HECHO_BIOGRAFICO
 add constraint hb_fkLugar
 foreign key (fkLugar)
