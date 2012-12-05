@@ -41,6 +41,7 @@ drop table ORQUESTA;
 drop table BALLET;
 drop table VOZ;
 drop table DIRECTOR;
+drop table DIRECTOR_MUSICAL;
 drop table COREOGRAFO;
 drop table DIRECTOR_ESCENOGRAFIA;
 drop table AUTOR;

@@ -72,19 +72,19 @@ on delete cascade;
 
 alter table MUSICO_OBRA
 add constraint mo_fkInstrumento
-foreign key (fkInstrumento)
+foreign key (pkInstrumento)
 references INSTRUMENTO(idInstrumento)
 on delete cascade;
 
 alter table MUSICO_OBRA
-add constraint mo_fkObra 
-foreign key (fkObra)
-references OBRA(idObra)
+add constraint mo_fkPresentacion 
+foreign key (pkPresentacion)
+references FECHA_PRESENTACION(idFP)
 on delete cascade;
 
 alter table MUSICO_OBRA
 add constraint MusObra_fkMusico
-foreign key (fkMusico)
+foreign key (pkMusico)
 references MUSICO(idMusico)
 on delete cascade;
 
@@ -95,9 +95,9 @@ references BAILARIN(idBailarin)
 on delete cascade;
 
 alter table BAILARIN_OBRA
-add constraint bo_fkObra
-foreign key (pkObra)
-references OBRA(idObra)
+add constraint bo_fkPresentacion
+foreign key (pkPresentacion)
+references FECHA_PRESENTACION(idFP)
 on delete cascade;
 
 alter table AUDICION_CANTANTE
@@ -140,6 +140,12 @@ alter table OBRA
 add constraint obra_fkDirector
 foreign key (fkDirector)
 references DIRECTOR(idDirector)
+on delete cascade;
+
+alter table OBRA
+add constraint obra_fkDM
+foreign key (fkDM)
+references DIRECTOR_MUSICAL(idDM)
 on delete cascade;
 
 alter table OBRA
@@ -466,6 +472,12 @@ foreign key (fkDirector)
 references DIRECTOR(idDirector)
 on delete cascade;
 
+alter table ESTUDIO
+add constraint estudio_fkDM
+foreign key (fkDM)
+references DIRECTOR_MUSICAL(idDM)
+on delete cascade;
+
 alter table TRABAJADOR_CARGO
 add constraint tc_fkCargo
 foreign key (fkCargo)
@@ -532,6 +544,12 @@ foreign key (fkDirector)
 references DIRECTOR(idDirector)
 on delete cascade;
 
+alter table TRABAJADOR_CARGO
+add constraint tc_fkDM
+foreign key (fkDM)
+references DIRECTOR_MUSICAL(idDM)
+on delete cascade;
+
 alter table TRABAJADOR
 add constraint trabajador_fkLugar
 foreign key (fkLugar)
@@ -592,6 +610,10 @@ foreign key (fkLugar)
 references LUGAR(idLugar)
 on delete cascade;
 
-
+alter table DIRECTOR_MUSICAL
+add constraint director_fkLugar
+foreign key (fkLugar)
+references LUGAR(idLugar)
+on delete cascade;
 
 

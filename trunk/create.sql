@@ -16,7 +16,7 @@ create or replace type telefono as object (
     numero                  varchar2(15)
 );
 /
-create or replace type telefonos AS VARRAY(5) OF telefono;
+create or replace type telefonos AS VARRAY(3) OF telefono;
 /
 
 create table DEPARTAMENTO (
@@ -138,20 +138,17 @@ create table NACIONALIDAD_TRABAJADOR (
 );
 
 create table MUSICO_OBRA (
-    idMOb                   number(10)                          not null,
-    fecha                   date                                not null,
+    pkInstrumento           number(10)                          not null,
+    pkMusico                number(10)                          not null,
+    pkPresentacion          number(10)                          not null,
     posicion                varchar2(20)                        not null,
-    fkInstrumento           number(10)                          not null,
-    fkMusico                number(10)                          not null,
-    fkObra                  number(10)                          not null,  
-    CONSTRAINT              pkMOb_idMOb                         PRIMARY KEY (idMOb)
+    CONSTRAINT              pkMOb_idMOb                         PRIMARY KEY (pkInstrumento, pkMusico, pkPresentacion)
 );
 
 create table BAILARIN_OBRA (
     pkBailarin              number(10)                          not null,
-    pkObra                  number(10)                          not null,
-    pkFecha                 date                                not null,  
-    CONSTRAINT              pkBO_idBO                           PRIMARY KEY (pkBailarin, pkObra, pkFecha)
+    pkPresentacion          date                                not null,  
+    CONSTRAINT              pkBO_idBO                           PRIMARY KEY (pkBailarin, pkFecha)
 );
 
 create table AUDICION_CANTANTE (
@@ -203,6 +200,7 @@ create table OBRA (
     fkOrquesta              number(10)                                  ,
     fkBallet                number(10)                                  ,
     fkCoreografo            number(10)                          not null,
+    fkDirectorMusical       number(10)                          not null,
     CONSTRAINT              pkObra_idObra                      PRIMARY KEY (idObra)
 );
 
@@ -404,6 +402,7 @@ create table ESTUDIO (
     fkDirectorEscenografia  number(10)                                  ,
     fkCoreografo            number(10)                                  ,
     fkDirector              number(10)                                  ,
+    fkDM                    number(10)                                  ,
     CONSTRAINT              pkEstudio_idEstudio                 PRIMARY KEY (idEstudio)
 );
 
@@ -422,6 +421,7 @@ create table TRABAJADOR_CARGO (
     fkDirectorEscenografia  number(10)                                  ,
     fkCoreografo            number(10)                                  ,
     fkDirector              number(10)                                  ,
+    fkDM                    number(10)                                  ,
     CONSTRAINT              pkTrabajadorCargo_idTC              PRIMARY KEY (idTC)
 );
 
@@ -565,7 +565,19 @@ create table DIRECTOR (
     CONSTRAINT              chDirector_sexo                     CHECK (sexo IN ('f', 'm'))
 );
 
-
+create table DIRECTOR_MUSICAL (
+    idDM                    number(10)                          not null,
+    nombreCompleto          datos_personales                            ,
+    telefono                telefonos                                   ,
+    sexo                    varchar2(10)                        not null,
+    fechaNacimiento         date                                not null,
+    fallecimiento           date                                        ,
+    foto                    blob                                not null,
+    fkLugar                 number(10)                          not null,   
+    detalleDireccion        varchar2(200)                       not null,
+    CONSTRAINT              pkDM_idDM                           PRIMARY KEY (idDM),
+    CONSTRAINT              chDM_sexo                     CHECK (sexo IN ('f', 'm'))
+);
 CREATE SEQUENCE seqDepartamento
      START WITH 1
      INCREMENT BY 1
@@ -775,6 +787,14 @@ CREATE SEQUENCE seqAudicionMusico
      CACHE 10;
      
 CREATE SEQUENCE seqAudicionCantante
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqDirectorMusical
      START WITH 1
      INCREMENT BY 1
      MINVALUE 1
