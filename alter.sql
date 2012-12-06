@@ -611,7 +611,7 @@ references LUGAR(idLugar)
 on delete cascade;
 
 alter table DIRECTOR_MUSICAL
-add constraint director_fkLugar
+add constraint directorMusical_fkLugar
 foreign key (fkLugar)
 references LUGAR(idLugar)
 on delete cascade;
