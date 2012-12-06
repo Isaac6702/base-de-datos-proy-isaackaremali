@@ -9,6 +9,9 @@ drop table MUSICO_ORQUESTA;
 drop table BAILARIN_OBRA;
 drop table BAILARIN_BALLET;
 drop table MUSICO_OBRA;
+drop table TRABAJADOR_OBRA;
+drop table DM_ORQUESTA;
+drop table INVITADO_OBRA;
 drop table HECHO_BIOGRAFICO;
 drop table CARGO;
 drop table DEPARTAMENTO;
@@ -86,5 +89,4 @@ drop sequence seqDirectorMusical;
 
 drop type TELEFONOS;
 drop type TELEFONO;
-drop type PERIODO;
 drop type DATOS_PERSONALES;
