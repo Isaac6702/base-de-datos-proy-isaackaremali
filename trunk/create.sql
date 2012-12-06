@@ -16,7 +16,7 @@ create or replace type telefono as object (
     numero                  varchar2(15)
 );
 /
-create or replace type telefonos AS VARRAY(3) OF telefono;
+create or replace type telefonos AS VARRAY(5) OF telefono;
 /
 
 create table DEPARTAMENTO (
@@ -147,8 +147,8 @@ create table MUSICO_OBRA (
 
 create table BAILARIN_OBRA (
     pkBailarin              number(10)                          not null,
-    pkPresentacion          date                                not null,  
-    CONSTRAINT              pkBO_idBO                           PRIMARY KEY (pkBailarin, pkFecha)
+    pkPresentacion          number(10)                          not null,  
+    CONSTRAINT              pkBO_idBO                           PRIMARY KEY (pkBailarin, pkPresentacion)
 );
 
 create table AUDICION_CANTANTE (
@@ -200,7 +200,7 @@ create table OBRA (
     fkOrquesta              number(10)                                  ,
     fkBallet                number(10)                                  ,
     fkCoreografo            number(10)                          not null,
-    fkDirectorMusical       number(10)                          not null,
+    fkDM                    number(10)                          not null,
     CONSTRAINT              pkObra_idObra                      PRIMARY KEY (idObra)
 );
 
@@ -237,10 +237,10 @@ create table UBICACION (
 create table ENTRADA (
     idEntrada               number(10)                          not null,
     costo                   number(12,2)                        not null,
-    pagada                  number(1)                             not null,
+    pagada                  number(1)                           not null,
     fkUbicacion             number(10)                          not null,
     fkPresentacion          number(10)                          not null,
-    CONSTRAINT              chbooleanPagada                 CHECK (pagada IN (0,1)),
+    CONSTRAINT              chbooleanPagada                     CHECK (pagada IN (0,1)),
     CONSTRAINT              pkEntrada_idEntrada                 PRIMARY KEY (idEntrada) 
 );
 
@@ -576,7 +576,7 @@ create table DIRECTOR_MUSICAL (
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkDM_idDM                           PRIMARY KEY (idDM),
-    CONSTRAINT              chDM_sexo                     CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chDM_sexo                           CHECK (sexo IN ('f', 'm'))
 );
 CREATE SEQUENCE seqDepartamento
      START WITH 1
