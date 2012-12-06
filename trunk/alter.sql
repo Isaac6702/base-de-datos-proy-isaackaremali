@@ -616,4 +616,38 @@ foreign key (fkLugar)
 references LUGAR(idLugar)
 on delete cascade;
 
+alter table TRABAJADOR_OBRA
+add constraint trabajadorObra_fkTrabajador
+foreign key (pkTrabajador)
+references TRABAJADOR(idTrabajador)
+on delete cascade;
 
+alter table TRABAJADOR_OBRA
+add constraint trabajadorObra_fkPresentacion
+foreign key (pkPresentacion)
+references FECHA_PRESENTACION(idFP)
+on delete cascade;
+
+alter table DM_ORQUESTA
+add constraint dmOrquesta_fkDM
+foreign key (pkDM)
+references DIRECTOR_MUSICAL(idDM)
+on delete cascade;
+
+alter table DM_ORQUESTA
+add constraint dmOrquesta_fkOrquesta
+foreign key (pkOrquesta)
+references ORQUESTA(idOrquesta)
+on delete cascade;
+
+alter table INVITADO_OBRA
+add constraint invitadoObra_fkIE
+foreign key (pkIE)
+references INVITADO_ESPECIAL(idIE)
+on delete cascade;
+
+alter table INVITADO_OBRA
+add constraint invitadoObra_fkPresentacion
+foreign key (pkPresentacion)
+references FECHA_PRESENTACION(idFP)
+on delete cascade;

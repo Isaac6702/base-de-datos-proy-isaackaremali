@@ -5,12 +5,6 @@ create or replace type datos_personales as object (
     segundoApellido         varchar2(20)
 );
 /
-create or replace type PERIODO as object (
-    fechaInicio             date,
-    fechaFin                date 
-);
-/
-
 create or replace type telefono as object (
     codigo                  varchar2(3),
     numero                  varchar2(15)
@@ -113,16 +107,27 @@ create table MATERIAL (
 create table BAILARIN_BALLET (
     pkBallet                number(10)                          not null,
     pkBailarin              number(10)                          not null,
-    fechaInicioFin          periodo                                     ,
+    fechaInicio             date                                not null,
+    fechaFin                date                                        ,
     CONSTRAINT              pkBB_idBB                           PRIMARY KEY (pkBallet, pkBailarin)
 );
+
 
 create table MUSICO_ORQUESTA (
     pkMusico                number(10)                          not null,
     pkOrquesta              number(10)                          not null,
-    fechaInicioFin          periodo                                     ,
+    fechaInicio             date                                not null,
+    fechaFin                date                                        ,
     posicion                varchar2(20)                        not null, 
     CONSTRAINT              pkMO_idMO                           PRIMARY KEY (pkMusico, pkOrquesta)
+);
+
+create table DM_ORQUESTA (
+    pkDM                    number(10)                          not null,
+    pkOrquesta              number(10)                          not null,
+    fechaInicio             date                                not null,
+    fechaFin                date                                not null,
+    CONSTRAINT              pkDMO_idDMO                           PRIMARY KEY (pkDM, pkOrquesta)
 );
 
 create table CANTANTE_VOZ (
@@ -149,6 +154,18 @@ create table BAILARIN_OBRA (
     pkBailarin              number(10)                          not null,
     pkPresentacion          number(10)                          not null,  
     CONSTRAINT              pkBO_idBO                           PRIMARY KEY (pkBailarin, pkPresentacion)
+);
+
+create table TRABAJADOR_OBRA (
+    pkTrabajador            number(10)                          not null,
+    pkPresentacion          number(10)                          not null,  
+    CONSTRAINT              pkTO_idTO                           PRIMARY KEY (pkTrabajador, pkPresentacion)
+);
+
+create table INVITADO_OBRA (
+    pkIE                    number(10)                          not null,
+    pkPresentacion          number(10)                          not null,  
+    CONSTRAINT              pkIO_idIO                           PRIMARY KEY (pkIE, pkPresentacion)
 );
 
 create table AUDICION_CANTANTE (
@@ -390,7 +407,8 @@ create table MUSICO_INSTRUMENTO (
 create table ESTUDIO (
     idEstudio               number(10)                          not null,
     descripcion             varchar2(20)                        not null,
-    fechaInicioFin          periodo                                     ,
+    fechaInicio             date                                not null,
+    fechaFin                date                                        ,
     fkInstitucion           number(10)                          not null,
     fkTrabajador            number(10)                                  ,
     fkMusico                number(10)                                  ,
@@ -408,7 +426,8 @@ create table ESTUDIO (
 
 create table TRABAJADOR_CARGO (
     idTC                    number(10)                          not null,
-    fechaInicioFin          periodo                                     ,
+    fechaInicio             date                                not null,
+    fechaFin                date                                        ,
     sueldo                  number(12,2)                        not null,
     fkCargo                 number(10)                          not null,
     fkTrabajador            number(10)                                  ,
