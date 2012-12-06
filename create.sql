@@ -16,7 +16,7 @@ create or replace type telefono as object (
     numero                  varchar2(15)
 );
 /
-create or replace type telefonos AS VARRAY(5) OF telefono;
+create or replace type telefonos AS VARRAY(3) OF telefono;
 /
 
 create table DEPARTAMENTO (
