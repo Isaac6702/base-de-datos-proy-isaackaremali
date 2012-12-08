@@ -27,6 +27,6 @@ END;
 INSERT INTO prueba (id, foto) VALUES (2, empty_blob());
 
 BEGIN
-loadBlob('c:/BaseDeDatosII(2)/nat.jpeg',1);
+loadBlob('nat.jpeg',1);
 END;
 /
