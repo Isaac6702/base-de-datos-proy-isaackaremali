@@ -142,6 +142,66 @@ create table NACIONALIDAD_TRABAJADOR (
     CONSTRAINT              pkNT_idNT                           PRIMARY KEY (pkNacionalidad, pkTrabajador)
 );
 
+create table NACIONALIDAD_INVITADO (
+    pkNacionalidad          number(10)                          not null,
+    pkInvitado              number(10)                          not null,  
+    CONSTRAINT              pkNI_idNI                           PRIMARY KEY (pkNacionalidad, pkInvitado)
+);
+
+create table NACIONALIDAD_DIRECTOR (
+    pkNacionalidad          number(10)                          not null,
+    pkDirector              number(10)                          not null,  
+    CONSTRAINT              pkND_idND                           PRIMARY KEY (pkNacionalidad, pkDirector)
+);
+
+create table NACIONALIDAD_AUTOR (
+    pkNacionalidad          number(10)                          not null,
+    pkAutor                 number(10)                          not null,  
+    CONSTRAINT              pkNA_idNA                           PRIMARY KEY (pkNacionalidad, pkAutor)
+);
+
+create table NACIONALIDAD_DM (
+    pkNacionalidad          number(10)                          not null,
+    pkDM                    number(10)                          not null,  
+    CONSTRAINT              pkNDM_idNDM                         PRIMARY KEY (pkNacionalidad, pkDM)
+);
+
+create table NACIONALIDAD_DE (
+    pkNacionalidad          number(10)                          not null,
+    pkDE                    number(10)                          not null,  
+    CONSTRAINT              pkNMDE_idNDE                        PRIMARY KEY (pkNacionalidad, pkDE)
+);
+
+create table NACIONALIDAD_COREOGRAFO (
+    pkNacionalidad          number(10)                          not null,
+    pkCoreografo            number(10)                          not null,  
+    CONSTRAINT              pkNCO_idNCO                         PRIMARY KEY (pkNacionalidad, pkCoreografo)
+);
+
+create table NACIONALIDAD_BAILARIN (
+    pkNacionalidad          number(10)                          not null,
+    pkBailarin              number(10)                          not null,  
+    CONSTRAINT              pkNB_idNB                          PRIMARY KEY (pkNacionalidad, pkBailarin)
+);
+
+create table NACIONALIDAD_CANTANTE (
+    pkNacionalidad          number(10)                          not null,
+    pkCantante              number(10)                          not null,  
+    CONSTRAINT              pkNC_idNC                          PRIMARY KEY (pkNacionalidad, pkCantante)
+);
+
+create table NACIONALIDAD_MUSICO (
+    pkNacionalidad          number(10)                          not null,
+    pkMusico                number(10)                          not null,  
+    CONSTRAINT              pkNM_idNM                          PRIMARY KEY (pkNacionalidad, pkMusico)
+);
+
+create table NACIONALIDAD_ESCENOGRAFO (
+    pkNacionalidad          number(10)                          not null,
+    pkEscenografo           number(10)                          not null,  
+    CONSTRAINT              pkNe_idNE                          PRIMARY KEY (pkNacionalidad, pkEscenografo)
+);
+
 create table MUSICO_OBRA (
     pkInstrumento           number(10)                          not null,
     pkMusico                number(10)                          not null,
@@ -594,9 +654,12 @@ create table DIRECTOR_MUSICAL (
     foto                    blob                                not null,
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
     CONSTRAINT              pkDM_idDM                           PRIMARY KEY (idDM),
-    CONSTRAINT              chDM_sexo                           CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chDM_sexo                           CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              chDM_booleanInvitado                CHECK (invitado IN (0,1))
 );
+
 CREATE SEQUENCE seqDepartamento
      START WITH 1
      INCREMENT BY 1

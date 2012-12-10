@@ -651,3 +651,123 @@ add constraint invitadoObra_fkPresentacion
 foreign key (pkPresentacion)
 references FECHA_PRESENTACION(idFP)
 on delete cascade;
+
+alter table NACIONALIDAD_DIRECTOR
+add constraint nd_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_DIRECTOR
+add constraint nd_fkDirector
+foreign key (pkDirector)
+references DIRECTOR(idDirector)
+on delete cascade;
+
+alter table NACIONALIDAD_DM
+add constraint ndm_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_DM
+add constraint ndm_fkDM
+foreign key (pkDM)
+references DIRECTOR_MUSICAL(idDM)
+on delete cascade;
+
+alter table NACIONALIDAD_DE
+add constraint nde_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_DE
+add constraint nde_fkDE
+foreign key (pkDE)
+references DIRECTOR_ESCENOGRAFIA(idDE)
+on delete cascade;
+
+alter table NACIONALIDAD_COREOGRAFO
+add constraint nco_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_COREOGRAFO
+add constraint nco_fkDM
+foreign key (pkCoreografo)
+references COREOGRAFO(idCoreografo)
+on delete cascade;
+
+alter table NACIONALIDAD_BAILARIN
+add constraint nb_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_BAILARIN
+add constraint nb_fkBailarin
+foreign key (pkBailarin)
+references BAILARIN(idBailarin)
+on delete cascade;
+
+alter table NACIONALIDAD_CANTANTE
+add constraint nc_fkNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_CANTANTE
+add constraint nc_fkCantante
+foreign key (pkCantante)
+references CANTANTE(idCantante)
+on delete cascade;
+
+alter table NACIONALIDAD_MUSICO
+add constraint nm_fKNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_MUSICO
+add constraint nm_fkMusico
+foreign key (pkMusico)
+references MUSICO(idMusico)
+on delete cascade;
+
+alter table NACIONALIDAD_ESCENOGRAFO
+add constraint ne_fKNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_ESCENOGRAFO
+add constraint ne_fkEscenografo
+foreign key (pkEscenografo)
+references ESCENOGRAFO(idEscenografo)
+on delete cascade;
+
+alter table NACIONALIDAD_AUTOR
+add constraint na_fKNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_AUTOR
+add constraint na_fkAutor
+foreign key (pkAutor)
+references AUTOR(idAutor)
+on delete cascade;
+
+alter table NACIONALIDAD_INVITADO
+add constraint ni_fKNacionalidad
+foreign key (pkNacionalidad)
+references NACIONALIDAD(idNacionalidad)
+on delete cascade;
+
+alter table NACIONALIDAD_INVITADO
+add constraint ni_fkInvitado
+foreign key (pkInvitado)
+references INVITADO_ESPECIAL(idIE)
+on delete cascade;
