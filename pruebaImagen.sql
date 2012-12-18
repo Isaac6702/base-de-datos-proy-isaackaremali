@@ -1,5 +1,5 @@
 CREATE OR REPLACE 
-DIRECTORY IMAGES AS 'C:\BaseDeDatosII(2)';
+DIRECTORY IMAGES AS 'C:/BaseDeDatosII/imagenes/';
 
 GRANT READ ON DIRECTORY IMAGES to PUBLIC;
 
@@ -27,6 +27,6 @@ END;
 INSERT INTO prueba (id, foto) VALUES (2, empty_blob());
 
 BEGIN
-loadBlob('nat.jpeg',1);
+loadBlob('nat.jpg',1);
 END;
 /
