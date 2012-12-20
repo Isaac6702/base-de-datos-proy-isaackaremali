@@ -16,23 +16,23 @@ create or replace type telefonos AS VARRAY(3) OF telefono;
 create table DEPARTAMENTO (
     idDepartamento          number(10)                          not null,
     nombre                  varchar2(20)                        not null,
-    tipoAscenso             varchar2(10)                        not null,
     tiempoAscenso           number(10)                                  ,
-    CONSTRAINT              pkDepartamento_idDepartamento       PRIMARY KEY (idDepartamento),
-    CONSTRAINT              ch_tipoAscenso                      CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
+    CONSTRAINT              pkDepartamento_idDepartamento       PRIMARY KEY (idDepartamento)
 );
 
 create table CARGO (
     idCargo                 number(10)                          not null,
     nombre                  varchar2(20)                        not null,
+    tipoAscenso             varchar2(10)                        not null,
     fkDepartamento          number(10)                          not null,
     fkJefe                  number(10)                                  ,
-    CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo)
+    CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo),
+    CONSTRAINT              chCargo_tipoAscenso                      CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
 );
 
 create table LUGAR (
     idLugar                 number(10)                          not null,
-    nombre                  varchar2(20)                        not null,
+    nombre                  varchar2(50)                        not null,
     tipo                    varchar2(5)                         not null,
     bandera                 blob                                        ,
     fkLugar                 number(10)                                  ,
@@ -66,7 +66,7 @@ create table NACIONALIDAD (
     sexo                    varchar2(5)                         not null,
     fkPais                  number(10)                          not null,  
     CONSTRAINT              pkNacionalidad_idNacionalidad       PRIMARY KEY (idNacionalidad),
-    CONSTRAINT              chNacionalidad_sexo                 CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chNacionalidad_sexo                 CHECK (sexo IN ('f', 'm', 'a'))
 );
 
 create table ORQUESTA (
@@ -511,7 +511,7 @@ create table TRABAJADOR (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkTrabajador_idTrabajador           PRIMARY KEY (idTrabajador),
@@ -525,7 +525,7 @@ create table MUSICO (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkMusico_idMusico                   PRIMARY KEY (idMusico),
@@ -539,7 +539,7 @@ create table CANTANTE (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkCantante_idCantante               PRIMARY KEY (idCantante),
@@ -553,7 +553,7 @@ create table BAILARIN (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkBailarin_idBailarin              PRIMARY KEY (idBailarin),
@@ -567,7 +567,7 @@ create table ESCENOGRAFO (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkEscenografo_idEscenografo         PRIMARY KEY (idEscenografo),
@@ -581,7 +581,7 @@ create table INVITADO_ESPECIAL (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    BLOB                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkIE_idIE                           PRIMARY KEY (idIE),
@@ -595,7 +595,7 @@ create table AUTOR (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkAutor_idAutor                     PRIMARY KEY (idAutor),
@@ -609,7 +609,7 @@ create table DIRECTOR_ESCENOGRAFIA (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkDE_idDE                           PRIMARY KEY (idDE),
@@ -623,7 +623,7 @@ create table COREOGRAFO (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkCoreografo_idCoreografo           PRIMARY KEY (idCoreografo),
@@ -637,7 +637,7 @@ create table DIRECTOR (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkDirector_idDirector               PRIMARY KEY (idDirector),
@@ -651,7 +651,7 @@ create table DIRECTOR_MUSICAL (
     sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
-    foto                    blob                                not null,
+    foto                    blob                                        ,
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
@@ -877,6 +877,14 @@ CREATE SEQUENCE seqAudicionCantante
      CACHE 10;
 
 CREATE SEQUENCE seqDirectorMusical
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqIdioma
      START WITH 1
      INCREMENT BY 1
      MINVALUE 1

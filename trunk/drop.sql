@@ -96,6 +96,7 @@ drop sequence seqPremiacion;
 drop sequence seqAudicionMusico;
 drop sequence seqAudicionCantante;
 drop sequence seqDirectorMusical;
+drop sequence seqIdioma;
 
 drop type TELEFONOS;
 drop type TELEFONO;
