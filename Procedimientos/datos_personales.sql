@@ -1,4 +1,4 @@
-CREATE OR REPLACE function consulta_primer_nombre (paramID IN NUMBER)
+CREATE OR REPLACE function consulta_primer_nombre_trabajadores (paramID IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
 CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
@@ -15,7 +15,7 @@ END LOOP;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_segundo_nombre (paramID IN NUMBER)
+CREATE OR REPLACE function consulta_segundo_nombre_trabajadores (paramID IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
 CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
@@ -32,7 +32,7 @@ END LOOP;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_primer_apellido (paramID IN NUMBER)
+CREATE OR REPLACE function consulta_primer_apellido_trabajadores (paramID IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
 CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
@@ -49,7 +49,7 @@ END LOOP;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_segundo_apellido (paramID IN NUMBER)
+CREATE OR REPLACE function consulta_segundo_apellido_trabajadores (paramID IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
 CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
