@@ -813,7 +813,16 @@ CREATE SEQUENCE seqCoreografo
      NOMAXVALUE
      NOCYCLE
      CACHE 10;
+     
 CREATE SEQUENCE seqDirector
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqTrabajador
      START WITH 1
      INCREMENT BY 1
      MINVALUE 1
