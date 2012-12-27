@@ -1,14 +1,17 @@
-create or replace PROCEDURE insertTrabajador(id IN NUMBER, nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, cargo IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
+create or replace PROCEDURE insertTrabajador(nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, cargo IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
 l_bfile  BFILE;
 l_blob   BLOB;
+CURSOR BUSQUEDA IS select seqTrabajador.NEXTVAL  from dual;
+ID BUSQUEDA % ROWTYPE;
 BEGIN
 
+FOR ID IN BUSQUEDA LOOP
    validarTDA(nombreCompleto, telefonos);
    
   INSERT INTO TRABAJADOR
    (IDTRABAJADOR, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
   VALUES 
-   (id, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
+   (ID.NEXTVAL, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
   RETURN foto INTO l_blob;
     
     if archivoFoto IS NOT NULL THEN
@@ -22,13 +25,13 @@ BEGIN
 INSERT INTO TRABAJADOR_CARGO
     (IDTC, FECHAINICIO, SUELDO, FKTRABAJADOR, FKCARGO)
   VALUES 
-   (seqTrabajadorCargo.NEXTVAL, fechaInicioCargo, sueldo, id, cargo);
+   (seqTrabajadorCargo.NEXTVAL, fechaInicioCargo, sueldo, ID.NEXTVAL, cargo);
   
 INSERT INTO NACIONALIDAD_TRABAJADOR
    (PKNACIONALIDAD, PKTRABAJADOR)
   VALUES
-   (nacionalidad, id);
-
+   (nacionalidad, ID.NEXTVAL);
+END LOOP;
 COMMIT;
  
 EXCEPTION WHEN OTHERS THEN
