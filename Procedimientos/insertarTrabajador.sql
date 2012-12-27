@@ -10,12 +10,14 @@ BEGIN
   VALUES 
    (id, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
   RETURN foto INTO l_blob;
-
-  l_bfile := BFILENAME('IMAGES', archivoFoto);
-  DBMS_LOB.fileopen(l_bfile, Dbms_Lob.File_Readonly);
-  DBMS_LOB.loadfromfile(l_blob,l_bfile,DBMS_LOB.getlength(l_bfile));
-  DBMS_LOB.fileclose(l_bfile);
-
+    
+    if archivoFoto IS NOT NULL THEN
+        l_bfile := BFILENAME('IMAGES', archivoFoto);
+        DBMS_LOB.fileopen(l_bfile, Dbms_Lob.File_Readonly);
+        DBMS_LOB.loadfromfile(l_blob,l_bfile,DBMS_LOB.getlength(l_bfile));
+        DBMS_LOB.fileclose(l_bfile);
+        
+    end if;
 
 INSERT INTO TRABAJADOR_CARGO
     (IDTC, FECHAINICIO, SUELDO, FKTRABAJADOR, FKCARGO)
