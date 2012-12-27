@@ -1,4 +1,4 @@
-CREATE OR REPLACE function consulta_telefonos (paramID IN NUMBER)
+CREATE OR REPLACE function consulta_telefonos_trabajadores (paramID IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(500);
 CURSOR BUSQUEDA IS select * from trabajador WHERE trabajador.IDTRABAJADOR = paramID;
