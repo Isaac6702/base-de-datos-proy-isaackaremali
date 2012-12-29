@@ -25,8 +25,8 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select IDTRABAJADOR id, consulta_primer_nombre(IDTRABAJADOR) PrimerNombre, consulta_segundo_nombre(IDTRABAJADOR) SegundoNombre, consulta_primer_apellido(IDTRABAJADOR) PrimerApellido, consulta_segundo_apellido(IDTRABAJADOR) SegundoNombre, consulta_telefonos(IDTRABAJADOR) telefonos, c.nombre cargo, t.foto foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR");
-                    llenarTabla(tablaBD);
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select IDTRABAJADOR id, consulta_primer_nombre(IDTRABAJADOR) PrimerNombre, consulta_segundo_nombre(IDTRABAJADOR) SegundoNombre, consulta_primer_apellido(IDTRABAJADOR) PrimerApellido, consulta_segundo_apellido(IDTRABAJADOR) SegundoNombre, consulta_telefonos(IDTRABAJADOR) telefonos,c.nombre cargo, edades(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR");
+                llenarTabla(tablaBD);
             }
         }
 
@@ -68,6 +68,7 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Segundo Apelldio");
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Cargo");
+            tablaAux.Columns.Add("Antigüedad");
             tablaAux.Columns.Add("foto", typeof(Image));
 
             while (tablaBD.Read())
@@ -77,11 +78,11 @@ namespace pruebaGridView
                     byte[] auxByte = (byte[])tablaBD["foto"];
                     Image imagen = llenarImagen(auxByte,tablaBD["ID"] + tablaBD["PRIMERNOMBRE"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDONOMBRE"], tablaBD["TELEFONOS"], tablaBD["CARGO"], imagen);
+                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDONOMBRE"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDONOMBRE"], tablaBD["TELEFONOS"], tablaBD["CARGO"]);
+                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDONOMBRE"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"]);
                
                 }
             
