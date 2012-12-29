@@ -829,3 +829,11 @@ CREATE SEQUENCE seqTrabajador
      NOMAXVALUE
      NOCYCLE
      CACHE 10;
+     
+CREATE SEQUENCE seqDirectorEscenografia
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
