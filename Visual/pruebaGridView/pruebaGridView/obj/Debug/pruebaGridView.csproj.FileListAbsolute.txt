@@ -7,3 +7,12 @@
 \\psf\Home\Documents\Visual Studio 2012\Projects\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csproj.GenerateResource.Cache
 \\psf\Home\Documents\Visual Studio 2012\Projects\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.exe
 \\psf\Home\Documents\Visual Studio 2012\Projects\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.exe.config
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.exe
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.exe
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csprojResolveAssemblyReference.cache
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.Form1.resources
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csproj.GenerateResource.Cache
