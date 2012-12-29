@@ -30,7 +30,7 @@ create table DEPARTAMENTO (
 
 create table CARGO (
     idCargo                 number(10)                          not null,
-    nombre                  varchar2(20)                        not null,
+    nombre                  varchar2(100)                        not null,
     fkDepartamento          number(10)                          not null,
     fkJefe                  number(10)                                  ,
     CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo)
