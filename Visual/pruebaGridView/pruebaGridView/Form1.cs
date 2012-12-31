@@ -25,7 +25,7 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select IDTRABAJADOR id, consulta_primer_nombre(IDTRABAJADOR) PrimerNombre, consulta_segundo_nombre(IDTRABAJADOR) SegundoNombre, consulta_primer_apellido(IDTRABAJADOR) PrimerApellido, consulta_segundo_apellido(IDTRABAJADOR) SegundoNombre, consulta_telefonos(IDTRABAJADOR) telefonos,c.nombre cargo, edades(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select IDTRABAJADOR id, consulta_primer_nombre(IDTRABAJADOR) PrimerNombre, consulta_segundo_nombre(IDTRABAJADOR) SegundoNombre, consulta_primer_apellido(IDTRABAJADOR) PrimerApellido, consulta_segundo_apellido(IDTRABAJADOR) SegundoNombre, consulta_telefonos(IDTRABAJADOR) telefonos,c.nombre cargo, edades(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR AND tc.FECHAFIN = NULL");
                 llenarTabla(tablaBD);
             }
         }

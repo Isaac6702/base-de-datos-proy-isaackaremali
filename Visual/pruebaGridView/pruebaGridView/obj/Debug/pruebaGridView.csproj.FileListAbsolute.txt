@@ -15,3 +15,4 @@ C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csproj.GenerateResource.Cache
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.exe
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csprojResolveAssemblyReference.cache
