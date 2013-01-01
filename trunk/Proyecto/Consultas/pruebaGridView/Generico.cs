@@ -1,0 +1,76 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace pruebaGridView
+{
+    static class Generico    
+    {
+
+        public static string generarParametroFiltrado(List<string> lista)
+        {
+            string parametro = "";
+            for (int i = 0; i < lista.Count(); i++)
+            {
+                if (i == lista.Count() - 1)
+                    parametro = parametro + lista[i];
+                else
+                    parametro = parametro + lista[i] + " AND ";
+
+            }
+            return parametro;
+        }
+
+        public static void filtrar(DataGridView gridView, DataTable tablaReporte, String parametroFiltrado)
+        {
+            BindingSource filtro = new BindingSource();
+            filtro.DataSource = tablaReporte.Copy();
+            if (parametroFiltrado.Length != 0)
+            {
+                filtro.Filter = parametroFiltrado;
+
+                gridView.DataSource = filtro;
+            }
+            
+        }
+     
+
+
+        public static Image llenarImagen(byte[] imagenBlob, String nombre)
+        {
+            Image imagen = null;
+            int ancho = 75;
+            int largo = 97;
+            Bitmap b = new Bitmap(ancho, largo);
+            Graphics g = Graphics.FromImage((Image)b);
+            String rutaImagen = "C:/fotos/" + nombre + ".jpg";
+
+            if (imagenBlob.Length != 0)
+            {
+
+                byte[] blob = imagenBlob;
+                FileStream FS = new FileStream(rutaImagen, FileMode.Create);
+                FS.Write(blob, 0, blob.Length);
+                FS.Close();
+
+                imagen = Image.FromFile(rutaImagen);
+                //ajustar tamaño         
+                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                //Dibujamos la imagen con las nuevas dimensiones
+                g.DrawImage(imagen, 0, 0, ancho, largo);
+                g.Dispose();
+
+            }
+            return (Image)b;
+
+        }
+
+    }
+}
