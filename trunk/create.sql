@@ -531,7 +531,7 @@ create table MUSICO (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkMusico_idMusico                   PRIMARY KEY (idMusico),
-    CONSTRAINT              chMusico_sexo                   CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chMusico_sexo                       CHECK (sexo IN ('f', 'm'))
 );
 
 create table CANTANTE (
