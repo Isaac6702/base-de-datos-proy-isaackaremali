@@ -17,7 +17,8 @@ create table DEPARTAMENTO (
     idDepartamento          number(10)                          not null,
     nombre                  varchar2(20)                        not null,
     tiempoAscenso           number(10)                                  ,
-    CONSTRAINT              pkDepartamento_idDepartamento       PRIMARY KEY (idDepartamento)
+    CONSTRAINT              pkDepartamento_idDepartamento       PRIMARY KEY (idDepartamento),
+    CONSTRAINT              cNombre_departamento                 UNIQUE(nombre)
 );
 
 create table CARGO (
@@ -27,7 +28,8 @@ create table CARGO (
     fkDepartamento          number(10)                          not null,
     fkJefe                  number(10)                                  ,
     CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo),
-    CONSTRAINT              chCargo_tipoAscenso                      CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
+    CONSTRAINT              cNombre_cargo                       UNIQUE(nombre),
+    CONSTRAINT              chCargo_tipoAscenso                 CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
 );
 
 create table LUGAR (
@@ -43,13 +45,15 @@ create table LUGAR (
 create table INSTITUCION (
     idInstitucion          number(10)                          not null,
     nombre                 varchar2(20)                        not null, 
-    CONSTRAINT             pkInstitucion_idInstitucion         PRIMARY KEY (idInstitucion)
+    CONSTRAINT             pkInstitucion_idInstitucion         PRIMARY KEY (idInstitucion),
+    CONSTRAINT             cNombre_institucion                 UNIQUE(nombre)
 );
 
 create table INSTRUMENTO (
     idInstrumento          number(10)                          not null,
     nombre                 varchar2(20)                        not null, 
-    CONSTRAINT             pkInstrumento_idInstrumento         PRIMARY KEY (idInstrumento)
+    CONSTRAINT             pkInstrumento_idInstrumento         PRIMARY KEY (idInstrumento),
+    CONSTRAINT             cNombre_instrumento                 UNIQUE(nombre)
 );
 
 create table VOZ (
@@ -57,7 +61,8 @@ create table VOZ (
     nombre                  varchar2(20)                        not null,
     descripcion             varchar2(100)                               ,
     fkVoz                   number(10)                                  , 
-    CONSTRAINT              pkVoz_idVoz                         PRIMARY KEY (idVoz)
+    CONSTRAINT              pkVoz_idVoz                         PRIMARY KEY (idVoz),
+    CONSTRAINT              cNombre_voz                         UNIQUE(nombre)
 );
 
 create table NACIONALIDAD (
@@ -72,21 +77,24 @@ create table NACIONALIDAD (
 create table ORQUESTA (
     idOrquesta              number(10)                          not null,
     nombre                  varchar2(20)                        not null,
-    invitado                number(1)                             not null,
-    CONSTRAINT              chbooleanInvitado                 CHECK (invitado IN (0,1)),
-    CONSTRAINT              pkOrquesta_idOrquesta               PRIMARY KEY (idOrquesta)
+    invitado                number(1)                           not null,
+    CONSTRAINT              chbooleanInvitado                   CHECK (invitado IN (0,1)),
+    CONSTRAINT              pkOrquesta_idOrquesta               PRIMARY KEY (idOrquesta),
+    CONSTRAINT              cNombre_orquesta                    UNIQUE(nombre)
 );
 
 create table BALLET (
     idBallet                number(10)                          not null,
     nombre                  varchar2(20)                        not null,
-    CONSTRAINT              pkBallet_idBallet                   PRIMARY KEY (idBallet)
+    CONSTRAINT              pkBallet_idBallet                   PRIMARY KEY (idBallet),
+    CONSTRAINT              cNombre_ballet                      UNIQUE(nombre)
 );
 
 create table IDIOMA (
     idIdioma                number(10)                          not null,
     nombre                  varchar2(20)                        not null,
-    CONSTRAINT              pkIdioma_idIdioma                   PRIMARY KEY (idIdioma)
+    CONSTRAINT              pkIdioma_idIdioma                   PRIMARY KEY (idIdioma),
+    CONSTRAINT              cNombre_idioma                      UNIQUE(nombre)
 );
 
 
@@ -94,14 +102,16 @@ create table MONEDA (
     idMoneda                number(10)                          not null,
     nombre                  varchar2(20)                        not null,
     valor                   number(12,2)                        not null,   
-    CONSTRAINT              pkMoneda_idMoneda                   PRIMARY KEY (idMoneda)
+    CONSTRAINT              pkMoneda_idMoneda                   PRIMARY KEY (idMoneda),
+    CONSTRAINT              cNombre_moneda                      UNIQUE(nombre)
 );
 
 create table MATERIAL (
     idMaterial              number(10)                          not null,
     nombre                  varchar2(20)                        not null,
     costo                   number(12,2)                        not null, 
-    CONSTRAINT              pkMaterial_idMaterial               PRIMARY KEY (idMaterial)
+    CONSTRAINT              pkMaterial_idMaterial               PRIMARY KEY (idMaterial),
+    CONSTRAINT              cNombre_material                    UNIQUE(nombre)
 );
 
 create table BAILARIN_BALLET (
@@ -633,7 +643,7 @@ create table DIRECTOR_ESCENOGRAFIA (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chDE_booleanInvitado          CHECK (invitado IN (0,1)),
+    CONSTRAINT              chDE_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkDE_idDE                           PRIMARY KEY (idDE),
     CONSTRAINT              chDE_sexo                           CHECK (sexo IN ('f', 'm'))
 );
