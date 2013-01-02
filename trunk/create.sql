@@ -903,7 +903,55 @@ CREATE SEQUENCE seqIdioma
      NOCYCLE
      CACHE 10;
 
+CREATE SEQUENCE seqBailarin
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqEstudio
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqEscenografo
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqCoreografo
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqDirector
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
 CREATE SEQUENCE seqTrabajador
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqDirectorEscenografia
      START WITH 1
      INCREMENT BY 1
      MINVALUE 1
