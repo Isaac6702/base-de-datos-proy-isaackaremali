@@ -46,6 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Cargos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cargos.Designer.cs">
+      <DependentUpon>Cargos.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatosTrabajador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -61,6 +67,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Cargos.resx">
+      <DependentUpon>Cargos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DatosTrabajador.resx">
       <DependentUpon>DatosTrabajador.cs</DependentUpon>
     </EmbeddedResource>
