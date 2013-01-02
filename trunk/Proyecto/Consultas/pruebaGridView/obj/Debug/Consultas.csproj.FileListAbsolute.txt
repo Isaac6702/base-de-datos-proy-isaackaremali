@@ -18,3 +18,14 @@ C:\Users\isaac\Documents\Visual Studio 2012\Projects\Proyecto\Consultas\pruebaGr
 C:\Users\isaac\Documents\Visual Studio 2012\Projects\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Stilo.resources
 C:\Users\isaac\Documents\Visual Studio 2012\Projects\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
 C:\Users\isaac\Documents\Visual Studio 2012\Projects\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.GenerateResource.Cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\bin\Debug\pruebaGridView.exe.config
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.exe
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\bin\Debug\pruebaGridView.exe
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\bin\Debug\pruebaGridView.pdb
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csprojResolveAssemblyReference.cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Cargos.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DatosTrabajador.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Stilo.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.GenerateResource.Cache
