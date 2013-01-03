@@ -85,7 +85,7 @@ create table ORQUESTA (
 
 create table BALLET (
     idBallet                number(10)                          not null,
-    nombre                  varchar2(20)                        not null,
+    nombre                  varchar2(500)                        not null,
     CONSTRAINT              pkBallet_idBallet                   PRIMARY KEY (idBallet),
     CONSTRAINT              cNombre_ballet                      UNIQUE(nombre)
 );
