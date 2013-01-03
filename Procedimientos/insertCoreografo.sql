@@ -3,7 +3,7 @@ DIRECTORY FOTOSCOREOGRAFO AS 'C:\BasesDeDatosII\fotos\fotosCoreografo';
 
 GRANT READ ON DIRECTORY FOTOSCOREOGRAFO to PUBLIC;
 
-create or replace PROCEDURE insertCoreografo(nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
+create or replace PROCEDURE insertCoreografo(pasaporte IN NUMBER, invitado IN NUMBER, nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
 l_bfile  BFILE;
 l_blob   BLOB; 
 CURSOR BUSQUEDA IS select seqCoreografo.NEXTVAL  from dual;
@@ -12,12 +12,13 @@ ID BUSQUEDA % ROWTYPE;
 BEGIN
 FOR ID IN BUSQUEDA LOOP
 
-    validarTDA(nombreCompleto, telefonos);
+    validarTDA(nombreCompleto, telefonos);   
+    validarNacionalidad(sexo, nacionalidad);
           
       INSERT INTO COREOGRAFO
-       (IDCOREOGRAFO, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
+       (IDCOREOGRAFO, PASAPORTE, INVITADO, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
       VALUES 
-       (ID.NEXTVAL, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
+       (ID.NEXTVAL, pasaporte, invitado, nombreCompleto, telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
       RETURN foto INTO l_blob;
       
     if archivoFoto IS NOT NULL THEN
