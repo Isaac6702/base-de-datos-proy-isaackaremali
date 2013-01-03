@@ -1,67 +1,53 @@
-CREATE OR REPLACE function consulta_primer_nombre_trabajadores (paramID IN NUMBER)
+CREATE OR REPLACE function primer_nombre (tda DATOS_PERSONALES)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
-AUX  BUSQUEDA % ROWTYPE;
-
 BEGIN
-FOR AUX IN BUSQUEDA LOOP
-    IF AUX.NombreCompleto.primerNombre IS NOT NULL THEN
-RESULTADO := AUX.NombreCompleto.primerNombre;
 
-END IF;
-END LOOP;
-    
+    IF tda.primerNombre IS NOT NULL THEN
+        
+        RESULTADO := tda.primerNombre;
+        
+    END IF;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_segundo_nombre_trabajadores (paramID IN NUMBER)
+CREATE OR REPLACE function segundo_nombre (tda DATOS_PERSONALES)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
-AUX  BUSQUEDA % ROWTYPE;
-
 BEGIN
-FOR AUX IN BUSQUEDA LOOP
-    IF AUX.NombreCompleto.segundoNombre IS NOT NULL THEN
-RESULTADO := AUX.NombreCompleto.segundoNombre;
 
-END IF;
-END LOOP;
-    
+    IF tda.segundoNombre IS NOT NULL THEN
+        
+        RESULTADO := tda.segundoNombre;
+        
+    END IF;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_primer_apellido_trabajadores (paramID IN NUMBER)
+
+CREATE OR REPLACE function primer_apellido (tda DATOS_PERSONALES)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
-AUX  BUSQUEDA % ROWTYPE;
-
 BEGIN
-FOR AUX IN BUSQUEDA LOOP
-    IF AUX.NombreCompleto.PrimerApellido IS NOT NULL THEN
-RESULTADO := AUX.NombreCompleto.PrimerApellido ;
 
-END IF;
-END LOOP;
-    
+    IF tda.primerApellido IS NOT NULL THEN
+        
+        RESULTADO := tda.primerApellido;
+        
+    END IF;
 RETURN (RESULTADO);
 END;
 
-CREATE OR REPLACE function consulta_segundo_apellido_trabajadores (paramID IN NUMBER)
+CREATE OR REPLACE function segundo_apellido(tda DATOS_PERSONALES)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select * from trabajador  WHERE trabajador.IDTRABAJADOR = paramID;
-AUX  BUSQUEDA % ROWTYPE;
 
 BEGIN
-FOR AUX IN BUSQUEDA LOOP
-    IF AUX.NombreCompleto.segundoApellido IS NOT NULL THEN
-RESULTADO := AUX.NombreCompleto.segundoApellido ;
 
-END IF;
-END LOOP;
-    
+    IF tda.segundoApellido IS NOT NULL THEN
+        
+        RESULTADO := tda.segundoApellido;
+        
+    END IF;
 RETURN (RESULTADO);
 END;

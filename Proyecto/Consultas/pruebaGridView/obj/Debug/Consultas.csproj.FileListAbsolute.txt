@@ -29,3 +29,4 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Dat
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Stilo.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.GenerateResource.Cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Bailarines.resources
