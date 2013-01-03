@@ -1,4 +1,11 @@
-create or replace PROCEDURE insertTrabajador(nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, cargo IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
+
+CREATE OR REPLACE 
+DIRECTORY FOTOSTRABAJADOR AS 'C:\BasesDeDatosII\fotos\fotosTrabajador';
+/
+GRANT READ ON DIRECTORY FOTOSTRABAJADOR to PUBLIC;
+/
+
+create or replace PROCEDURE insertTrabajador(pasaporte IN NUMBER, invitado IN NUMBER,nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, cargo IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
 l_bfile  BFILE;
 l_blob   BLOB;
 CURSOR BUSQUEDA IS select seqTrabajador.NEXTVAL  from dual;
@@ -7,11 +14,12 @@ BEGIN
 
 FOR ID IN BUSQUEDA LOOP
    validarTDA(nombreCompleto, telefonos);
+   validarNacionalidad(sexo, nacionalidad);
    
   INSERT INTO TRABAJADOR
-   (IDTRABAJADOR, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
+   (IDTRABAJADOR, PASAPORTE, INVITADO,NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
   VALUES 
-   (ID.NEXTVAL, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
+   (ID.NEXTVAL, pasaporte, invitado,nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
   RETURN foto INTO l_blob;
     
     if archivoFoto IS NOT NULL THEN

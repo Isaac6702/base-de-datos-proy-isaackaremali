@@ -13,7 +13,7 @@ BEGIN
 FOR ID IN BUSQUEDA LOOP
 
     validarTDA(nombreCompleto, telefonos);
-          
+    validarNacionalidad(sexo, nacionalidad);      
       INSERT INTO BAILARIN
        (IDBAILARIN, PASAPORTE, INVITADO,NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
       VALUES 
