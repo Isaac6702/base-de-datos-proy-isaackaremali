@@ -3,7 +3,7 @@ DIRECTORY FOTOSESCENOGRAFO AS 'C:\BasesDeDatosII\fotos\fotosEscenografo';
 /
 GRANT READ ON DIRECTORY FOTOSESCENOGRAFO to PUBLIC;
 /
-create or replace PROCEDURE insertEscenografo(nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
+create or replace PROCEDURE insertEscenografo(pasaporte IN NUMBER, invitado IN NUMBER, nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
 l_bfile  BFILE;
 l_blob   BLOB; 
 CURSOR BUSQUEDA IS select seqbailarin.NEXTVAL  from dual;
@@ -13,11 +13,12 @@ BEGIN
 FOR ID IN BUSQUEDA LOOP
 
     validarTDA(nombreCompleto, telefonos);
+    validarNacionalidad(sexo, nacionalidad);
           
       INSERT INTO ESCENOGRAFO
-       (IDESCENOGRAFO, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
+       (IDESCENOGRAFO, PASAPORTE, INVITADO, NOMBRECOMPLETO, TELEFONO, SEXO, FECHANACIMIENTO, FALLECIMIENTO, FOTO, FKLUGAR, DETALLEDIRECCION)
       VALUES 
-       (ID.NEXTVAL, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
+       (ID.NEXTVAL, pasaporte, invitado, nombreCompleto , telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion )
       RETURN foto INTO l_blob;
     
     if archivoFoto IS NOT NULL THEN
