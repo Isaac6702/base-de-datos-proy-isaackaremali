@@ -52,6 +52,12 @@
     <Compile Include="Cargos.Designer.cs">
       <DependentUpon>Cargos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Bailarines.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bailarines.Designer.cs">
+      <DependentUpon>Bailarines.cs</DependentUpon>
+    </Compile>
     <Compile Include="DatosTrabajador.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,6 +75,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Cargos.resx">
       <DependentUpon>Cargos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bailarines.resx">
+      <DependentUpon>Bailarines.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DatosTrabajador.resx">
       <DependentUpon>DatosTrabajador.cs</DependentUpon>
