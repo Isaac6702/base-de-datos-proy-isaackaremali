@@ -1,17 +1,12 @@
 create or replace PROCEDURE insertarInstitucion(nombreInstitucion IN VARCHAR2) IS
 
-CURSOR BUSQUEDA_INSTITUCION IS select seqInstitucion.NEXTVAL from dual;
-ID BUSQUEDA_INSTITUCION % ROWTYPE;
-
 BEGIN
-FOR ID IN BUSQUEDA_INSTITUCION LOOP
           
-      INSERT INTO INSTITUCION
+    INSERT INTO INSTITUCION
        (idInstitucion, nombre)
-      VALUES 
-       (ID.NEXTVAL, nombreInstitucion);
-END LOOP;
-
+    VALUES 
+       (seqInstitucion.NEXTVAL, lower(nombreInstitucion));
+       
 COMMIT;
  
 EXCEPTION WHEN OTHERS THEN
