@@ -14,11 +14,11 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class DatosTrabajador : Form
+    public partial class Coreografo : Form
     {
         DataTable tablaAux = new DataTable();
-  
-        public DatosTrabajador()
+
+        public Coreografo()
         {
             InitializeComponent();
 
@@ -26,7 +26,7 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select IDTRABAJADOR id, primer_nombre(NOMBRECOMPLETO) PrimerNombre, segundo_nombre(NOMBRECOMPLETO) SegundoNombre, primer_apellido(NOMBRECOMPLETO) PrimerApellido, segundo_apellido(NOMBRECOMPLETO) SegundoApellido, consultar_telefonos(TELEFONO) telefonos,c.nombre cargo, edades(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR AND tc.FECHAFIN is NULL");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select idcoreografo id, co.pasaporte pasaporte ,primer_nombre(NOMBRECOMPLETO) PrimerNombre, segundo_nombre(NOMBRECOMPLETO) SegundoNombre, primer_apellido(NOMBRECOMPLETO) PrimerApellido, segundo_apellido(NOMBRECOMPLETO) SegundoApellido, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO)antiguedad from coreografo co, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND co.idcoreografo = tc.FKCOREOGRAFO AND tc.FECHAFIN is NULL AND invitado = 0 ");  
                 llenarTabla(tablaBD);
             }
         }
@@ -35,12 +35,12 @@ namespace pruebaGridView
         public void llenarTabla(OracleDataReader tablaBD)
         {
 
+            tablaAux.Columns.Add("Identificador");
             tablaAux.Columns.Add("Primer_Nombre");
             tablaAux.Columns.Add("Segundo_Nombre");
             tablaAux.Columns.Add("Primer_Apellido");
             tablaAux.Columns.Add("Segundo_Apellido");
             tablaAux.Columns.Add("Teléfono");
-            tablaAux.Columns.Add("Cargo");
             tablaAux.Columns.Add("Antigüedad");
             tablaAux.Columns.Add("foto", typeof(Image));
 
@@ -51,11 +51,11 @@ namespace pruebaGridView
                     byte[] auxByte = (byte[])tablaBD["foto"];
                     Image imagen = Generico.llenarImagen(auxByte,tablaBD["ID"] + tablaBD["PRIMERNOMBRE"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], imagen);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"],tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["TELEFONOS"],  tablaBD["antiguedad"], imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"]);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"],tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["TELEFONOS"],  tablaBD["antiguedad"], null);
                
                 }
             
@@ -88,6 +88,11 @@ namespace pruebaGridView
             {
                 lista.Add("Segundo_Apellido='" + TBSegundoApelldio.Text + "'");
             }
+            if (TBIdentificador.TextLength != 0)
+            {
+                lista.Add("identificador='" + TBIdentificador.Text + "'");
+            }
+
 
 
             Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
