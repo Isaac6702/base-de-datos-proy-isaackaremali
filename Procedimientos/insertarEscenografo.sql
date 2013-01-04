@@ -6,7 +6,7 @@ GRANT READ ON DIRECTORY FOTOSESCENOGRAFO to PUBLIC;
 create or replace PROCEDURE insertEscenografo(pasaporte IN NUMBER, invitado IN NUMBER, nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER ) IS
 l_bfile  BFILE;
 l_blob   BLOB; 
-CURSOR BUSQUEDA IS select seqbailarin.NEXTVAL  from dual;
+CURSOR BUSQUEDA IS select seqEscenografo.NEXTVAL  from dual;
 ID BUSQUEDA % ROWTYPE;
 
 BEGIN
