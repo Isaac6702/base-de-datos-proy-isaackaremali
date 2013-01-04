@@ -103,7 +103,7 @@ namespace pruebaGridView
             }
             if (TBIdentificador.TextLength != 0)
             {
-                lista.Add("Identificador='" + TBIdentificador.Text + "'");
+                lista.Add("Identificardor='" + TBIdentificador.Text + "'");
             }
             if (TBNacionalidad.TextLength != 0)
             {
@@ -118,6 +118,11 @@ namespace pruebaGridView
                 tabla.DataSource = tablaAux;
             }
 
+        }
+
+        private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Generico.tbSoloNumero(e);
         }
 
       

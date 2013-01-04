@@ -106,6 +106,11 @@ namespace pruebaGridView
 
         }
 
+        private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            Generico.tbSoloNumero(e);
+        }
+
 
 
 
