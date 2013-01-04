@@ -15,6 +15,7 @@ BEGIN
 FOR ID IN BUSQUEDA LOOP
 
     validarTDA(nombreCompleto, telefonos);
+    validarNacionalidad(sexo, nacionalidad); 
           
       INSERT INTO DIRECTOR_MUSICAL
        (idDM, pasaporte, nombreCompleto, telefono, sexo, fechaNacimiento, fallecimiento, foto, fkLugar, detalleDireccion, invitado)
