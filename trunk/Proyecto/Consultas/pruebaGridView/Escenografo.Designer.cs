@@ -213,6 +213,7 @@
             this.TBIdentificador.Name = "TBIdentificador";
             this.TBIdentificador.Size = new System.Drawing.Size(100, 20);
             this.TBIdentificador.TabIndex = 12;
+            this.TBIdentificador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBIdentificador_KeyPress);
             // 
             // BTBuscar
             // 
