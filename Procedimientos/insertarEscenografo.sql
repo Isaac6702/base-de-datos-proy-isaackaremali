@@ -31,7 +31,7 @@ FOR ID IN BUSQUEDA LOOP
     INSERT INTO TRABAJADOR_CARGO
         (IDTC, FECHAINICIO, SUELDO, FKESCENOGRAFO, FKCARGO)
       VALUES 
-       (seqTrabajadorCargo.NEXTVAL, fechaInicioCargo, sueldo, ID.NEXTVAL, 54);
+       (seqTrabajadorCargo.NEXTVAL, fechaInicioCargo, sueldo, ID.NEXTVAL, 55);
       
     INSERT INTO NACIONALIDAD_ESCENOGRAFO
        (PKNACIONALIDAD, PKESCENOGRAFO)

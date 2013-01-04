@@ -58,11 +58,23 @@
     <Compile Include="Bailarines.Designer.cs">
       <DependentUpon>Bailarines.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatosTrabajador.cs">
+    <Compile Include="Coreografo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DatosTrabajador.Designer.cs">
-      <DependentUpon>DatosTrabajador.cs</DependentUpon>
+    <Compile Include="Coreografo.Designer.cs">
+      <DependentUpon>Coreografo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Escenografo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Escenografo.Designer.cs">
+      <DependentUpon>Escenografo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Trabajador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Trabajador.Designer.cs">
+      <DependentUpon>Trabajador.cs</DependentUpon>
     </Compile>
     <Compile Include="Generico.cs" />
     <Compile Include="Stilo.cs">
@@ -79,8 +91,14 @@
     <EmbeddedResource Include="Bailarines.resx">
       <DependentUpon>Bailarines.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DatosTrabajador.resx">
-      <DependentUpon>DatosTrabajador.cs</DependentUpon>
+    <EmbeddedResource Include="Coreografo.resx">
+      <DependentUpon>Coreografo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Escenografo.resx">
+      <DependentUpon>Escenografo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Trabajador.resx">
+      <DependentUpon>Trabajador.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Stilo.resx">
       <DependentUpon>Stilo.cs</DependentUpon>
