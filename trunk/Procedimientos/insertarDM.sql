@@ -3,7 +3,7 @@ DIRECTORY FOTOSDM AS 'C:\BasesDeDatosII\fotos\fotosDM';
 /
 GRANT READ ON DIRECTORY FOTOSDM to PUBLIC;
 /
-create or replace PROCEDURE insertDM(nombreCompleto IN DATOS_PERSONALES, nroPasaporte IN NUMBER, invitadoDM IN NUMBER, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER) IS
+create or replace PROCEDURE insertDM(nroPasaporte IN NUMBER, invitadoDM IN NUMBER, nombreCompleto IN DATOS_PERSONALES, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER) IS
 l_bfile  BFILE;
 l_blob   BLOB; 
 CURSOR BUSQUEDA IS select seqDirectorMusical.NEXTVAL  from dual;
