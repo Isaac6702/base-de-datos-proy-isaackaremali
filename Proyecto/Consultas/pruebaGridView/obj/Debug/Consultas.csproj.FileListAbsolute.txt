@@ -32,3 +32,4 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csprojRe
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Coreografo.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Escenografo.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Trabajador.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DirectorMusical.resources
