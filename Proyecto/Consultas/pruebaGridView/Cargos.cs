@@ -61,7 +61,7 @@ namespace pruebaGridView
 
             if (TBCargo.TextLength != 0)
             {
-                lista.Add("Cargo='" + TBCargo.Text + "'");
+                lista.Add("Cargo like '%" + TBCargo.Text + "%'");
             }
 
            

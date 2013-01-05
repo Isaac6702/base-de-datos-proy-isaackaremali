@@ -58,6 +58,12 @@
     <Compile Include="Bailarines.Designer.cs">
       <DependentUpon>Bailarines.cs</DependentUpon>
     </Compile>
+    <Compile Include="EntradasVendidas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntradasVendidas.Designer.cs">
+      <DependentUpon>EntradasVendidas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Reservas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -102,6 +108,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Bailarines.resx">
       <DependentUpon>Bailarines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntradasVendidas.resx">
+      <DependentUpon>EntradasVendidas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reservas.resx">
       <DependentUpon>Reservas.cs</DependentUpon>
