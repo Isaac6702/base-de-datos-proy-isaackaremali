@@ -304,8 +304,8 @@ create table USUARIO (
 
 create table UBICACION (
     idUbicacion             number(10)                          not null,
-    tipo                    varchar2(10)                        not null,
-    nombre                  varchar2(10)                        not null,
+    tipo                    varchar2(100)                        not null,
+    nombre                  varchar2(1000)                        not null,
     fkUbicacion             number(10)                                  ,
     CONSTRAINT              pkUbicacion_idUbicacion             PRIMARY KEY (idUbicacion),
     CONSTRAINT              chUbicacion_tipo                    CHECK (tipo IN ('piso', 'zona', 'asiento'))
