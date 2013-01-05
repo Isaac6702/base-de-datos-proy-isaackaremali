@@ -58,6 +58,12 @@
     <Compile Include="Bailarines.Designer.cs">
       <DependentUpon>Bailarines.cs</DependentUpon>
     </Compile>
+    <Compile Include="Reservas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reservas.Designer.cs">
+      <DependentUpon>Reservas.cs</DependentUpon>
+    </Compile>
     <Compile Include="DIrectorMusical.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Bailarines.resx">
       <DependentUpon>Bailarines.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reservas.resx">
+      <DependentUpon>Reservas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DIrectorMusical.resx">
       <DependentUpon>DIrectorMusical.cs</DependentUpon>
