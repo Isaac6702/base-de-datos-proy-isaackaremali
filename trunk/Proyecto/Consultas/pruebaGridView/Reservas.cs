@@ -61,18 +61,18 @@ namespace pruebaGridView
 
             if (TBApellido.TextLength != 0)
             {
-                lista.Add("Apellido='" + TBApellido.Text + "'");
+                lista.Add("Apellido like '%" + TBApellido.Text + "%'");
             }
 
             if (TBFechaReserva.TextLength != 0)
             {
-                lista.Add("Fecha_Reserva='" + TBFechaReserva.Text + "'");
+                lista.Add("Fecha_Reserva ='" + TBFechaReserva.Text + "'");
             }
 
             if (TBFechaOpera.TextLength != 0)
             {
                
-                lista.Add("Fecha_Opera='" + TBFechaOpera.Text + "'");
+                lista.Add("Fecha_Opera like '%" + TBFechaOpera.Text + "%'");
             }
 
             if ( TBIdReserva.TextLength != 0)
@@ -85,11 +85,11 @@ namespace pruebaGridView
             }
             if (TBNombre.TextLength != 0)
             {
-                lista.Add("Nombre='" + TBNombre.Text + "'");
+                lista.Add("Nombre like '%" + TBNombre.Text + "%'");
             }
             if (TBOpera.TextLength != 0)
             {
-                lista.Add("Opera='" + TBOpera.Text + "'");
+                lista.Add("Opera like '%" + TBOpera.Text + "%'");
             }
 
 

@@ -99,7 +99,7 @@ namespace pruebaGridView
 
             if (TBAntiguedad.TextLength != 0)
             {
-                lista.Add("Antigüedad='" + TBAntiguedad.Text + "'");
+                lista.Add("Antigüedad like '%" + TBAntiguedad.Text + "%'");
             }
             if (TBIdentificador.TextLength != 0)
             {
@@ -107,7 +107,7 @@ namespace pruebaGridView
             }
             if (TBNacionalidad.TextLength != 0)
             {
-                lista.Add("Nacionalidad='" + TBNacionalidad.Text + "'");
+                lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
             }
 
 

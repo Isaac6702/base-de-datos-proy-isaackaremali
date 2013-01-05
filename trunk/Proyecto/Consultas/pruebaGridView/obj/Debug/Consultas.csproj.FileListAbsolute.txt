@@ -34,3 +34,4 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.G
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.exe
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.pdb
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csprojResolveAssemblyReference.cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.EntradasVendidas.resources

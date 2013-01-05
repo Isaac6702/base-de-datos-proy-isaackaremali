@@ -72,22 +72,22 @@ namespace pruebaGridView
 
             if (TBPrimerNombre.TextLength != 0)
             {
-                lista.Add("Primer_Nombre='" + TBPrimerNombre.Text + "'");
+                lista.Add("Primer_Nombre like '%" + TBPrimerNombre.Text + "%'");
             }
 
             if (TBSegundoNombre.TextLength != 0)
             {
-                lista.Add("Segundo_Nombre='" + TBSegundoNombre.Text + "'");
+                lista.Add("Segundo_Nombre like '%" + TBSegundoNombre.Text + "%'");
             }
 
             if (TBPrimerApellido.TextLength != 0)
             {
-                lista.Add("Primer_Apellido='" + TBPrimerApellido.Text + "'");
+                lista.Add("Primer_Apellido like '%" + TBPrimerApellido.Text + "%'");
             }
 
             if (TBSegundoApelldio.TextLength!= 0)
             {
-                lista.Add("Segundo_Apellido='" + TBSegundoApelldio.Text + "'");
+                lista.Add("Segundo_Apellido like '%" + TBSegundoApelldio.Text + "%'");
             }
             if (TBIdentificador.TextLength != 0)
             {
