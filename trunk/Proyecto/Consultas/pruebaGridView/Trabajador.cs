@@ -26,7 +26,7 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(t.fklugar, t.detalleDireccion) direccion, IDTRABAJADOR id, pasaporte,primer_nombre(NOMBRECOMPLETO) PrimerNombre, segundo_nombre(NOMBRECOMPLETO) SegundoNombre, primer_apellido(NOMBRECOMPLETO) PrimerApellido, segundo_apellido(NOMBRECOMPLETO) SegundoApellido, consultar_telefonos(TELEFONO) telefonos,c.nombre cargo, Antiguedad(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR AND tc.FECHAFIN is NULL AND t.invitado = 0");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(t.fklugar, t.detalleDireccion) direccion, IDTRABAJADOR id, pasaporte, nombres(NOMBRECOMPLETO) nombres,  apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos,c.nombre cargo, Antiguedad(tc.FECHAINICIO)antigüedad, t.foto from trabajador t, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND t.IDTRABAJADOR = tc.FKTRABAJADOR AND tc.FECHAFIN is NULL AND t.invitado = 0");
                 llenarTabla(tablaBD);
             }
         }
@@ -36,10 +36,8 @@ namespace pruebaGridView
         {
 
             tablaAux.Columns.Add("Identificador");
-            tablaAux.Columns.Add("Primer_Nombre");
-            tablaAux.Columns.Add("Segundo_Nombre");
-            tablaAux.Columns.Add("Primer_Apellido");
-            tablaAux.Columns.Add("Segundo_Apellido");
+            tablaAux.Columns.Add("Nombres");
+            tablaAux.Columns.Add("Apellidos");
             tablaAux.Columns.Add("Direccion");
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Cargo");
@@ -53,11 +51,11 @@ namespace pruebaGridView
                     byte[] auxByte = (byte[])tablaBD["foto"];
                     Image imagen = Generico.llenarImagen(auxByte,tablaBD["ID"] + tablaBD["PRIMERNOMBRE"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], imagen);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["CARGO"], tablaBD["antigüedad"], null);
                
                 }
             
@@ -71,25 +69,17 @@ namespace pruebaGridView
             List<string> lista = new List<string>();
             
 
-            if (TBPrimerNombre.TextLength != 0)
+            if (TBNombres.TextLength != 0)
             {
-                lista.Add("Primer_Nombre like '%" + TBPrimerNombre.Text + "%'");
+                lista.Add("Nombres like '%" + TBNombres.Text + "%'");
             }
 
-            if (TBSegundoNombre.TextLength != 0)
+            if (TBApellidos.TextLength != 0)
             {
-                lista.Add("Segundo_Nombre like'%" + TBSegundoNombre.Text + "&'");
+                lista.Add("Apellidos like '%" + TBApellidos.Text + "%'");
             }
 
-            if (TBPrimerApellido.TextLength != 0)
-            {
-                lista.Add("Primer_Apellido like '%" + TBPrimerApellido.Text + "%'");
-            }
 
-            if (TBSegundoApelldio.TextLength!= 0)
-            {
-                lista.Add("Segundo_Apellido like'%" + TBSegundoApelldio.Text + "%'");
-            }
             if (TBIdentificador.TextLength != 0)
             {
                 lista.Add("identificador='" + TBIdentificador.Text + "'");

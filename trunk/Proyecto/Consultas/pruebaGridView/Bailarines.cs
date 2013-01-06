@@ -24,7 +24,7 @@ namespace pruebaGridView
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, b.pasaporte pasaporte, primer_nombre(b.NOMBRECOMPLETO) primerNombre, segundo_nombre(b.NOMBRECOMPLETO) segundoNombre, primer_apellido(b.NOMBRECOMPLETO) primerApellido, segundo_apellido(b.NOMBRECOMPLETO) segundoApellido, n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, telefonos_bailarines(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idBailarin) estudios, l.bandera bandera, b.foto fotobailarin from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN AND n.fkpais = l.idlugar AND b.invitado = 0");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, telefonos_bailarines(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idBailarin) estudios, l.bandera bandera, b.foto fotobailarin from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN AND n.fkpais = l.idlugar AND b.invitado = 0");
                 llenarTabla(tablaBD);
             }
         }
@@ -32,10 +32,8 @@ namespace pruebaGridView
         public void llenarTabla(OracleDataReader tablaBD)
         {
             tablaAux.Columns.Add("Identificardor");
-            tablaAux.Columns.Add("Primer_Nombre");
-            tablaAux.Columns.Add("Segundo_Nombre");
-            tablaAux.Columns.Add("Primer_Apellido");
-            tablaAux.Columns.Add("Segundo_Apellido");
+            tablaAux.Columns.Add("Nombres");
+            tablaAux.Columns.Add("Apellidos");
             tablaAux.Columns.Add("Nacionalidad");
             tablaAux.Columns.Add("Bandera", typeof(Image));
             tablaAux.Columns.Add("Direccíon");
@@ -53,11 +51,11 @@ namespace pruebaGridView
 
                     byte[] fotoBailarin = (byte[])tablaBD["FOTOBAILARIN"];
                     Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"] + tablaBD["PRIMERNOMBRE"].ToString());
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], foto);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], foto);
 
                 }
                 catch {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["PRIMERNOMBRE"], tablaBD["SEGUNDONOMBRE"], tablaBD["PRIMERAPELLIDO"], tablaBD["SEGUNDOAPELLIDO"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], null);
 
                 
                 }
@@ -77,24 +75,14 @@ namespace pruebaGridView
             List<string> lista = new List<string>();
 
 
-            if (TBPrimerNombre.TextLength != 0)
+            if (TBNombres.TextLength != 0)
             {
-                lista.Add("Primer_Nombre='" + TBPrimerNombre.Text + "'");
+                lista.Add("Nombres like '%" + TBNombres.Text + "%'");
             }
 
-            if (TBSegundoNombre.TextLength != 0)
+            if (TBApellidos.TextLength != 0)
             {
-                lista.Add("Segundo_Nombre='" + TBSegundoNombre.Text + "'");
-            }
-
-            if (TBPrimerApellido.TextLength != 0)
-            {
-                lista.Add("Primer_Apellido='" + TBPrimerApellido.Text + "'");
-            }
-
-            if (TBSegundoApellido.TextLength != 0)
-            {
-                lista.Add("Segundo_Apellido='" + TBSegundoApellido.Text + "'");
+                lista.Add("Apellidos like '%" + TBApellidos.Text + "%'");
             }
 
             if (TBAntiguedad.TextLength != 0)
