@@ -36,14 +36,10 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nombreReporte = new System.Windows.Forms.Label();
-            this.TBPrimerNombre = new System.Windows.Forms.TextBox();
-            this.LBPrimerNombre = new System.Windows.Forms.Label();
-            this.LBSegundoNombre = new System.Windows.Forms.Label();
-            this.TBSegundoNombre = new System.Windows.Forms.TextBox();
             this.LBPrimerApellido = new System.Windows.Forms.Label();
-            this.TBPrimerApellido = new System.Windows.Forms.TextBox();
+            this.TBNombres = new System.Windows.Forms.TextBox();
             this.LBSegundoApellido = new System.Windows.Forms.Label();
-            this.TBSegundoApelldio = new System.Windows.Forms.TextBox();
+            this.TBApellidos = new System.Windows.Forms.TextBox();
             this.LBIdentificador = new System.Windows.Forms.Label();
             this.TBIdentificador = new System.Windows.Forms.TextBox();
             this.BTBuscar = new System.Windows.Forms.Button();
@@ -134,69 +130,37 @@
             this.nombreReporte.TabIndex = 3;
             this.nombreReporte.Text = "Datos  Escenografos";
             // 
-            // TBPrimerNombre
-            // 
-            this.TBPrimerNombre.Location = new System.Drawing.Point(196, 65);
-            this.TBPrimerNombre.Name = "TBPrimerNombre";
-            this.TBPrimerNombre.Size = new System.Drawing.Size(100, 20);
-            this.TBPrimerNombre.TabIndex = 4;
-            // 
-            // LBPrimerNombre
-            // 
-            this.LBPrimerNombre.AutoSize = true;
-            this.LBPrimerNombre.Location = new System.Drawing.Point(138, 68);
-            this.LBPrimerNombre.Name = "LBPrimerNombre";
-            this.LBPrimerNombre.Size = new System.Drawing.Size(57, 13);
-            this.LBPrimerNombre.TabIndex = 5;
-            this.LBPrimerNombre.Text = "1° Nombre";
-            // 
-            // LBSegundoNombre
-            // 
-            this.LBSegundoNombre.AutoSize = true;
-            this.LBSegundoNombre.Location = new System.Drawing.Point(309, 68);
-            this.LBSegundoNombre.Name = "LBSegundoNombre";
-            this.LBSegundoNombre.Size = new System.Drawing.Size(57, 13);
-            this.LBSegundoNombre.TabIndex = 7;
-            this.LBSegundoNombre.Text = "2° Nombre";
-            // 
-            // TBSegundoNombre
-            // 
-            this.TBSegundoNombre.Location = new System.Drawing.Point(368, 65);
-            this.TBSegundoNombre.Name = "TBSegundoNombre";
-            this.TBSegundoNombre.Size = new System.Drawing.Size(100, 20);
-            this.TBSegundoNombre.TabIndex = 6;
-            // 
             // LBPrimerApellido
             // 
             this.LBPrimerApellido.AutoSize = true;
-            this.LBPrimerApellido.Location = new System.Drawing.Point(482, 68);
+            this.LBPrimerApellido.Location = new System.Drawing.Point(493, 68);
             this.LBPrimerApellido.Name = "LBPrimerApellido";
-            this.LBPrimerApellido.Size = new System.Drawing.Size(57, 13);
+            this.LBPrimerApellido.Size = new System.Drawing.Size(49, 13);
             this.LBPrimerApellido.TabIndex = 9;
-            this.LBPrimerApellido.Text = "1° Apelldio";
+            this.LBPrimerApellido.Text = "Nombres";
             // 
-            // TBPrimerApellido
+            // TBNombres
             // 
-            this.TBPrimerApellido.Location = new System.Drawing.Point(545, 65);
-            this.TBPrimerApellido.Name = "TBPrimerApellido";
-            this.TBPrimerApellido.Size = new System.Drawing.Size(100, 20);
-            this.TBPrimerApellido.TabIndex = 8;
+            this.TBNombres.Location = new System.Drawing.Point(545, 65);
+            this.TBNombres.Name = "TBNombres";
+            this.TBNombres.Size = new System.Drawing.Size(100, 20);
+            this.TBNombres.TabIndex = 8;
             // 
             // LBSegundoApellido
             // 
             this.LBSegundoApellido.AutoSize = true;
-            this.LBSegundoApellido.Location = new System.Drawing.Point(664, 68);
+            this.LBSegundoApellido.Location = new System.Drawing.Point(667, 68);
             this.LBSegundoApellido.Name = "LBSegundoApellido";
-            this.LBSegundoApellido.Size = new System.Drawing.Size(57, 13);
+            this.LBSegundoApellido.Size = new System.Drawing.Size(49, 13);
             this.LBSegundoApellido.TabIndex = 11;
-            this.LBSegundoApellido.Text = "2° Apellido";
+            this.LBSegundoApellido.Text = "Apellidos";
             // 
-            // TBSegundoApelldio
+            // TBApellidos
             // 
-            this.TBSegundoApelldio.Location = new System.Drawing.Point(727, 65);
-            this.TBSegundoApelldio.Name = "TBSegundoApelldio";
-            this.TBSegundoApelldio.Size = new System.Drawing.Size(100, 20);
-            this.TBSegundoApelldio.TabIndex = 10;
+            this.TBApellidos.Location = new System.Drawing.Point(720, 65);
+            this.TBApellidos.Name = "TBApellidos";
+            this.TBApellidos.Size = new System.Drawing.Size(100, 20);
+            this.TBApellidos.TabIndex = 10;
             // 
             // LBIdentificador
             // 
@@ -235,13 +199,9 @@
             this.Controls.Add(this.LBIdentificador);
             this.Controls.Add(this.TBIdentificador);
             this.Controls.Add(this.LBSegundoApellido);
-            this.Controls.Add(this.TBSegundoApelldio);
+            this.Controls.Add(this.TBApellidos);
             this.Controls.Add(this.LBPrimerApellido);
-            this.Controls.Add(this.TBPrimerApellido);
-            this.Controls.Add(this.LBSegundoNombre);
-            this.Controls.Add(this.TBSegundoNombre);
-            this.Controls.Add(this.LBPrimerNombre);
-            this.Controls.Add(this.TBPrimerNombre);
+            this.Controls.Add(this.TBNombres);
             this.Controls.Add(this.nombreReporte);
             this.Controls.Add(this.tabla);
             this.Controls.Add(this.pictureBox1);
@@ -265,14 +225,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label nombreReporte;
-        private System.Windows.Forms.TextBox TBPrimerNombre;
-        private System.Windows.Forms.Label LBPrimerNombre;
-        private System.Windows.Forms.Label LBSegundoNombre;
-        private System.Windows.Forms.TextBox TBSegundoNombre;
         private System.Windows.Forms.Label LBPrimerApellido;
-        private System.Windows.Forms.TextBox TBPrimerApellido;
+        private System.Windows.Forms.TextBox TBNombres;
         private System.Windows.Forms.Label LBSegundoApellido;
-        private System.Windows.Forms.TextBox TBSegundoApelldio;
+        private System.Windows.Forms.TextBox TBApellidos;
         private System.Windows.Forms.Label LBIdentificador;
         private System.Windows.Forms.TextBox TBIdentificador;
         private System.Windows.Forms.Button BTBuscar;
