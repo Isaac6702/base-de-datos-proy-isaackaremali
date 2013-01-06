@@ -5,9 +5,15 @@ BEGIN
 
     IF tda.primerNombre IS NOT NULL THEN
         
-        RESULTADO := tda.primerNombre || ' , '|| tda.segundoNombre;
+        RESULTADO := tda.primerNombre;
         
     END IF;
+     IF tda.segundoNombre IS NOT NULL THEN
+        
+        RESULTADO := RESULTADO || ' '|| tda.segundoNombre; 
+        
+    END IF;
+    
 RETURN (RESULTADO);
 END;
 
@@ -19,8 +25,16 @@ BEGIN
 
     IF tda.primerApellido IS NOT NULL THEN
         
-        RESULTADO := tda.primerApellido || ' , '|| tda.segundoApellido;
+        RESULTADO := tda.primerApellido;
         
     END IF;
+    
+    IF tda.segundoApellido IS NOT NULL THEN
+        
+        RESULTADO := RESULTADO || ' '|| tda.segundoApellido;
+        
+    END IF;
+    
+    
 RETURN (RESULTADO);
 END;
