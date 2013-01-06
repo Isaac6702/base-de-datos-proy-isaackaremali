@@ -515,8 +515,11 @@ create table TRABAJADOR (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chTrabajador_booleanInvitado        CHECK (invitado IN (0,1)),
     CONSTRAINT              pkTrabajador_idTrabajador           PRIMARY KEY (idTrabajador),
-    CONSTRAINT              chTrabajador_sexo                   CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chTrabajador_sexo                   CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_trabajador               UNIQUE (pasaporte)
 );
 
 create table MUSICO (
@@ -530,6 +533,8 @@ create table MUSICO (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chMusico_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkMusico_idMusico                   PRIMARY KEY (idMusico),
     CONSTRAINT              chMusico_sexo                       CHECK (sexo IN ('f', 'm'))
 );
@@ -545,6 +550,8 @@ create table CANTANTE (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chCantante_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkCantante_idCantante               PRIMARY KEY (idCantante),
     CONSTRAINT              chCantante_sexo                     CHECK (sexo IN ('f', 'm'))
 );
@@ -560,6 +567,8 @@ create table BAILARIN (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chBailarin_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkBailarin_idBailarin              PRIMARY KEY (idBailarin),
     CONSTRAINT              chBailarin_sexo                    CHECK (sexo IN ('f', 'm'))
 ); 
@@ -575,6 +584,8 @@ create table ESCENOGRAFO (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chEscenografo_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkEscenografo_idEscenografo         PRIMARY KEY (idEscenografo),
     CONSTRAINT              chEscenografo_sexo                  CHECK (sexo IN ('f', 'm'))
 );
@@ -605,6 +616,8 @@ create table AUTOR (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chAutor_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkAutor_idAutor                     PRIMARY KEY (idAutor),
     CONSTRAINT              chAutor_sexo                        CHECK (sexo IN ('f', 'm'))
 );
@@ -620,6 +633,8 @@ create table DIRECTOR_ESCENOGRAFIA (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chDE_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkDE_idDE                           PRIMARY KEY (idDE),
     CONSTRAINT              chDE_sexo                           CHECK (sexo IN ('f', 'm'))
 );
@@ -635,6 +650,8 @@ create table COREOGRAFO (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chCoreografo_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkCoreografo_idCoreografo           PRIMARY KEY (idCoreografo),
     CONSTRAINT              chCoreografo_sexo                   CHECK (sexo IN ('f', 'm'))
 );
@@ -650,6 +667,8 @@ create table DIRECTOR (
     foto                    blob                                        ,
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
+    invitado                number(1)                           not null,
+    CONSTRAINT              chDirector_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkDirector_idDirector               PRIMARY KEY (idDirector),
     CONSTRAINT              chDirector_sexo                     CHECK (sexo IN ('f', 'm'))
 );
