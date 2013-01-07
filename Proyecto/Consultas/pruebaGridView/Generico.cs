@@ -71,6 +71,7 @@ namespace pruebaGridView
             Graphics g = Graphics.FromImage((Image)b);
             String rutaImagen = "C:/fotos/" + nombre + ".jpg";
 
+            Console.WriteLine(" holaaaaaa =");
             if (imagenBlob.Length != 0)
             {
 
