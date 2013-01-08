@@ -27,7 +27,7 @@ create table CARGO (
     fkDepartamento          number(10)                          not null,
     fkJefe                  number(10)                                  ,
     CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo),
-    CONSTRAINT              chCargo_tipoAscenso                      CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
+    CONSTRAINT              chCargo_tipoAscenso                 CHECK (tipoAscenso IN ('tiempo', 'nombrado'))
 );
 
 create table LUGAR (
@@ -72,8 +72,8 @@ create table NACIONALIDAD (
 create table ORQUESTA (
     idOrquesta              number(10)                          not null,
     nombre                  varchar2(20)                        not null,
-    invitado                number(1)                             not null,
-    CONSTRAINT              chbooleanInvitado                 CHECK (invitado IN (0,1)),
+    invitado                number(1)                           not null,
+    CONSTRAINT              chbooleanInvitado                   CHECK (invitado IN (0,1)),
     CONSTRAINT              pkOrquesta_idOrquesta               PRIMARY KEY (idOrquesta)
 );
 
@@ -181,7 +181,7 @@ create table NACIONALIDAD_COREOGRAFO (
 create table NACIONALIDAD_BAILARIN (
     pkNacionalidad          number(10)                          not null,
     pkBailarin              number(10)                          not null,  
-    CONSTRAINT              pkNB_idNB                          PRIMARY KEY (pkNacionalidad, pkBailarin)
+    CONSTRAINT              pkNB_idNB                           PRIMARY KEY (pkNacionalidad, pkBailarin)
 );
 
 create table NACIONALIDAD_CANTANTE (
@@ -290,6 +290,7 @@ create table FECHA_PRESENTACION (
 
 create table USUARIO (
     idUsuario               number(10)                          not null,
+    pasaporte               number(10)                          not null,
     nombre                  datos_personales                            ,
     detalleDireccion        varchar2(200)                       not null,
     telefono                telefonos                                   ,
@@ -299,13 +300,14 @@ create table USUARIO (
     fkIdioma                number(10)                                  ,
     fkNacionalidad          number(10)                          not null,
     CONSTRAINT              pkUsuario_idUsuario                 PRIMARY KEY (idUsuario),
-    CONSTRAINT              chUsuario_sexo                      CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chUsuario_sexo                      CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_usuario                  UNIQUE (pasaporte)   
 );
 
 create table UBICACION (
     idUbicacion             number(10)                          not null,
-    tipo                    varchar2(100)                        not null,
-    nombre                  varchar2(1000)                        not null,
+    tipo                    varchar2(100)                       not null,
+    nombre                  varchar2(1000)                      not null,
     fkUbicacion             number(10)                                  ,
     CONSTRAINT              pkUbicacion_idUbicacion             PRIMARY KEY (idUbicacion),
     CONSTRAINT              chUbicacion_tipo                    CHECK (tipo IN ('piso', 'zona', 'asiento'))
@@ -331,8 +333,8 @@ create table RESERVA (
 create table DETALLE_RESERVA (
     pkReserva               number(10)                          not null,
     pkEntrada               number(10)                          not null,
-    status                  number(1)                           not null,
-    CONSTRAINT              chbooleanStatus                     CHECK (status IN (0,1)),
+    status                  varchar2(10)                        not null,
+    CONSTRAINT              chbooleanStatus                     CHECK (status IN ('a','p','c')),
     CONSTRAINT              pkDR_idDR                           PRIMARY KEY (pkReserva, pkEntrada)
 );
 
@@ -419,6 +421,7 @@ create table ESCENOGRAFIA (
 create table ESCENOGRAFIA_MATERIAL (
     idEM                    number(10)                          not null,
     costo                   number(12,2)                        not null,
+    cantidad                number(12,2)                        not null,
     fkMaterial              number(10)                          not null,
     fkEscenografia          number(10)                          not null,
     CONSTRAINT              pkEM_idEM                           PRIMARY KEY (idEM)
@@ -536,7 +539,8 @@ create table MUSICO (
     invitado                number(1)                           not null,
     CONSTRAINT              chMusico_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkMusico_idMusico                   PRIMARY KEY (idMusico),
-    CONSTRAINT              chMusico_sexo                       CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chMusico_sexo                       CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_musico                   UNIQUE (pasaporte)
 );
 
 create table CANTANTE (
@@ -553,7 +557,8 @@ create table CANTANTE (
     invitado                number(1)                           not null,
     CONSTRAINT              chCantante_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkCantante_idCantante               PRIMARY KEY (idCantante),
-    CONSTRAINT              chCantante_sexo                     CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chCantante_sexo                     CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_Cantante                 UNIQUE (pasaporte)
 );
 
 create table BAILARIN (
@@ -568,9 +573,10 @@ create table BAILARIN (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chBailarin_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              chBailarin_booleanInvitado         CHECK (invitado IN (0,1)),
     CONSTRAINT              pkBailarin_idBailarin              PRIMARY KEY (idBailarin),
-    CONSTRAINT              chBailarin_sexo                    CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chBailarin_sexo                    CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cBailarin_trabajador               UNIQUE (pasaporte)
 ); 
 
 create table ESCENOGRAFO (
@@ -585,9 +591,10 @@ create table ESCENOGRAFO (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chEscenografo_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              chEscenografo_booleanInvitado       CHECK (invitado IN (0,1)),
     CONSTRAINT              pkEscenografo_idEscenografo         PRIMARY KEY (idEscenografo),
-    CONSTRAINT              chEscenografo_sexo                  CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chEscenografo_sexo                  CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cEscenografo_trabajador             UNIQUE (pasaporte)
 );
 
 create table INVITADO_ESPECIAL (
@@ -602,7 +609,8 @@ create table INVITADO_ESPECIAL (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     CONSTRAINT              pkIE_idIE                           PRIMARY KEY (idIE),
-    CONSTRAINT              chIE_sexo                           CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chIE_sexo                           CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_invitado                 UNIQUE (pasaporte)
 ); 
 
 create table AUTOR (
@@ -617,9 +625,10 @@ create table AUTOR (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chAutor_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              chAutor_booleanInvitado             CHECK (invitado IN (0,1)),
     CONSTRAINT              pkAutor_idAutor                     PRIMARY KEY (idAutor),
-    CONSTRAINT              chAutor_sexo                        CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chAutor_sexo                        CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_estudio                  UNIQUE (pasaporte)
 );
 
 create table DIRECTOR_ESCENOGRAFIA (
@@ -636,7 +645,8 @@ create table DIRECTOR_ESCENOGRAFIA (
     invitado                number(1)                           not null,
     CONSTRAINT              chDE_booleanInvitado                CHECK (invitado IN (0,1)),
     CONSTRAINT              pkDE_idDE                           PRIMARY KEY (idDE),
-    CONSTRAINT              chDE_sexo                           CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chDE_sexo                           CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_de                       UNIQUE (pasaporte)
 );
 
 create table COREOGRAFO (
@@ -651,9 +661,10 @@ create table COREOGRAFO (
     fkLugar                 number(10)                          not null,
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chCoreografo_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              chCoreografo_booleanInvitado        CHECK (invitado IN (0,1)),
     CONSTRAINT              pkCoreografo_idCoreografo           PRIMARY KEY (idCoreografo),
-    CONSTRAINT              chCoreografo_sexo                   CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chCoreografo_sexo                   CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_Coreografo               UNIQUE (pasaporte)
 );
 
 create table DIRECTOR (
@@ -668,9 +679,10 @@ create table DIRECTOR (
     fkLugar                 number(10)                          not null,   
     detalleDireccion        varchar2(200)                       not null,
     invitado                number(1)                           not null,
-    CONSTRAINT              chDirector_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              chDirector_booleanInvitado          CHECK (invitado IN (0,1)),
     CONSTRAINT              pkDirector_idDirector               PRIMARY KEY (idDirector),
-    CONSTRAINT              chDirector_sexo                     CHECK (sexo IN ('f', 'm'))
+    CONSTRAINT              chDirector_sexo                     CHECK (sexo IN ('f', 'm')),
+    CONSTRAINT              cPasaporte_director                 UNIQUE (pasaporte)
 );
 
 create table DIRECTOR_MUSICAL (
@@ -687,7 +699,8 @@ create table DIRECTOR_MUSICAL (
     invitado                number(1)                           not null,
     CONSTRAINT              pkDM_idDM                           PRIMARY KEY (idDM),
     CONSTRAINT              chDM_sexo                           CHECK (sexo IN ('f', 'm')),
-    CONSTRAINT              chDM_booleanInvitado                CHECK (invitado IN (0,1))
+    CONSTRAINT              chDM_booleanInvitado                CHECK (invitado IN (0,1)),
+    CONSTRAINT              cPasaporte_dm                       UNIQUE (pasaporte)
 );
 
 CREATE SEQUENCE seqDepartamento
