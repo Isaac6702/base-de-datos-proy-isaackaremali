@@ -282,6 +282,7 @@ create table OBRA (
 create table FECHA_PRESENTACION (
     idFP                    number(10)                          not null,
     fecha                   date                                not null,
+    zonaMasCara             number(12,2)                        not null,
     fkObra                  number(10)                          not null, 
     CONSTRAINT              pkFP_idFP                           PRIMARY KEY (idFP)
 );
