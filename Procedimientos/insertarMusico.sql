@@ -3,7 +3,7 @@ DIRECTORY FOTOSMUSICOS AS 'C:\BasesDeDatosII\fotos\fotosMusicos';
 /
 GRANT READ ON DIRECTORY FOTOSMUSICOS to PUBLIC;
 /
-create or replace PROCEDURE insertarMusico(nombreCompleto IN DATOS_PERSONALES, nroPasaporte IN NUMBER, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER, idInstr IN NUMBER, instPpal IN NUMBER, fechaEjecucionInst IN NUMBER) IS
+create or replace PROCEDURE insertarMusico(nombreCompleto IN DATOS_PERSONALES, nroPasaporte IN NUMBER, telefonos IN TELEFONOS, sexo IN VARCHAR2, fechaNacimiento IN DATE, fallecimiento IN DATE, archivoFoto IN VARCHAR2, fkLugar IN NUMBER, detalleDireccion IN VARCHAR2, nacionalidad IN NUMBER, fechaInicioCargo IN DATE, sueldo IN NUMBER, idInstr IN NUMBER, instPpal IN NUMBER, fechaEjecucionInst IN NUMBER, invitado IN NUMBER) IS
 l_bfile  BFILE;
 l_blob   BLOB; 
 CURSOR BUSQUEDA IS select seqMusico.NEXTVAL  from dual;
@@ -15,9 +15,9 @@ FOR ID IN BUSQUEDA LOOP
     validarTDA(nombreCompleto, telefonos);
           
       INSERT INTO MUSICO
-       (idMusico, pasaporte, nombreCompleto, telefono, sexo, fechaNacimiento, fallecimiento, foto, fkLugar, detalleDireccion)
+       (idMusico, pasaporte, nombreCompleto, telefono, sexo, fechaNacimiento, fallecimiento, foto, fkLugar, detalleDireccion, invitado)
       VALUES 
-       (ID.NEXTVAL, nroPasaporte, nombreCompleto, telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion)
+       (ID.NEXTVAL, nroPasaporte, nombreCompleto, telefonos, sexo, fechaNacimiento, fallecimiento, EMPTY_BLOB(), fkLugar, detalleDireccion, invitado)
       RETURN foto INTO l_blob;
       
     if archivoFoto IS NOT NULL THEN
