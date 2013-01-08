@@ -22,8 +22,8 @@ create table DEPARTAMENTO (
 
 create table CARGO (
     idCargo                 number(10)                          not null,
-    nombre                  varchar2(20)                        not null,
-    tipoAscenso             varchar2(10)                        not null,
+    nombre                  varchar2(200)                        not null,
+    tipoAscenso             varchar2(100)                        not null,
     fkDepartamento          number(10)                          not null,
     fkJefe                  number(10)                                  ,
     CONSTRAINT              pkCargo_idCargo                     PRIMARY KEY (idCargo),
@@ -89,7 +89,6 @@ create table IDIOMA (
     CONSTRAINT              pkIdioma_idIdioma                   PRIMARY KEY (idIdioma)
 );
 
-
 create table MONEDA (
     idMoneda                number(10)                          not null,
     nombre                  varchar2(20)                        not null,
@@ -111,7 +110,6 @@ create table BAILARIN_BALLET (
     fechaFin                date                                        ,
     CONSTRAINT              pkBB_idBB                           PRIMARY KEY (pkBallet, pkBailarin)
 );
-
 
 create table MUSICO_ORQUESTA (
     pkMusico                number(10)                          not null,
@@ -308,6 +306,7 @@ create table UBICACION (
     idUbicacion             number(10)                          not null,
     tipo                    varchar2(100)                       not null,
     nombre                  varchar2(1000)                      not null,
+    porcentaje              number(12,2)                                ,
     fkUbicacion             number(10)                                  ,
     CONSTRAINT              pkUbicacion_idUbicacion             PRIMARY KEY (idUbicacion),
     CONSTRAINT              chUbicacion_tipo                    CHECK (tipo IN ('piso', 'zona', 'asiento'))
@@ -349,7 +348,6 @@ create table DETALLE_FACTURA (
     idDF                    number(10)                          not null,
     cantidad                number(10)                          not null,
     monto                   number(12,2)                        not null,
-    costoExtranjero         number(12,2)                                ,
     fkFactura               number(10)                          not null,
     fkEntrada               number(10)                                  ,
     fkLibreto               number(10)                                  ,
@@ -403,6 +401,7 @@ create table PAGO (
     monto                   number(12,2)                        not null,
     fecha                   date                                not null,
     formaPago               varchar2(10)                        not null,
+    costoExtranjero         number(12,2)                                ,
     fkMoneda                number(10)                                  ,
     fkFactura               number(10)                          not null,   
     CONSTRAINT              pkPago_idPago                       PRIMARY KEY (idPago),
@@ -465,7 +464,6 @@ create table MUSICO_INSTRUMENTO (
     CONSTRAINT              chbooleanInstrumentoPrincipal       CHECK (instrumentoPrincipal IN (0,1)),
     CONSTRAINT              pkMI_idMI                           PRIMARY KEY (pkMusico, pkInstrumento)
 );
-
 
 create table ESTUDIO (
     idEstudio               number(10)                          not null,
@@ -1014,5 +1012,12 @@ CREATE SEQUENCE seqdf
      NOMAXVALUE
      NOCYCLE
      CACHE 10;
-     
+
+CREATE SEQUENCE seqFP
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;     
      
