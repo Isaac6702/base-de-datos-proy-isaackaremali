@@ -24,7 +24,7 @@ namespace pruebaGridView
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select u.pasaporte pasaporte, primer_nombre(u.NOMBRE) nombre, primer_apellido(u.NOMBRE) apellido, r.fecha fechaReserva, dr.status, e.costo, fp.fecha fechaPresentacion, o.nombre obra, ub.nombre ubicacion, r.idreserva from reserva r, usuario u, detalle_reserva dr, entrada e, fecha_presentacion fp, obra o, ubicacion ub where r.fkusuario = u.idusuario AND dr.pkreserva = r.idReserva AND dr.status = 1 AND dr.pkEntrada = e.idEntrada AND e.fkPresentacion = fp.idfp AND fp.fkObra = o.idObra AND e.fkUbicacion = ub.idUbicacion");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select u.pasaporte pasaporte, nombres(u.NOMBRE) nombre, apellidos(u.NOMBRE) apellido, r.fecha fechaReserva, dr.status, e.costo, fp.fecha fechaPresentacion, o.nombre obra, ub.nombre ubicacion, r.idreserva from reserva r, usuario u, detalle_reserva dr, entrada e, fecha_presentacion fp, obra o, ubicacion ub where r.fkusuario = u.idusuario AND dr.pkreserva = r.idReserva AND dr.status = 'a' AND dr.pkEntrada = e.idEntrada AND e.fkPresentacion = fp.idfp AND fp.fkObra = o.idObra AND e.fkUbicacion = ub.idUbicacion");
                 llenarTabla(tablaBD);
             }
         }
@@ -33,8 +33,8 @@ namespace pruebaGridView
         {
             tablaAux.Columns.Add("Id_Reserva");
             tablaAux.Columns.Add("Id_Usuario");
-            tablaAux.Columns.Add("Nombre");
-            tablaAux.Columns.Add("Apellido");
+            tablaAux.Columns.Add("Nombres");
+            tablaAux.Columns.Add("Apellidos");
             tablaAux.Columns.Add("Opera");
             tablaAux.Columns.Add("Fecha_Reserva");
             tablaAux.Columns.Add("Fecha_Opera");
@@ -61,7 +61,7 @@ namespace pruebaGridView
 
             if (TBApellido.TextLength != 0)
             {
-                lista.Add("Apellido like '%" + TBApellido.Text + "%'");
+                lista.Add("Apellidos like '%" + TBApellido.Text + "%'");
             }
 
             if (TBFechaReserva.TextLength != 0)
@@ -85,7 +85,7 @@ namespace pruebaGridView
             }
             if (TBNombre.TextLength != 0)
             {
-                lista.Add("Nombre like '%" + TBNombre.Text + "%'");
+                lista.Add("Nombres like '%" + TBNombre.Text + "%'");
             }
             if (TBOpera.TextLength != 0)
             {
