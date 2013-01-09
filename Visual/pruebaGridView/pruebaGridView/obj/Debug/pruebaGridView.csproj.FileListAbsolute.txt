@@ -16,3 +16,12 @@ C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.exe
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.pdb
 C:\BasesDeDatosII\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csprojResolveAssemblyReference.cache
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.exe.config
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.exe
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.pdb
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.exe
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\bin\Debug\pruebaGridView.pdb
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csprojResolveAssemblyReference.cache
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.Form1.resources
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
+C:\Users\Ali Jose\Desktop\Bd2\Visual\pruebaGridView\pruebaGridView\obj\Debug\pruebaGridView.csproj.GenerateResource.Cache
