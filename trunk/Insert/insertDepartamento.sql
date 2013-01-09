@@ -1,0 +1,12 @@
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'ventas'	,	60	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'finanzas'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'recursos humanos'	,	24	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'limpieza'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'surpevision'	,	24	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'produccion'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'sonido'	,	36	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'iluminacion'	,	36	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'de canto'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'de musica'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'de baile'	,	84	);
+insert into DEPARTAMENTO values (	seqDepartamento.nextval	,	'tecnologico'	,	36	);
