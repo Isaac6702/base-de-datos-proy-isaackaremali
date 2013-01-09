@@ -14,7 +14,7 @@ FOR AUX IN BUSQUEDA LOOP
     IF diasPasados < 20 THEN
         dbms_output.put_line('fue cancelada la reserva n¼ ' || AUX.IDRESERVA);
         update DETALLE_RESERVA
-            set status = 0
+            set status = 'c'
             where PKRESERVA = AUX.IDRESERVA AND PKENTRADA = AUX.IDENTRADA ;
         
         
