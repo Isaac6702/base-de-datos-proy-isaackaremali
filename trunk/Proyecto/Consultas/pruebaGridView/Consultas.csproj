@@ -76,6 +76,12 @@
     <Compile Include="Cantante1.Designer.cs">
       <DependentUpon>Cantante1.cs</DependentUpon>
     </Compile>
+    <Compile Include="VentaEntradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VentaEntradas.Designer.cs">
+      <DependentUpon>VentaEntradas.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntradasVendidas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cantante1.resx">
       <DependentUpon>Cantante1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VentaEntradas.resx">
+      <DependentUpon>VentaEntradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntradasVendidas.resx">
       <DependentUpon>EntradasVendidas.cs</DependentUpon>
