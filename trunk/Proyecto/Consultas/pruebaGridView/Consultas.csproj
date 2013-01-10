@@ -70,6 +70,12 @@
     <Compile Include="Autor1.Designer.cs">
       <DependentUpon>Autor1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Cantante1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Cantante1.Designer.cs">
+      <DependentUpon>Cantante1.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntradasVendidas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -126,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Autor1.resx">
       <DependentUpon>Autor1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Cantante1.resx">
+      <DependentUpon>Cantante1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EntradasVendidas.resx">
       <DependentUpon>EntradasVendidas.cs</DependentUpon>

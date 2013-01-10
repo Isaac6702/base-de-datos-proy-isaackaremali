@@ -53,3 +53,6 @@ Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj
 Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Stilo.resources
 Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
 Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.GenerateResource.Cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Calendario.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Actor1.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Cantante1.resources
