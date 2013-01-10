@@ -35,3 +35,6 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.exe
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.pdb
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csprojResolveAssemblyReference.cache
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.EntradasVendidas.resources
+Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\bin\Debug\pruebaGridView.exe.config
+Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.exe
+Z:\Dropbox\Base de Datos II\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.pdb
