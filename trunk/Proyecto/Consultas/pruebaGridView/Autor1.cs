@@ -14,10 +14,10 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class Actor : Form
+    public partial class Actor1 : Form
     {
         DataTable tablaAux = new DataTable();
-        public Actor()
+        public Actor1()
         {
             InitializeComponent();
         }
