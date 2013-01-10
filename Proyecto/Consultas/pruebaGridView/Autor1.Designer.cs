@@ -1,6 +1,6 @@
 ﻿namespace pruebaGridView
 {
-    partial class Actor
+    partial class Actor1
     {
         /// <summary>
         /// Required designer variable.
