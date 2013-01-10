@@ -16,7 +16,7 @@ namespace pruebaGridView
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Cantante1());
+            Application.Run(new VentaEntradas());
         }
     }
 }
