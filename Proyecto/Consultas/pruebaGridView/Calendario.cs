@@ -14,33 +14,33 @@ using System.IO;
 
 namespace pruebaGridView
 {
-    public partial class Form1 : Form
+    public partial class Calendario : Form
     {
         DataTable tablaAux = new DataTable();
         OracleDataReader tablaBD;
-        
-        public Form1()
+
+        public Calendario()
         {
             InitializeComponent();
             tablaAux.Columns.Add("obra");
             tablaAux.Columns.Add("actores");
             tablaAux.Columns.Add("fecha");
 
-           Conexion conexion = new Conexion();
+            Conexion conexion = new Conexion();
             if (conexion.AbrirConexion("karem", "karem"))
             {
                 OracleDataReader tablaFechas = conexion.EjecutarSelect("select to_char(fp.fecha, 'dd/mm/yyyy') as fecha from fecha_presentacion fp order by fp.fecha");
                 splitFecha(tablaFechas);
             }
-          
+
             consultarObrasDelDia();
         }
 
         private void splitFecha(OracleDataReader tablaFechas)
         {
-            char[] delimiterChars = {'/','-'};
+            char[] delimiterChars = { '/', '-' };
             DateTime[] dateTimes = new System.DateTime[10000];
-           
+
             int i = 0;
             while (tablaFechas.Read())
             {
@@ -51,10 +51,10 @@ namespace pruebaGridView
 
                 dateTimes[i] = new System.DateTime(ano, mes, dia);
                 i = i + 1;
-             
-               
+
+
             }
-            this.calendario.BoldedDates = dateTimes;
+            this.calendario1.BoldedDates = dateTimes;
 
         }
         private void consultarObrasDelDia()
@@ -70,23 +70,23 @@ namespace pruebaGridView
 
         private void llenarTabla(OracleDataReader tablaBD)
         {
-           if (tablaBD != null)
+            if (tablaBD != null)
             {
                 tablaAux.Clear();
                 while (tablaBD.Read())
                 {
-                    tablaAux.Rows.Add(tablaBD["obra"], tablaBD["fecha"] );
+                    tablaAux.Rows.Add(tablaBD["obra"], tablaBD["fecha"]);
                 }
 
                 tabla.DataSource = tablaAux;
-                
+
             }
-       }
+        }
 
         //para obtener la tabla con la fecha seleccionada
         private void calendario_DateSelected(object sender, DateRangeEventArgs e)
         {
-            String fechaCalendario = calendario.SelectionRange.Start.ToShortDateString();
+            String fechaCalendario = calendario1.SelectionRange.Start.ToShortDateString();
             System.Console.WriteLine(fechaCalendario);
             Conexion conexion = new Conexion();
 
@@ -96,6 +96,11 @@ namespace pruebaGridView
                 llenarTabla(tablaBD);
             }
         }
-       
+
+        private void nombreReporte_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
