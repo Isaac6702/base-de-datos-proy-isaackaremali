@@ -1,23 +1,14 @@
-CREATE OR REPLACE function entradas_restantes (totalEntradas in NUMBER, idZona in NUMBER )
-RETURN NUMBER IS
-
-RESULTADO NUMBER;
-
-CURSOR BUSQUEDA IS select COUNT(e.idEntrada) cantidadAsientos, z.nombre zona, z.idubicacion idzona 
-from entrada e, ubicacion a, ubicacion z
-where e.fkubicacion = a.idubicacion AND e.pagada = 1 AND a.fkubicacion = z.idubicacion AND z.idubicacion = idZona
-GROUP BY z.nombre, z.idubicacion 
-
+CREATE OR REPLACE function estudios_bailarin (idBailarin IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select i.nombre institucion, e.DESCRIPCION  
+                    from estudio e, institucion i
+                    where e.FKINSTITUCION = i.IDINSTITUCION AND e.FKBAILARIN = idBailarin;
 AUX  BUSQUEDA % ROWTYPE;
 
 BEGIN
 FOR AUX IN BUSQUEDA LOOP
-
-    if AUX.CANTIDADASIENTOS is not null then
-     RESULTADO := totalEntradas - AUX.CANTIDADASIENTOS;
-    else
-        RESULTADO:= 0;
-    END IF;
+     RESULTADO := 'Institucion: '||AUX.institucion|| ' , Estudio: ' ||AUX.DESCRIPCION||'. ';
 END LOOP;
     
 RETURN (RESULTADO);
