@@ -149,6 +149,12 @@ references DIRECTOR_MUSICAL(idDM)
 on delete cascade;
 
 alter table OBRA
+add constraint obra_fkAutor
+foreign key (fkAutor)
+references AUTOR(idAutor)
+on delete cascade;
+
+alter table OBRA
 add constraint obra_fkOrquesta
 foreign key (fkOrquesta)
 references ORQUESTA(idOrquesta)
@@ -169,8 +175,7 @@ on delete cascade;
 alter table FECHA_PRESENTACION
 add constraint fp_fkObra
 foreign key (fkObra)
-references OBRA(idObra)
-on delete cascade;
+references OBRA(idObra);
 
 alter table USUARIO
 add constraint usuario_fkLugar
@@ -199,56 +204,47 @@ on delete cascade;
 alter table ENTRADA
 add constraint entrada_fkUbicacion
 foreign key (fkUbicacion)
-references UBICACION(idUbicacion)
-on delete cascade;
+references UBICACION(idUbicacion);
 
 alter table ENTRADA
 add constraint entrada_fkPresentacion
 foreign key (fkPresentacion)
-references FECHA_PRESENTACION(idFP)
-on delete cascade;
+references FECHA_PRESENTACION(idFP);
 
 alter table RESERVA
 add constraint reserva_fkUsuario
 foreign key (fkUsuario)
-references USUARIO(idUsuario)
-on delete cascade;
+references USUARIO(idUsuario);
 
 alter table DETALLE_RESERVA 
 add constraint dr_fkReserva
 foreign key (pkReserva)
-references RESERVA(idReserva)
-on delete cascade;
+references RESERVA(idReserva);
 
 alter table DETALLE_RESERVA
 add constraint dr_fkEntrada
 foreign key (pkEntrada)
-references ENTRADA(idEntrada)
-on delete cascade;
+references ENTRADA(idEntrada);
 
 alter table FACTURA
 add constraint factura_fkUsuario
 foreign key (fkUsuario)
-references USUARIO(idUsuario)
-on delete cascade;
+references USUARIO(idUsuario);
 
 alter table DETALLE_FACTURA 
 add constraint df_fkFactura
 foreign key (fkFactura)
-references FACTURA(idFactura)
-on delete cascade;
+references FACTURA(idFactura);
 
 alter table DETALLE_FACTURA
 add constraint df_fkEntrada
 foreign key (fkEntrada)
-references ENTRADA(idEntrada)
-on delete cascade;
+references ENTRADA(idEntrada);
 
 alter table DETALLE_FACTURA
 add constraint df_fkLibreto
 foreign key (fkLibreto)
-references LIBRETO(idLibreto)
-on delete cascade;
+references LIBRETO(idLibreto);
 
 alter table PREMIACION
 add constraint premiacion_fkUsuario
