@@ -1,0 +1,17 @@
+insert into PARTE values(	88	,	'I'	,	'acto'	,	null	,	4	);
+insert into PARTE values(	89	,	'che gelida manina'	,	'aria'	,	88	,	4	);
+insert into PARTE values(	90	,	'si, mi chiamano'	,	'aria'	,	88	,	4	);
+insert into PARTE values(	91	,	'o soave fanciulla'	,	'duo'	,	88	,	4	);
+insert into PARTE values(	92	,	'II'	,	'acto'	,	null	,	4	);
+insert into PARTE values(	93	,	'aranci, datteri! caldi I marroni!'	,	'aria'	,	92	,	4	);
+insert into PARTE values(	94	,	'quando m en vo'	,	'aria'	,	92	,	4	);
+insert into PARTE values(	95	,	'III'	,	'acto'	,	92	,	4	);
+insert into PARTE values(	96	,	'o buon marcello, aiuto'	,	'aria'	,	92	,	4	);
+insert into PARTE values(	97	,	'mimi e tanto malata'	,	'aria'	,	92	,	4	);
+insert into PARTE values(	98	,	'donde lieta usci'	,	'aria'	,	92	,	4	);
+insert into PARTE values(	99	,	'addio dolce svegliare alla mattina!'	,	'cuarteto'	,	92	,	4	);
+insert into PARTE values(	100	,	'IV'	,	'acto'	,	null	,	4	);
+insert into PARTE values(	101	,	'o mimi! tu piu non torni'	,	'duo'	,	100	,	4	);
+insert into PARTE values(	102	,	'gavota'	,	'aria'	,	100	,	4	);
+insert into PARTE values(	103	,	'vecchia zimarra, senti'	,	'aria'	,	100	,	4	);
+insert into PARTE values(	104	,	'sono andati?'	,	'duo'	,	100	,	4	);
