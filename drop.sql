@@ -98,6 +98,18 @@ drop sequence seqAudicionCantante;
 drop sequence seqDirectorMusical;
 drop sequence seqIdioma;
 drop sequence seqTrabajador;
+drop sequence seqBailarin;
+drop sequence seqCoreografo;
+drop sequence seqDF;
+drop sequence seqDirector;
+drop sequence seqDirectorEscenografia;
+drop sequence seqEntrada;
+drop sequence seqEscenografo;
+drop sequence seqEstudio;
+drop sequence seqFP;
+drop sequence seqPartitura;
+drop sequence seqUbicacion;
+drop sequence seqUsuario;
 
 drop type TELEFONOS;
 drop type TELEFONO;
