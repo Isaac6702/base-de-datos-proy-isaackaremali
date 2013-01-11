@@ -1,0 +1,16 @@
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM, fechaFin) values(	311	,	to_date(	'01/02/1946'	, 'dd/mm/yyyy')	,	5424	,	54	,	1	, to_date( '15/01/1951', 'dd/mm/yyyy'));
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM, fechaFin) values(	312	,	to_date(	'15/03/1955'	, 'dd/mm/yyyy')	,	3324	,	54	,	2	, to_date( '5/01/1958', 'dd/mm/yyyy'));
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM, fechaFin) values(	313	,	to_date(	'03/04/1961'	, 'dd/mm/yyyy')	,	5136	,	54	,	3	, to_date( '26/01/1971', 'dd/mm/yyyy'));
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM, fechaFin) values(	314	,	to_date(	'07/02/1971'	, 'dd/mm/yyyy')	,	4450	,	54	,	4	, to_date( '23/01/1987', 'dd/mm/yyyy'));
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM, fechaFin) values(	315	,	to_date(	'02/05/1987'	, 'dd/mm/yyyy')	,	3227	,	54	,	5	, to_date( '02/01/2002', 'dd/mm/yyyy'));
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	316	,	to_date(	'13/02/2002'	, 'dd/mm/yyyy')	,	3222	,	54	,	6	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	317	,	to_date(	'21/2/2011'	, 'dd/mm/yyyy')	,	3897	,	54	,	7	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	318	,	to_date(	'2/10/2010'	, 'dd/mm/yyyy')	,	5043	,	54	,	8	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	319	,	to_date(	'24/1/2011'	, 'dd/mm/yyyy')	,	3704	,	54	,	9	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	320	,	to_date(	'30/12/2006'	, 'dd/mm/yyyy')	,	2349	,	54	,	10	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	321	,	to_date(	'20/8/2011'	, 'dd/mm/yyyy')	,	5991	,	54	,	11	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	322	,	to_date(	'26/1/2011'	, 'dd/mm/yyyy')	,	3816	,	54	,	12	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	323	,	to_date(	'21/4/2011'	, 'dd/mm/yyyy')	,	5555	,	54	,	13	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	324	,	to_date(	'5/4/2010'	, 'dd/mm/yyyy')	,	3206	,	54	,	14	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	325	,	to_date(	'16/7/2009'	, 'dd/mm/yyyy')	,	5220	,	54	,	15	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDM) values(	326	,	to_date(	'28/3/2011'	, 'dd/mm/yyyy')	,	3912	,	54	,	16	);

@@ -1,0 +1,10 @@
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	279	,	to_date(	'27/8/2010'	, 'dd/mm/yyyy')	,	2136	,	25	,	1	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	280	,	to_date(	'8/5/2008'	, 'dd/mm/yyyy')	,	2112	,	25	,	2	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	281	,	to_date(	'29/10/2008'	, 'dd/mm/yyyy')	,	2117	,	25	,	3	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	282	,	to_date(	'29/5/2009'	, 'dd/mm/yyyy')	,	1483	,	25	,	4	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	283	,	to_date(	'21/5/2010'	, 'dd/mm/yyyy')	,	2244	,	25	,	5	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	284	,	to_date(	'20/8/2011'	, 'dd/mm/yyyy')	,	1278	,	25	,	6	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	285	,	to_date(	'12/2/2010'	, 'dd/mm/yyyy')	,	2191	,	25	,	7	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	286	,	to_date(	'14/4/2011'	, 'dd/mm/yyyy')	,	1010	,	25	,	8	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	287	,	to_date(	'10/1/2007'	, 'dd/mm/yyyy')	,	1575	,	25	,	9	);
+insert into TRABAJADOR_CARGO (idTC, fechaInicio, sueldo, fkCargo, fkDirectorEscenografia) values(	288	,	to_date(	'11/11/2007'	, 'dd/mm/yyyy')	,	2346	,	25	,	10	);
