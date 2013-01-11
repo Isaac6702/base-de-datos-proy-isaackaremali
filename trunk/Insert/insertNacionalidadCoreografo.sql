@@ -1,0 +1,12 @@
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	1	);
+insert into NACIONALIDAD_COREOGRAFO values (	102	,	2	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	3	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	4	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	5	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	6	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	7	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	8	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	9	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	10	);
+insert into NACIONALIDAD_COREOGRAFO values (	41	,	11	);
+insert into NACIONALIDAD_COREOGRAFO values (	3	,	12	);

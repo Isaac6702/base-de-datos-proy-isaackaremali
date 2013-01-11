@@ -1,0 +1,10 @@
+insert into NACIONALIDAD_DIRECTOR values (	65	,	1	);
+insert into NACIONALIDAD_DIRECTOR values (	65	,	2	);
+insert into NACIONALIDAD_DIRECTOR values (	65	,	3	);
+insert into NACIONALIDAD_DIRECTOR values (	31	,	4	);
+insert into NACIONALIDAD_DIRECTOR values (	49	,	5	);
+insert into NACIONALIDAD_DIRECTOR values (	49	,	6	);
+insert into NACIONALIDAD_DIRECTOR values (	20	,	7	);
+insert into NACIONALIDAD_DIRECTOR values (	65	,	8	);
+insert into NACIONALIDAD_DIRECTOR values (	65	,	9	);
+insert into NACIONALIDAD_DIRECTOR values (	65	,	10	);
