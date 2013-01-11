@@ -131,3 +131,4 @@ insert into NACIONALIDAD values (	seqNacionalidad.nextval	,	'hungaro'	,	'm'	,	74
 insert into NACIONALIDAD values (	seqNacionalidad.nextval	,	'hungara'	,	'f'	,	74	);
 insert into NACIONALIDAD values (	seqNacionalidad.nextval	,	'checo'	,	'm'	,	250	);
 insert into NACIONALIDAD values (	seqNacionalidad.nextval	,	'checa'	,	'f'	,	250	);
+insert into NACIONALIDAD values (	seqNacionalidad.nextval	,	'astriaco'	,	'm'	,	12	);

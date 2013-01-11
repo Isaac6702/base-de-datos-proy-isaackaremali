@@ -1,0 +1,10 @@
+insert into NACIONALIDAD_ESCENOGRAFO values(	50	,	1	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	65	,	2	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	70	,	3	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	41	,	4	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	41	,	5	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	65	,	6	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	66	,	7	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	41	,	8	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	41	,	9	);
+insert into NACIONALIDAD_ESCENOGRAFO values(	71	,	10	);

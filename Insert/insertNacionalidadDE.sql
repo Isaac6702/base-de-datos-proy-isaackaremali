@@ -1,0 +1,10 @@
+insert into NACIONALIDAD_DE values(			71	,	1	);
+insert into NACIONALIDAD_DE values(			120	,	2	);
+insert into NACIONALIDAD_DE values(			3	,	3	);
+insert into NACIONALIDAD_DE values(			70	,	4	);
+insert into NACIONALIDAD_DE values(			65	,	5	);
+insert into NACIONALIDAD_DE values(			70	,	6	);
+insert into NACIONALIDAD_DE values(			65	,	7	);
+insert into NACIONALIDAD_DE values(			3	,	8	);
+insert into NACIONALIDAD_DE values(			3	,	9	);
+insert into NACIONALIDAD_DE values(			6	,	10	);

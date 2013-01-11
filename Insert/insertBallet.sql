@@ -1,0 +1,10 @@
+insert into BALLET values(	1	,	'Alameda Civic Ballet'	);
+insert into BALLET values(	2	,	'Alberta Ballet Company'	);
+insert into BALLET values(	3	,	'Patti Rutland Jazz'	);
+insert into BALLET values(	4	,	'Ballet Austin'	);
+insert into BALLET values(	5	,	'Ballet de l Opéra de Lyon'	);
+insert into BALLET values(	6	,	'Ballet Deviare'	);
+insert into BALLET values(	7	,	'Ballet Fantastique'	);
+insert into BALLET values(	8	,	'San Francisco Ballet'	);
+insert into BALLET values(	9	,	'Pina Bausch Tanztheater Wuppertal'	);
+insert into BALLET values(	10	,	'Galili Dance'	);
