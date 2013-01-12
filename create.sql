@@ -1,12 +1,12 @@
 create or replace type datos_personales as object (
-    primerNombre            varchar2(200),
-    segundoNombre           varchar2(200),
-    primerApellido          varchar2(200),
-    segundoApellido         varchar2(200)
+    primerNombre            varchar2(20),
+    segundoNombre           varchar2(20),
+    primerApellido          varchar2(20),
+    segundoApellido         varchar2(20)
 );
 /
 create or replace type telefono as object (
-    codigo                  varchar2(3),
+    codigo                  varchar2(4),
     numero                  varchar2(15)
 );
 /
@@ -15,7 +15,7 @@ create or replace type telefonos AS VARRAY(3) OF telefono;
 
 create table DEPARTAMENTO (
     idDepartamento          number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     tiempoAscenso           number(10)                                  ,
     CONSTRAINT              pkDepartamento_idDepartamento       PRIMARY KEY (idDepartamento)
 );
@@ -32,7 +32,7 @@ create table CARGO (
 
 create table LUGAR (
     idLugar                 number(10)                          not null,
-    nombre                  varchar2(500)                        not null,
+    nombre                  varchar2(50)                        not null,
     tipo                    varchar2(5)                         not null,
     bandera                 blob                                        ,
     fkLugar                 number(10)                                  ,
@@ -42,19 +42,19 @@ create table LUGAR (
 
 create table INSTITUCION (
     idInstitucion          number(10)                          not null,
-    nombre                 varchar2(200)                        not null, 
+    nombre                 varchar2(20)                        not null, 
     CONSTRAINT             pkInstitucion_idInstitucion         PRIMARY KEY (idInstitucion)
 );
 
 create table INSTRUMENTO (
     idInstrumento          number(10)                          not null,
-    nombre                 varchar2(200)                        not null, 
+    nombre                 varchar2(20)                        not null, 
     CONSTRAINT             pkInstrumento_idInstrumento         PRIMARY KEY (idInstrumento)
 );
 
 create table VOZ (
     idVoz                   number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     descripcion             varchar2(100)                               ,
     fkVoz                   number(10)                                  , 
     CONSTRAINT              pkVoz_idVoz                         PRIMARY KEY (idVoz)
@@ -62,7 +62,7 @@ create table VOZ (
 
 create table NACIONALIDAD (
     idNacionalidad          number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     sexo                    varchar2(5)                         not null,
     fkPais                  number(10)                          not null,  
     CONSTRAINT              pkNacionalidad_idNacionalidad       PRIMARY KEY (idNacionalidad),
@@ -79,26 +79,26 @@ create table ORQUESTA (
 
 create table BALLET (
     idBallet                number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     CONSTRAINT              pkBallet_idBallet                   PRIMARY KEY (idBallet)
 );
 
 create table IDIOMA (
     idIdioma                number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     CONSTRAINT              pkIdioma_idIdioma                   PRIMARY KEY (idIdioma)
 );
 
 create table MONEDA (
     idMoneda                number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     valor                   number(12,2)                        not null,   
     CONSTRAINT              pkMoneda_idMoneda                   PRIMARY KEY (idMoneda)
 );
 
 create table MATERIAL (
     idMaterial              number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     costo                   number(12,2)                        not null, 
     CONSTRAINT              pkMaterial_idMaterial               PRIMARY KEY (idMaterial)
 );
@@ -116,7 +116,7 @@ create table MUSICO_ORQUESTA (
     pkOrquesta              number(10)                          not null,
     fechaInicio             date                                not null,
     fechaFin                date                                        ,
-    posicion                varchar2(200)                        not null, 
+    posicion                varchar2(20)                        not null, 
     CONSTRAINT              pkMO_idMO                           PRIMARY KEY (pkMusico, pkOrquesta)
 );
 
@@ -124,7 +124,7 @@ create table DM_ORQUESTA (
     pkDM                    number(10)                          not null,
     pkOrquesta              number(10)                          not null,
     fechaInicio             date                                not null,
-    fechaFin                date                                not null,
+    fechaFin                date                                 ,
     CONSTRAINT              pkDMO_idDMO                           PRIMARY KEY (pkDM, pkOrquesta)
 );
 
@@ -204,7 +204,7 @@ create table MUSICO_OBRA (
     pkInstrumento           number(10)                          not null,
     pkMusico                number(10)                          not null,
     pkPresentacion          number(10)                          not null,
-    posicion                varchar2(200)                        not null,
+    posicion                varchar2(20)                        not null,
     CONSTRAINT              pkMOb_idMOb                         PRIMARY KEY (pkInstrumento, pkMusico, pkPresentacion)
 );
 
@@ -238,8 +238,8 @@ create table AUDICION_CANTANTE (
 
 create table PARTE (
     idParte                 number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
-    tipo                    varchar2(100)                        not null,
+    nombre                  varchar2(20)                        not null,
+    tipo                    varchar2(10)                        not null,
     fkParte                 number(10)                                  ,
     fkObra                  number(10)                          not null, 
     CONSTRAINT              pkParte_idParte                     PRIMARY KEY (idParte),
@@ -248,8 +248,8 @@ create table PARTE (
 
 create table AUDIO (
     idAudio                 number(10)                          not null,
-    descripcion             varchar2(500)                        not null,
-    formato                 varchar2(100)                        not null,
+    descripcion             varchar2(50)                        not null,
+    formato                 varchar2(10)                        not null,
     contenido               blob                                not null,
     fkPresentacion          number(10)                          not null, 
     CONSTRAINT              pkAudio_idAudio                     PRIMARY KEY (idAudio),
@@ -258,8 +258,8 @@ create table AUDIO (
 
 create table VIDEO (
     idVideo                 number(10)                          not null,
-    descripcion             varchar2(500)                        not null,
-    formato                 varchar2(100)                        not null,
+    descripcion             varchar2(50)                        not null,
+    formato                 varchar2(10)                        not null,
     contenido               blob                                not null,
     fkPresentacion          number(10)                          not null, 
     CONSTRAINT              pkVideo_idVideo                     PRIMARY KEY (idVideo),
@@ -268,15 +268,14 @@ create table VIDEO (
 
 create table OBRA (
     idObra                  number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
-    descripcion             varchar2(100)                       not null,
+    nombre                  varchar2(20)                        not null,
+    descripcion             varchar2(2000)                       not null,
     fechaVenta              date                                not null,
     fkDirector              number(10)                          not null,
     fkOrquesta              number(10)                                  ,
     fkBallet                number(10)                                  ,
     fkCoreografo            number(10)                          not null,
     fkDM                    number(10)                          not null,
-    fkAutor                 number(10)                          not null,
     CONSTRAINT              pkObra_idObra                      PRIMARY KEY (idObra)
 );
 
@@ -294,7 +293,7 @@ create table USUARIO (
     nombre                  datos_personales                            ,
     detalleDireccion        varchar2(200)                       not null,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fkLugar                 number(10)                          not null,
     fkIdioma                number(10)                                  ,
@@ -334,7 +333,7 @@ create table RESERVA (
 create table DETALLE_RESERVA (
     pkReserva               number(10)                          not null,
     pkEntrada               number(10)                          not null,
-    status                  varchar2(100)                        not null,
+    status                  varchar2(10)                        not null,
     CONSTRAINT              chbooleanStatus                     CHECK (status IN ('a','p','c')),
     CONSTRAINT              pkDR_idDR                           PRIMARY KEY (pkReserva, pkEntrada)
 );
@@ -348,7 +347,7 @@ create table FACTURA (
 
 create table DETALLE_FACTURA (
     idDF                    number(10)                          not null,
-    cantidad                number(10)                          not null,
+    cantidadLibreto         number(10)                                  ,
     monto                   number(12,2)                        not null,
     fkFactura               number(10)                          not null,
     fkEntrada               number(10)                                  ,
@@ -358,7 +357,7 @@ create table DETALLE_FACTURA (
 
 create table PREMIACION (
     idPremiacion            number(10)                          not null,
-    descripcion             varchar2(500)                        not null,
+    descripcion             varchar2(50)                        not null,
     numeroEntradasCompradas number(10)                          not null,
     fkUsuario               number(10)                          not null,
     fkPresentacion          number(10)                          not null,
@@ -402,7 +401,7 @@ create table PAGO (
     idPago                  number(10)                          not null,
     monto                   number(12,2)                        not null,
     fecha                   date                                not null,
-    formaPago               varchar2(100)                        not null,
+    formaPago               varchar2(10)                        not null,
     costoExtranjero         number(12,2)                                ,
     fkMoneda                number(10)                                  ,
     fkFactura               number(10)                          not null,   
@@ -430,7 +429,7 @@ create table ESCENOGRAFIA_MATERIAL (
 
 create table PERSONAJE (
     idPersonaje             number(10)                          not null,
-    nombre                  varchar2(200)                        not null,
+    nombre                  varchar2(20)                        not null,
     descripcion             varchar2(100)                               ,
     registroVoz             blob                                not null,
     principal               number(1)                           not null,
@@ -450,7 +449,7 @@ create table ELENCO (
 create table HECHO_BIOGRAFICO (
     idHB                    number(10)                          not null,
     fecha                   date                                not null,
-    tipo                    varchar2(200)                        not null,
+    tipo                    varchar2(20)                        not null,
     descripcion             varchar2(100)                               ,
     fkLugar                 number(10)                          not null,
     fkAutor                 number(10)                                  ,
@@ -469,7 +468,7 @@ create table MUSICO_INSTRUMENTO (
 
 create table ESTUDIO (
     idEstudio               number(10)                          not null,
-    descripcion             varchar2(200)                        not null,
+    descripcion             varchar2(20)                        not null,
     fechaInicio             date                                not null,
     fechaFin                date                                        ,
     fkInstitucion           number(10)                          not null,
@@ -512,7 +511,7 @@ create table TRABAJADOR (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -530,7 +529,7 @@ create table MUSICO (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -548,7 +547,7 @@ create table CANTANTE (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -566,7 +565,7 @@ create table BAILARIN (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -584,7 +583,7 @@ create table ESCENOGRAFO (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -602,7 +601,7 @@ create table INVITADO_ESPECIAL (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefono                                    ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -618,7 +617,7 @@ create table AUTOR (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -636,7 +635,7 @@ create table DIRECTOR_ESCENOGRAFIA (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -654,7 +653,7 @@ create table COREOGRAFO (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -672,7 +671,7 @@ create table DIRECTOR (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
@@ -690,7 +689,7 @@ create table DIRECTOR_MUSICAL (
     pasaporte               number(10)                          not null,
     nombreCompleto          datos_personales                            ,
     telefono                telefonos                                   ,
-    sexo                    varchar2(100)                        not null,
+    sexo                    varchar2(10)                        not null,
     fechaNacimiento         date                                not null,
     fallecimiento           date                                        ,
     foto                    blob                                        ,
