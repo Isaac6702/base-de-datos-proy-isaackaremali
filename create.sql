@@ -276,6 +276,7 @@ create table OBRA (
     fkBallet                number(10)                                  ,
     fkCoreografo            number(10)                          not null,
     fkDM                    number(10)                          not null,
+    fkAutor                 number(10)                          not null,
     CONSTRAINT              pkObra_idObra                      PRIMARY KEY (idObra)
 );
 
