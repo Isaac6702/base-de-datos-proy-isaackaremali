@@ -32,6 +32,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.OracleClient" />
@@ -76,6 +78,33 @@
     <Compile Include="Cantante1.Designer.cs">
       <DependentUpon>Cantante1.cs</DependentUpon>
     </Compile>
+    <Compile Include="BailarinesInvitados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BailarinesInvitados.Designer.cs">
+      <DependentUpon>BailarinesInvitados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DetalleFactura.cs" />
+    <Compile Include="Factura.cs" />
+    <Compile Include="Facturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Facturas.Designer.cs">
+      <DependentUpon>Facturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectorObra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectorObra.Designer.cs">
+      <DependentUpon>DirectorObra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MusicoInvitado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MusicoInvitado.Designer.cs">
+      <DependentUpon>MusicoInvitado.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs" />
     <Compile Include="VentaEntradas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -141,6 +170,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Cantante1.resx">
       <DependentUpon>Cantante1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BailarinesInvitados.resx">
+      <DependentUpon>BailarinesInvitados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturas.resx">
+      <DependentUpon>Facturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DirectorObra.resx">
+      <DependentUpon>DirectorObra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MusicoInvitado.resx">
+      <DependentUpon>MusicoInvitado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VentaEntradas.resx">
       <DependentUpon>VentaEntradas.cs</DependentUpon>

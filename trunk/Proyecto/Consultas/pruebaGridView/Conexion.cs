@@ -35,6 +35,7 @@ namespace pruebaViewGrid
 
             try
             {
+             
                 reader = cmd.ExecuteReader();
 
                 //while (reader.Read())
@@ -52,6 +53,36 @@ namespace pruebaViewGrid
                 cmd.Dispose();
             }
             return reader;
+        }
+
+
+        public int EjecutarInsert(string sql)
+        {
+
+            OracleCommand cmd = new OracleCommand(sql);
+            cmd.Connection = conexion;
+            cmd.CommandType = CommandType.Text;
+            try
+            {
+
+                return cmd.ExecuteNonQuery();
+
+                //while (reader.Read())
+                //{
+                //    //Esto hay que ver como modificarlo para que retorne la tabla
+                //    Console.WriteLine(Convert.ToString(reader["id"]));
+                //}
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                cmd.Dispose();
+            }
+
+            return 0;
         }
 
         public bool Ejecutar(string sql)

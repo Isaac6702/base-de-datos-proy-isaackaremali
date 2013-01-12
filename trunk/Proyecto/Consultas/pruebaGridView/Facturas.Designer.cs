@@ -1,6 +1,6 @@
 ﻿namespace pruebaGridView
 {
-    partial class VentaEntradas
+    partial class Facturas
     {
         /// <summary>
         /// Required designer variable.
@@ -36,10 +36,18 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nombreReporte = new System.Windows.Forms.Label();
-            this.tbRutaArchivo = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.LBApagar = new System.Windows.Forms.Label();
+            this.LBNroFactura = new System.Windows.Forms.Label();
+            this.LBFecha = new System.Windows.Forms.Label();
+            this.LBNombres = new System.Windows.Forms.Label();
+            this.LBNroId = new System.Windows.Forms.Label();
+            this.LBTotal = new System.Windows.Forms.Label();
+            this.LBDireccion = new System.Windows.Forms.Label();
+            this.LBTelefono = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBBuscar = new System.Windows.Forms.TextBox();
+            this.BTBuscar = new System.Windows.Forms.Button();
+            this.shapeContainer1 = new Microsoft.VisualBasic.PowerPacks.ShapeContainer();
+            this.lineShape1 = new Microsoft.VisualBasic.PowerPacks.LineShape();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -75,7 +83,7 @@
             dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.tabla.DefaultCellStyle = dataGridViewCellStyle7;
             this.tabla.ImeMode = System.Windows.Forms.ImeMode.On;
-            this.tabla.Location = new System.Drawing.Point(141, 88);
+            this.tabla.Location = new System.Drawing.Point(141, 166);
             this.tabla.MultiSelect = false;
             this.tabla.Name = "tabla";
             this.tabla.ReadOnly = true;
@@ -94,9 +102,10 @@
             this.tabla.ShowCellToolTips = false;
             this.tabla.ShowEditingIcon = false;
             this.tabla.ShowRowErrors = false;
-            this.tabla.Size = new System.Drawing.Size(834, 492);
+            this.tabla.Size = new System.Drawing.Size(834, 353);
             this.tabla.TabIndex = 0;
             this.tabla.TabStop = false;
+            this.tabla.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tabla_CellContentClick);
             // 
             // pictureBox2
             // 
@@ -121,62 +130,154 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(448, 12);
+            this.nombreReporte.Location = new System.Drawing.Point(473, 9);
             this.nombreReporte.Name = "nombreReporte";
-            this.nombreReporte.Size = new System.Drawing.Size(225, 28);
+            this.nombreReporte.Size = new System.Drawing.Size(114, 28);
             this.nombreReporte.TabIndex = 3;
-            this.nombreReporte.Text = "Venta de Entradas";
-            this.nombreReporte.Click += new System.EventHandler(this.nombreReporte_Click);
+            this.nombreReporte.Text = "Facturas";
             // 
-            // tbRutaArchivo
+            // LBNroFactura
             // 
-            this.tbRutaArchivo.Location = new System.Drawing.Point(735, 60);
-            this.tbRutaArchivo.Name = "tbRutaArchivo";
-            this.tbRutaArchivo.Size = new System.Drawing.Size(137, 20);
-            this.tbRutaArchivo.TabIndex = 4;
+            this.LBNroFactura.AutoSize = true;
+            this.LBNroFactura.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBNroFactura.Location = new System.Drawing.Point(846, 91);
+            this.LBNroFactura.Name = "LBNroFactura";
+            this.LBNroFactura.Size = new System.Drawing.Size(88, 16);
+            this.LBNroFactura.TabIndex = 4;
+            this.LBNroFactura.Text = "Nro Factura: -";
             // 
-            // button1
+            // LBFecha
             // 
-            this.button1.Location = new System.Drawing.Point(887, 59);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(63, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "archivo";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.LBFecha.AutoSize = true;
+            this.LBFecha.Location = new System.Drawing.Point(846, 107);
+            this.LBFecha.Name = "LBFecha";
+            this.LBFecha.Size = new System.Drawing.Size(46, 13);
+            this.LBFecha.TabIndex = 5;
+            this.LBFecha.Text = "Fecha: -";
+            this.LBFecha.Click += new System.EventHandler(this.LBFecha_Click);
             // 
-            // openFileDialog1
+            // LBNombres
             // 
-            this.openFileDialog1.FileName = "openFileDialog1";
-            this.openFileDialog1.FileOk += new System.ComponentModel.CancelEventHandler(this.openFileDialog1_FileOk);
+            this.LBNombres.AutoSize = true;
+            this.LBNombres.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBNombres.Location = new System.Drawing.Point(141, 104);
+            this.LBNombres.Name = "LBNombres";
+            this.LBNombres.Size = new System.Drawing.Size(144, 16);
+            this.LBNombres.TabIndex = 6;
+            this.LBNombres.Text = "Nombres y Apellidos: -";
             // 
-            // LBApagar
+            // LBNroId
             // 
-            this.LBApagar.AutoSize = true;
-            this.LBApagar.Location = new System.Drawing.Point(612, 64);
-            this.LBApagar.Name = "LBApagar";
-            this.LBApagar.Size = new System.Drawing.Size(82, 13);
-            this.LBApagar.TabIndex = 6;
-            this.LBApagar.Text = "Total a pagar:  -";
+            this.LBNroId.AutoSize = true;
+            this.LBNroId.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBNroId.Location = new System.Drawing.Point(565, 104);
+            this.LBNroId.Name = "LBNroId";
+            this.LBNroId.Size = new System.Drawing.Size(135, 16);
+            this.LBNroId.TabIndex = 7;
+            this.LBNroId.Text = "Nro de Identificador: -";
             // 
-            // VentaEntradas
+            // LBTotal
+            // 
+            this.LBTotal.AutoSize = true;
+            this.LBTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBTotal.Location = new System.Drawing.Point(846, 537);
+            this.LBTotal.Name = "LBTotal";
+            this.LBTotal.Size = new System.Drawing.Size(62, 18);
+            this.LBTotal.TabIndex = 8;
+            this.LBTotal.Text = "Total: -";
+            // 
+            // LBDireccion
+            // 
+            this.LBDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBDireccion.Location = new System.Drawing.Point(141, 131);
+            this.LBDireccion.Name = "LBDireccion";
+            this.LBDireccion.Size = new System.Drawing.Size(418, 32);
+            this.LBDireccion.TabIndex = 9;
+            this.LBDireccion.Text = "Direccion: -";
+            // 
+            // LBTelefono
+            // 
+            this.LBTelefono.AutoSize = true;
+            this.LBTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LBTelefono.Location = new System.Drawing.Point(565, 131);
+            this.LBTelefono.Name = "LBTelefono";
+            this.LBTelefono.Size = new System.Drawing.Size(69, 16);
+            this.LBTelefono.TabIndex = 10;
+            this.LBTelefono.Text = "Telefonos";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(726, 51);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 13);
+            this.label1.TabIndex = 11;
+            this.label1.Text = "Nro Factura";
+            // 
+            // TBBuscar
+            // 
+            this.TBBuscar.Location = new System.Drawing.Point(792, 48);
+            this.TBBuscar.Name = "TBBuscar";
+            this.TBBuscar.Size = new System.Drawing.Size(100, 20);
+            this.TBBuscar.TabIndex = 12;
+            this.TBBuscar.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress);
+            // 
+            // BTBuscar
+            // 
+            this.BTBuscar.Location = new System.Drawing.Point(898, 46);
+            this.BTBuscar.Name = "BTBuscar";
+            this.BTBuscar.Size = new System.Drawing.Size(63, 23);
+            this.BTBuscar.TabIndex = 13;
+            this.BTBuscar.Text = "Buscar";
+            this.BTBuscar.UseVisualStyleBackColor = true;
+            this.BTBuscar.Click += new System.EventHandler(this.BTBuscar_Click);
+            // 
+            // shapeContainer1
+            // 
+            this.shapeContainer1.Location = new System.Drawing.Point(0, 0);
+            this.shapeContainer1.Margin = new System.Windows.Forms.Padding(0);
+            this.shapeContainer1.Name = "shapeContainer1";
+            this.shapeContainer1.Shapes.AddRange(new Microsoft.VisualBasic.PowerPacks.Shape[] {
+            this.lineShape1});
+            this.shapeContainer1.Size = new System.Drawing.Size(974, 581);
+            this.shapeContainer1.TabIndex = 14;
+            this.shapeContainer1.TabStop = false;
+            // 
+            // lineShape1
+            // 
+            this.lineShape1.BorderColor = System.Drawing.SystemColors.ButtonFace;
+            this.lineShape1.Name = "lineShape1";
+            this.lineShape1.X1 = 137;
+            this.lineShape1.X2 = 971;
+            this.lineShape1.Y1 = 78;
+            this.lineShape1.Y2 = 78;
+            // 
+            // Facturas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(974, 581);
-            this.Controls.Add(this.LBApagar);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.tbRutaArchivo);
+            this.Controls.Add(this.BTBuscar);
+            this.Controls.Add(this.TBBuscar);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.LBTelefono);
+            this.Controls.Add(this.LBDireccion);
+            this.Controls.Add(this.LBTotal);
+            this.Controls.Add(this.LBNroId);
+            this.Controls.Add(this.LBNombres);
+            this.Controls.Add(this.LBFecha);
+            this.Controls.Add(this.LBNroFactura);
             this.Controls.Add(this.nombreReporte);
             this.Controls.Add(this.tabla);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
+            this.Controls.Add(this.shapeContainer1);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(990, 620);
             this.MinimumSize = new System.Drawing.Size(990, 620);
-            this.Name = "VentaEntradas";
-            this.Text = "Stilo";
+            this.Name = "Facturas";
+            this.Text = "Facturas";
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -191,10 +292,18 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label nombreReporte;
-        private System.Windows.Forms.TextBox tbRutaArchivo;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.Label LBApagar;
+        private System.Windows.Forms.Label LBNroFactura;
+        private System.Windows.Forms.Label LBFecha;
+        private System.Windows.Forms.Label LBNombres;
+        private System.Windows.Forms.Label LBNroId;
+        private System.Windows.Forms.Label LBTotal;
+        private System.Windows.Forms.Label LBDireccion;
+        private System.Windows.Forms.Label LBTelefono;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBBuscar;
+        private System.Windows.Forms.Button BTBuscar;
+        private Microsoft.VisualBasic.PowerPacks.ShapeContainer shapeContainer1;
+        private Microsoft.VisualBasic.PowerPacks.LineShape lineShape1;
     }
 }
 
