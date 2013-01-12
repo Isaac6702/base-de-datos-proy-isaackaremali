@@ -83,3 +83,9 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Bai
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DirectorObra.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Facturas.resources
 C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Musico.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.BailarinesInvitados.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Menu.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Musico.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Facturas.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DirectorObra.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.MusicoInvitado.resources
