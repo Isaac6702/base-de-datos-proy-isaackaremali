@@ -26,7 +26,7 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(dm.fklugar, dm.detalleDireccion) direccion, IDDM id, dm.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) Nombres, Apellidos(NOMBRECOMPLETO) Apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_DM(dm.iddm) obras, dm.foto foto from director_musical dm, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND dm.IDDM = tc.FKDM AND tc.FECHAFIN is NULL AND invitado = 0  ");  
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(dm.fklugar, dm.detalleDireccion) direccion, IDDM id, dm.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) Nombres, Apellidos(NOMBRECOMPLETO) Apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_DM(dm.iddm) obras, dm.FALLECIMIENTO, n.nombre nacionalidad from director_musical dm, cargo c, trabajador_cargo tc, nacionalidad n, NACIONALIDAD_DM nd where tc.FKCARGO = c.IDCARGO AND dm.IDDM = tc.FKDM  AND invitado = 0  AND nd.PKDM = dm.iddm AND nd.PKNACIONALIDAD = n.idnacionalidad");  
                 llenarTabla(tablaBD);
             }
         }
@@ -42,6 +42,8 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Antigüedad");
             tablaAux.Columns.Add("Obras dirigidas");
+            tablaAux.Columns.Add("Fallecimiento");
+            tablaAux.Columns.Add("Nacionalidad");
             tablaAux.Columns.Add("foto", typeof(Image));
 
             while (tablaBD.Read())
@@ -51,11 +53,11 @@ namespace pruebaGridView
                     byte[] auxByte = (byte[])tablaBD["foto"];
                     Image imagen = Generico.llenarImagen(auxByte, tablaBD["ID"] + tablaBD["NOMBRES"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["obras"], imagen);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["OBRAS"], tablaBD["FALLECIMIENTO"],tablaBD["NACIONALIDAD"], imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["obras"], null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["OBRAS"], tablaBD["FALLECIMIENTO"], tablaBD["NACIONALIDAD"], null);
                
                 }
             
@@ -67,7 +69,11 @@ namespace pruebaGridView
         private void BTBuscar_Click(object sender, EventArgs e)
         {
             List<string> lista = new List<string>();
-            
+
+            if (TBNacionalidad.TextLength != 0)
+            {
+                lista.Add("Nacionalidad like '%" + TBNacionalidad.Text + "%'");
+            }
 
 
             if (TBNombres.TextLength != 0)
@@ -98,6 +104,31 @@ namespace pruebaGridView
         private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
         {
             Generico.tbSoloNumero(e);
+        }
+
+        private void LBPrimerApellido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNombres_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DirectorMusical_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LBSegundoApellido_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBApellidos_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
 

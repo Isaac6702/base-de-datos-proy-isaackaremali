@@ -26,7 +26,7 @@ namespace pruebaGridView
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(co.fklugar, co.detalleDireccion) direccion, idcoreografo id, co.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) nombres, apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO)antiguedad from coreografo co, cargo c, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND co.idcoreografo = tc.FKCOREOGRAFO AND tc.FECHAFIN is NULL AND invitado = 0 ");  
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(co.fklugar, co.detalleDireccion) direccion, idcoreografo id, co.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) nombres, apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO)antiguedad, n.nombre nacionalidad, co.foto from coreografo co, cargo c, NACIONALIDAD_COREOGRAFO nc, nacionalidad n, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND co.idcoreografo = tc.FKCOREOGRAFO AND  invitado = 0 AND nc.PKCOREOGRAFO = co.idcoreografo AND nc.PKNACIONALIDAD = n.idnacionalidad AND tc.FECHAFIN is NULL");  
                 llenarTabla(tablaBD);
             }
         }
@@ -41,6 +41,7 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Direccion");
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Antigüedad");
+            tablaAux.Columns.Add("Nacionalidad");
             tablaAux.Columns.Add("foto", typeof(Image));
 
             while (tablaBD.Read())
@@ -50,11 +51,11 @@ namespace pruebaGridView
                     byte[] auxByte = (byte[])tablaBD["foto"];
                     Image imagen = Generico.llenarImagen(auxByte, tablaBD["ID"] + tablaBD["NOMBRES"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"],  tablaBD["TELEFONOS"], tablaBD["antiguedad"], imagen);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["nacionalidad"], imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["nacionalidad"], null);
                
                 }
             
@@ -82,6 +83,10 @@ namespace pruebaGridView
                 lista.Add("identificador ='" + TBIdentificador.Text + "'");
             }
 
+            if (TBNacionalidad.TextLength!= 0)
+            {
+                lista.Add("Nacionalidad  like '%" + TBNacionalidad.Text + "%'");
+            }
 
 
             Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));

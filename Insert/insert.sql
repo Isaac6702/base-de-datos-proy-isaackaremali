@@ -7,7 +7,6 @@
 @c:\BaseDeDatosII\Insert\insertUsuarios.sql;
 @c:\BaseDeDatosII\Insert\insertDepartamentos.sql;
 @c:\BaseDeDatosII\Insert\insertCargo.sql;
-@c:\BaseDeDatosII\Insert\insertAsientos.sql;
 
 
 
