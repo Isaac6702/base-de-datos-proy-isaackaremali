@@ -42,7 +42,7 @@ create table LUGAR (
 
 create table INSTITUCION (
     idInstitucion          number(10)                          not null,
-    nombre                 varchar2(20)                        not null, 
+    nombre                 varchar2(2000)                        not null, 
     CONSTRAINT             pkInstitucion_idInstitucion         PRIMARY KEY (idInstitucion)
 );
 
