@@ -50,7 +50,6 @@ drop table PERSONAJE;
 drop table NACIONALIDAD;
 drop table VOZ;
 drop table DIRECTOR_ESCENOGRAFIA;
-drop table AUTOR;
 drop table INVITADO_ESPECIAL;
 drop table ESCENOGRAFO;
 drop table CANTANTE;
@@ -65,6 +64,7 @@ drop table DIRECTOR_MUSICAL;
 drop table COREOGRAFO;
 drop table ORQUESTA;
 drop table BALLET;
+drop table AUTOR;
 drop table LUGAR;
 
 
