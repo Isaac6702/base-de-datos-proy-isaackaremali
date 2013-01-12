@@ -14,17 +14,17 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class Cantante1 : Form
+    public partial class BailarinesInvitados : Form
     {
         DataTable tablaAux = new DataTable();
-        public Cantante1()
+        public BailarinesInvitados()
         {
             InitializeComponent();
             Conexion conexion = new Conexion();
 
-            if (conexion.AbrirConexion("", ""))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, nombres(c.NOMBRECOMPLETO) nombres, apellidos(c.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(c.FKLUGAR, c.DETALLEDIRECCION)direccion, consultar_telefonos(c.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad,  estudios_cantante(idcantante) estudios from CANTANTE c, NACIONALIDAD_CANTANTE nc, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nc.PKCANTANTE = c.IDCANTANTE AND nc.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKCANTANTE = c.IDCANTANTE AND n.fkpais = l.idlugar AND c.invitado = 0");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idbailarin) estudios  from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN AND n.fkpais = l.idlugar AND b.invitado = 1");          
                 llenarTabla(tablaBD);
             }
         }
@@ -41,6 +41,7 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Estudios");
             tablaAux.Columns.Add("Antigüedad");
             tablaAux.Columns.Add("Ballet anteriores");
+            tablaAux.Columns.Add("Obras");
             tablaAux.Columns.Add("Foto", typeof(Image));
             while (tablaBD.Read())
             {
@@ -96,6 +97,10 @@ namespace pruebaGridView
                 lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
             }
 
+            if (TBObra.TextLength != 0)
+            {
+                lista.Add("obras like'%" + TBObra.Text + "%'");
+            }
 
             Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
 

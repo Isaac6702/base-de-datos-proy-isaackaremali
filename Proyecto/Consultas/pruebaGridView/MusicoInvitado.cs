@@ -14,17 +14,17 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class Cantante1 : Form
+    public partial class MusicoInvitado : Form
     {
         DataTable tablaAux = new DataTable();
-        public Cantante1()
+        public MusicoInvitado()
         {
             InitializeComponent();
             Conexion conexion = new Conexion();
 
-            if (conexion.AbrirConexion("", ""))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, nombres(c.NOMBRECOMPLETO) nombres, apellidos(c.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(c.FKLUGAR, c.DETALLEDIRECCION)direccion, consultar_telefonos(c.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad,  estudios_cantante(idcantante) estudios from CANTANTE c, NACIONALIDAD_CANTANTE nc, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nc.PKCANTANTE = c.IDCANTANTE AND nc.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKCANTANTE = c.IDCANTANTE AND n.fkpais = l.idlugar AND c.invitado = 0");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_M(idMusico) Posiconobra from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO AND n.fkpais = l.idlugar AND m.invitado = 1");
                 llenarTabla(tablaBD);
             }
         }
@@ -40,7 +40,10 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Estudios");
             tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Ballet anteriores");
+            tablaAux.Columns.Add("Instrumentos que ejecutan y tiempo de ejecución");
+            tablaAux.Columns.Add("Instrumento principal y tiempo de ejecución");
+            tablaAux.Columns.Add("Orquesta");
+            tablaAux.Columns.Add("Obras");
             tablaAux.Columns.Add("Foto", typeof(Image));
             while (tablaBD.Read())
             {
@@ -95,6 +98,14 @@ namespace pruebaGridView
             {
                 lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
             }
+            if (TBOrquesta.TextLength != 0)
+            {
+                lista.Add("Orquesta like'%" + TBOrquesta.Text + "%'");
+            }
+            if (TBOrquesta.TextLength != 0)
+            {
+                lista.Add("Obras like'%" + TBObra.Text + "%'");
+            }
 
 
             Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
@@ -109,6 +120,36 @@ namespace pruebaGridView
         private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
         {
             Generico.tbSoloNumero(e);
+        }
+
+        private void MusicoInvitado_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNombres_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBApellidos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
       

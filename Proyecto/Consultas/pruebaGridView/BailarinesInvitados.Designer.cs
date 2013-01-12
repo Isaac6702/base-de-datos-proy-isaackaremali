@@ -1,6 +1,6 @@
 ﻿namespace pruebaGridView
 {
-    partial class Actor1
+    partial class BailarinesInvitados
     {
         /// <summary>
         /// Required designer variable.
@@ -36,6 +36,19 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nombreReporte = new System.Windows.Forms.Label();
+            this.BTBuscar = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.TBNombres = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.TBApellidos = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.TBIdentificador = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.TBNacionalidad = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.TBAntiguedad = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBObra = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -117,18 +130,138 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(501, 12);
+            this.nombreReporte.Location = new System.Drawing.Point(442, 5);
             this.nombreReporte.Name = "nombreReporte";
-            this.nombreReporte.Size = new System.Drawing.Size(76, 28);
+            this.nombreReporte.Size = new System.Drawing.Size(241, 28);
             this.nombreReporte.TabIndex = 3;
-            this.nombreReporte.Text = "Autor";
+            this.nombreReporte.Text = "Bailarines invitados";
             // 
-            // Actor1
+            // BTBuscar
+            // 
+            this.BTBuscar.Location = new System.Drawing.Point(902, 62);
+            this.BTBuscar.Name = "BTBuscar";
+            this.BTBuscar.Size = new System.Drawing.Size(63, 23);
+            this.BTBuscar.TabIndex = 4;
+            this.BTBuscar.Text = "Buscar";
+            this.BTBuscar.UseVisualStyleBackColor = true;
+            this.BTBuscar.Click += new System.EventHandler(this.BTBuscar_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(559, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(49, 13);
+            this.label3.TabIndex = 11;
+            this.label3.Text = "Nombres";
+            // 
+            // TBNombres
+            // 
+            this.TBNombres.Location = new System.Drawing.Point(611, 38);
+            this.TBNombres.Name = "TBNombres";
+            this.TBNombres.Size = new System.Drawing.Size(100, 20);
+            this.TBNombres.TabIndex = 10;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(740, 41);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 13);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Apellidos";
+            // 
+            // TBApellidos
+            // 
+            this.TBApellidos.Location = new System.Drawing.Point(792, 38);
+            this.TBApellidos.Name = "TBApellidos";
+            this.TBApellidos.Size = new System.Drawing.Size(100, 20);
+            this.TBApellidos.TabIndex = 12;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(191, 67);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Identificador";
+            // 
+            // TBIdentificador
+            // 
+            this.TBIdentificador.Location = new System.Drawing.Point(258, 64);
+            this.TBIdentificador.Name = "TBIdentificador";
+            this.TBIdentificador.Size = new System.Drawing.Size(100, 20);
+            this.TBIdentificador.TabIndex = 14;
+            this.TBIdentificador.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TBIdentificador_KeyPress);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(541, 67);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(69, 13);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "Nacionalidad";
+            // 
+            // TBNacionalidad
+            // 
+            this.TBNacionalidad.Location = new System.Drawing.Point(611, 64);
+            this.TBNacionalidad.Name = "TBNacionalidad";
+            this.TBNacionalidad.Size = new System.Drawing.Size(100, 20);
+            this.TBNacionalidad.TabIndex = 16;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(728, 67);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(61, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Antiguedad";
+            // 
+            // TBAntiguedad
+            // 
+            this.TBAntiguedad.Location = new System.Drawing.Point(792, 64);
+            this.TBAntiguedad.Name = "TBAntiguedad";
+            this.TBAntiguedad.Size = new System.Drawing.Size(100, 20);
+            this.TBAntiguedad.TabIndex = 18;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(378, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(30, 13);
+            this.label1.TabIndex = 21;
+            this.label1.Text = "Obra";
+            // 
+            // TBObra
+            // 
+            this.TBObra.Location = new System.Drawing.Point(411, 64);
+            this.TBObra.Name = "TBObra";
+            this.TBObra.Size = new System.Drawing.Size(100, 20);
+            this.TBObra.TabIndex = 20;
+            // 
+            // BailarinesInvitados
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(974, 581);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TBObra);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.TBAntiguedad);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.TBNacionalidad);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.TBIdentificador);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.TBApellidos);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.TBNombres);
+            this.Controls.Add(this.BTBuscar);
             this.Controls.Add(this.nombreReporte);
             this.Controls.Add(this.tabla);
             this.Controls.Add(this.pictureBox1);
@@ -136,8 +269,8 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(990, 620);
             this.MinimumSize = new System.Drawing.Size(990, 620);
-            this.Name = "Actor1";
-            this.Text = "Autor";
+            this.Name = "BailarinesInvitados";
+            this.Text = "Bailarines invitados";
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -146,12 +279,30 @@
 
         }
 
+        private void textBox1_TextChanged(object sender, System.EventArgs e)
+        {
+            throw new System.NotImplementedException();
+        }
+
         #endregion
 
         private System.Windows.Forms.DataGridView tabla;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label nombreReporte;
+        private System.Windows.Forms.Button BTBuscar;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox TBNombres;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox TBApellidos;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox TBIdentificador;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox TBNacionalidad;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox TBAntiguedad;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBObra;
     }
 }
 

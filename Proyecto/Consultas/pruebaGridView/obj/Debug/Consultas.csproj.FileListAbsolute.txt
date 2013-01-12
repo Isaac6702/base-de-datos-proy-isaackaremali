@@ -77,3 +77,8 @@ C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Trab
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Stilo.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Properties.Resources.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.GenerateResource.Cache
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.VentaEntradas.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.MusicoInvitado.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.BailarinesInvitados.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DirectorObra.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Facturas.resources
