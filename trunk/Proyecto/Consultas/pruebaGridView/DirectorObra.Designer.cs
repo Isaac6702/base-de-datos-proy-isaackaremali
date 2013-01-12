@@ -32,6 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DirectorObra));
             this.tabla = new System.Windows.Forms.DataGridView();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -43,6 +44,8 @@
             this.LBIdentificador = new System.Windows.Forms.Label();
             this.TBIdentificador = new System.Windows.Forms.TextBox();
             this.BTBuscar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBNacionalidad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -103,7 +106,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Image = global::pruebaGridView.Properties.Resources.black;
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(-2, 0);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(137, 580);
@@ -113,7 +116,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::pruebaGridView.Properties.Resources.roh_red;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(106, 153);
@@ -124,7 +127,7 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(467, 12);
+            this.nombreReporte.Location = new System.Drawing.Point(518, 12);
             this.nombreReporte.Name = "nombreReporte";
             this.nombreReporte.Size = new System.Drawing.Size(169, 28);
             this.nombreReporte.TabIndex = 3;
@@ -133,7 +136,7 @@
             // LBPrimerApellido
             // 
             this.LBPrimerApellido.AutoSize = true;
-            this.LBPrimerApellido.Location = new System.Drawing.Point(497, 68);
+            this.LBPrimerApellido.Location = new System.Drawing.Point(249, 64);
             this.LBPrimerApellido.Name = "LBPrimerApellido";
             this.LBPrimerApellido.Size = new System.Drawing.Size(49, 13);
             this.LBPrimerApellido.TabIndex = 9;
@@ -141,7 +144,7 @@
             // 
             // TBNombres
             // 
-            this.TBNombres.Location = new System.Drawing.Point(549, 65);
+            this.TBNombres.Location = new System.Drawing.Point(301, 61);
             this.TBNombres.Name = "TBNombres";
             this.TBNombres.Size = new System.Drawing.Size(100, 20);
             this.TBNombres.TabIndex = 8;
@@ -149,7 +152,7 @@
             // LBSegundoApellido
             // 
             this.LBSegundoApellido.AutoSize = true;
-            this.LBSegundoApellido.Location = new System.Drawing.Point(671, 68);
+            this.LBSegundoApellido.Location = new System.Drawing.Point(439, 64);
             this.LBSegundoApellido.Name = "LBSegundoApellido";
             this.LBSegundoApellido.Size = new System.Drawing.Size(49, 13);
             this.LBSegundoApellido.TabIndex = 11;
@@ -157,7 +160,7 @@
             // 
             // TBApellidos
             // 
-            this.TBApellidos.Location = new System.Drawing.Point(724, 65);
+            this.TBApellidos.Location = new System.Drawing.Point(492, 61);
             this.TBApellidos.Name = "TBApellidos";
             this.TBApellidos.Size = new System.Drawing.Size(100, 20);
             this.TBApellidos.TabIndex = 10;
@@ -165,7 +168,7 @@
             // LBIdentificador
             // 
             this.LBIdentificador.AutoSize = true;
-            this.LBIdentificador.Location = new System.Drawing.Point(838, 68);
+            this.LBIdentificador.Location = new System.Drawing.Point(841, 64);
             this.LBIdentificador.Name = "LBIdentificador";
             this.LBIdentificador.Size = new System.Drawing.Size(65, 13);
             this.LBIdentificador.TabIndex = 13;
@@ -173,7 +176,7 @@
             // 
             // TBIdentificador
             // 
-            this.TBIdentificador.Location = new System.Drawing.Point(904, 65);
+            this.TBIdentificador.Location = new System.Drawing.Point(907, 61);
             this.TBIdentificador.Name = "TBIdentificador";
             this.TBIdentificador.Size = new System.Drawing.Size(100, 20);
             this.TBIdentificador.TabIndex = 12;
@@ -181,7 +184,7 @@
             // 
             // BTBuscar
             // 
-            this.BTBuscar.Location = new System.Drawing.Point(1013, 62);
+            this.BTBuscar.Location = new System.Drawing.Point(1013, 59);
             this.BTBuscar.Name = "BTBuscar";
             this.BTBuscar.Size = new System.Drawing.Size(63, 23);
             this.BTBuscar.TabIndex = 14;
@@ -189,12 +192,30 @@
             this.BTBuscar.UseVisualStyleBackColor = true;
             this.BTBuscar.Click += new System.EventHandler(this.BTBuscar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(637, 64);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 15;
+            this.label1.Text = "Nacionalidad";
+            // 
+            // TBNacionalidad
+            // 
+            this.TBNacionalidad.Location = new System.Drawing.Point(713, 61);
+            this.TBNacionalidad.Name = "TBNacionalidad";
+            this.TBNacionalidad.Size = new System.Drawing.Size(100, 20);
+            this.TBNacionalidad.TabIndex = 16;
+            // 
             // DirectorObra
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1083, 581);
+            this.Controls.Add(this.TBNacionalidad);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.BTBuscar);
             this.Controls.Add(this.LBIdentificador);
             this.Controls.Add(this.TBIdentificador);
@@ -232,6 +253,8 @@
         private System.Windows.Forms.Label LBIdentificador;
         private System.Windows.Forms.TextBox TBIdentificador;
         private System.Windows.Forms.Button BTBuscar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBNacionalidad;
     }
 }
 

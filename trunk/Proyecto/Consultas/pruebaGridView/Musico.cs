@@ -14,17 +14,17 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class BailarinesInvitados : Form
+    public partial class Musico : Form
     {
         DataTable tablaAux = new DataTable();
-        public BailarinesInvitados()
+        public Musico()
         {
             InitializeComponent();
             Conexion conexion = new Conexion();
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad , estudios_bailarin(idbailarin) estudios from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN AND n.fkpais = l.idlugar AND b.invitado = 1");          
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) Posiconobra, estudios_musico(idMusico) estudios, musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra, musico_instrumentP(idMusico) InstrumentoP from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO AND n.fkpais = l.idlugar AND m.invitado = 0");
                 llenarTabla(tablaBD);
             }
         }
@@ -40,6 +40,9 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Estudios");
             tablaAux.Columns.Add("Antigüedad");
+            tablaAux.Columns.Add("Instrumentos que ejecutan y tiempo de ejecución");
+            tablaAux.Columns.Add("Instrumento principal y tiempo de ejecución");
+            tablaAux.Columns.Add("Orquesta");
             tablaAux.Columns.Add("Obras");
             tablaAux.Columns.Add("Foto", typeof(Image));
             while (tablaBD.Read())
@@ -51,13 +54,13 @@ namespace pruebaGridView
 
                     byte[] fotoBailarin = (byte[])tablaBD["FOTOBAILARIN"];
                     Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"] + tablaBD["NOMBRES"].ToString());
-                    
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"],null, foto);
+
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], foto);
 
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], null, null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], null);
 
 
                 }
@@ -95,11 +98,15 @@ namespace pruebaGridView
             {
                 lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
             }
-
-            if (TBObra.TextLength != 0)
+            if (TBOrquesta.TextLength != 0)
             {
-                lista.Add("obras like'%" + TBObra.Text + "%'");
+                lista.Add("Orquesta like'%" + TBOrquesta.Text + "%'");
             }
+            if (TBOrquesta.TextLength != 0)
+            {
+                lista.Add("Obras like'%" + TBObra.Text + "%'");
+            }
+
 
             Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
 
@@ -113,6 +120,36 @@ namespace pruebaGridView
         private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
         {
             Generico.tbSoloNumero(e);
+        }
+
+        private void MusicoInvitado_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBNombres_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TBApellidos_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void tabla_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
       

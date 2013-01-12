@@ -43,6 +43,8 @@
             this.LBIdentificador = new System.Windows.Forms.Label();
             this.TBIdentificador = new System.Windows.Forms.TextBox();
             this.BTBuscar = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBNacionalidad = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -124,7 +126,7 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(416, 12);
+            this.nombreReporte.Location = new System.Drawing.Point(473, 12);
             this.nombreReporte.Name = "nombreReporte";
             this.nombreReporte.Size = new System.Drawing.Size(221, 28);
             this.nombreReporte.TabIndex = 3;
@@ -132,7 +134,7 @@
             // 
             // TBNombres
             // 
-            this.TBNombres.Location = new System.Drawing.Point(537, 63);
+            this.TBNombres.Location = new System.Drawing.Point(334, 64);
             this.TBNombres.Name = "TBNombres";
             this.TBNombres.Size = new System.Drawing.Size(100, 20);
             this.TBNombres.TabIndex = 4;
@@ -140,7 +142,7 @@
             // LBPrimerNombre
             // 
             this.LBPrimerNombre.AutoSize = true;
-            this.LBPrimerNombre.Location = new System.Drawing.Point(484, 66);
+            this.LBPrimerNombre.Location = new System.Drawing.Point(281, 67);
             this.LBPrimerNombre.Name = "LBPrimerNombre";
             this.LBPrimerNombre.Size = new System.Drawing.Size(49, 13);
             this.LBPrimerNombre.TabIndex = 5;
@@ -149,18 +151,20 @@
             // LBPrimerApellido
             // 
             this.LBPrimerApellido.AutoSize = true;
-            this.LBPrimerApellido.Location = new System.Drawing.Point(665, 67);
+            this.LBPrimerApellido.Location = new System.Drawing.Point(462, 68);
             this.LBPrimerApellido.Name = "LBPrimerApellido";
             this.LBPrimerApellido.Size = new System.Drawing.Size(49, 13);
             this.LBPrimerApellido.TabIndex = 9;
             this.LBPrimerApellido.Text = "Apellidos";
+            this.LBPrimerApellido.Click += new System.EventHandler(this.LBPrimerApellido_Click);
             // 
             // TBApellidos
             // 
-            this.TBApellidos.Location = new System.Drawing.Point(717, 64);
+            this.TBApellidos.Location = new System.Drawing.Point(514, 65);
             this.TBApellidos.Name = "TBApellidos";
             this.TBApellidos.Size = new System.Drawing.Size(100, 20);
             this.TBApellidos.TabIndex = 8;
+            this.TBApellidos.TextChanged += new System.EventHandler(this.TBApellidos_TextChanged);
             // 
             // LBIdentificador
             // 
@@ -189,12 +193,30 @@
             this.BTBuscar.UseVisualStyleBackColor = true;
             this.BTBuscar.Click += new System.EventHandler(this.BTBuscar_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(643, 67);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(69, 13);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Nacionalidad";
+            // 
+            // TBNacionalidad
+            // 
+            this.TBNacionalidad.Location = new System.Drawing.Point(716, 64);
+            this.TBNacionalidad.Name = "TBNacionalidad";
+            this.TBNacionalidad.Size = new System.Drawing.Size(100, 20);
+            this.TBNacionalidad.TabIndex = 15;
+            // 
             // Trabajador
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1083, 581);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.TBNacionalidad);
             this.Controls.Add(this.BTBuscar);
             this.Controls.Add(this.LBIdentificador);
             this.Controls.Add(this.TBIdentificador);
@@ -232,6 +254,8 @@
         private System.Windows.Forms.Label LBIdentificador;
         private System.Windows.Forms.TextBox TBIdentificador;
         private System.Windows.Forms.Button BTBuscar;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBNacionalidad;
     }
 }
 

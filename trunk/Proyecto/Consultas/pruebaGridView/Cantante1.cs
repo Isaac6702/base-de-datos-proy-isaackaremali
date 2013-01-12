@@ -22,9 +22,9 @@ namespace pruebaGridView
             InitializeComponent();
             Conexion conexion = new Conexion();
 
-            if (conexion.AbrirConexion("", ""))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select l.nombre pais, l.idlugar, nombres(c.NOMBRECOMPLETO) nombres, apellidos(c.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(c.FKLUGAR, c.DETALLEDIRECCION)direccion, consultar_telefonos(c.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad,  estudios_cantante(idcantante) estudios from CANTANTE c, NACIONALIDAD_CANTANTE nc, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nc.PKCANTANTE = c.IDCANTANTE AND nc.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKCANTANTE = c.IDCANTANTE AND n.fkpais = l.idlugar AND c.invitado = 0");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select voz_cantante (c.idcantante) voz,c.pasaporte pasaporte, l.nombre pais, l.idlugar, nombres(c.NOMBRECOMPLETO) nombres, apellidos(c.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(c.FKLUGAR, c.DETALLEDIRECCION)direccion, consultar_telefonos(c.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad,  estudios_cantante(idcantante) estudios from CANTANTE c, NACIONALIDAD_CANTANTE nc, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nc.PKCANTANTE = c.IDCANTANTE AND nc.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKCANTANTE = c.IDCANTANTE AND n.fkpais = l.idlugar AND c.invitado = 0");
                 llenarTabla(tablaBD);
             }
         }
@@ -35,30 +35,26 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Nombres");
             tablaAux.Columns.Add("Apellidos");
             tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("Bandera", typeof(Image));
             tablaAux.Columns.Add("Direccíon");
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Estudios");
             tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Ballet anteriores");
+            tablaAux.Columns.Add("Voces");
             tablaAux.Columns.Add("Foto", typeof(Image));
             while (tablaBD.Read())
             {
                 try
                 {
-                    //byte[] bandera = (byte[])tablaBD["bandera"];
-                    //Image imagenBandera = Generico.llenarImagen(bandera, tablaBD["idlugar"] + tablaBD["pais"].ToString());
 
                     byte[] fotoBailarin = (byte[])tablaBD["FOTOBAILARIN"];
                     Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"] + tablaBD["NOMBRES"].ToString());
-                    
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], foto);
+
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], tablaBD["direccion"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["VOZ"], foto);
 
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], null);
-
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], tablaBD["direccion"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["VOZ"], null);
 
                 }
 
@@ -94,6 +90,10 @@ namespace pruebaGridView
             if (TBNacionalidad.TextLength != 0)
             {
                 lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
+            }
+            if (TBVoz.TextLength != 0)
+            {
+                lista.Add("Voces like'%" + TBVoz.Text + "%'");
             }
 
 

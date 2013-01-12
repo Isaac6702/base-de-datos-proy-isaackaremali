@@ -1,6 +1,6 @@
 ﻿namespace pruebaGridView
 {
-    partial class MusicoInvitado
+    partial class Musico
     {
         /// <summary>
         /// Required designer variable.
@@ -134,11 +134,11 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(449, 7);
+            this.nombreReporte.Location = new System.Drawing.Point(504, 5);
             this.nombreReporte.Name = "nombreReporte";
-            this.nombreReporte.Size = new System.Drawing.Size(218, 28);
+            this.nombreReporte.Size = new System.Drawing.Size(113, 28);
             this.nombreReporte.TabIndex = 3;
-            this.nombreReporte.Text = "Musicos invitados";
+            this.nombreReporte.Text = "Musicos ";
             // 
             // BTBuscar
             // 
@@ -298,7 +298,7 @@
             this.MaximumSize = new System.Drawing.Size(990, 620);
             this.MinimumSize = new System.Drawing.Size(990, 620);
             this.Name = "MusicoInvitado";
-            this.Text = "Musicos invitado";
+            this.Text = "Musicos";
             this.Load += new System.EventHandler(this.MusicoInvitado_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

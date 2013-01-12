@@ -1,8 +1,9 @@
 CREATE OR REPLACE function consultar_direccion (fkDireccion IN NUMBER, detalleDireccion IN VARCHAR2)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select p.nombre pais, e.nombre estado, c.nombre ciudad from lugar p, lugar c, lugar e where p.idlugar = e.fklugar and e.idlugar = c.fklugar and e.idlugar = fkDireccion;
-AUX  BUSQUEDA % ROWTYPE;
+CURSOR BUSQUEDA IS select p.nombre pais, e.nombre estado, c.nombre ciudad
+ from lugar p, lugar c, lugar e 
+where e.idlugar = c.fklugar and p.idlugar = e.fklugar and c.idlugar = fkDireccion;AUX  BUSQUEDA % ROWTYPE;
 
 BEGIN
 FOR AUX IN BUSQUEDA LOOP
