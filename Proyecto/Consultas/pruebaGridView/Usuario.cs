@@ -61,13 +61,7 @@ namespace pruebaGridView
             get { return telefono; }
             set { telefono = value; }
         }
-        private string detalleDireccion;
-
-        public string DetalleDireccion
-        {
-            get { return detalleDireccion; }
-            set { detalleDireccion = value; }
-        }
+ 
         private int fkDireccion;
 
         public int FkDireccion
@@ -86,7 +80,6 @@ namespace pruebaGridView
         public void imprimir()
         {
             Console.WriteLine("id "+ this.Identificador);
-            Console.WriteLine("detalle " + this.DetalleDireccion);
             Console.WriteLine("fkdireccion " + this.FkDireccion);
             Console.WriteLine("fknacionalidad " + this.FkNacionalidad);
             Console.WriteLine("idzona " + this.idZona);

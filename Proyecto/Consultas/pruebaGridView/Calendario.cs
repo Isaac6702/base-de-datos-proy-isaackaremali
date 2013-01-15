@@ -23,11 +23,10 @@ namespace pruebaGridView
         {
             InitializeComponent();
             tablaAux.Columns.Add("obra");
-            tablaAux.Columns.Add("actores");
             tablaAux.Columns.Add("fecha");
 
             Conexion conexion = new Conexion();
-            if (conexion.AbrirConexion("karem", "karem"))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 OracleDataReader tablaFechas = conexion.EjecutarSelect("select to_char(fp.fecha, 'dd/mm/yyyy') as fecha from fecha_presentacion fp order by fp.fecha");
                 splitFecha(tablaFechas);
@@ -60,7 +59,7 @@ namespace pruebaGridView
         private void consultarObrasDelDia()
         {
             Conexion conexion = new Conexion();
-            if (conexion.AbrirConexion("karem", "karem"))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 tablaBD = conexion.EjecutarSelect("select fp.fecha as fecha, o.nombre as obra from fecha_presentacion fp, obra o where to_date(fp.fecha, 'dd/mm/yyyy') = to_date(sysdate, 'dd/mm/yyyy') and fp.fkObra = o.idObra order by fp.fecha");
 
@@ -84,13 +83,14 @@ namespace pruebaGridView
         }
 
         //para obtener la tabla con la fecha seleccionada
-        private void calendario_DateSelected(object sender, DateRangeEventArgs e)
+        private void calendario1_DateSelected(object sender, DateRangeEventArgs e)
         {
+            Console.WriteLine("entro");
             String fechaCalendario = calendario1.SelectionRange.Start.ToShortDateString();
             System.Console.WriteLine(fechaCalendario);
             Conexion conexion = new Conexion();
 
-            if (conexion.AbrirConexion("karem", "karem"))
+            if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 tablaBD = conexion.EjecutarSelect("select fp.fecha as fecha, o.nombre as obra from fecha_presentacion fp, obra o where fp.fecha = to_date('" + fechaCalendario + "', 'mm/dd/yyyy') and fp.fkObra = o.idObra order by fp.fecha");
                 llenarTabla(tablaBD);
@@ -99,6 +99,20 @@ namespace pruebaGridView
 
         private void nombreReporte_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void calendario1_DateSelected_1(object sender, DateRangeEventArgs e)
+        {
+            String fechaCalendario = calendario1.SelectionRange.Start.ToShortDateString();
+            System.Console.WriteLine(fechaCalendario);
+            Conexion conexion = new Conexion();
+
+            if (conexion.AbrirConexion("isaac", "isaac"))
+            {
+                tablaBD = conexion.EjecutarSelect("select fp.fecha as fecha, o.nombre as obra from fecha_presentacion fp, obra o where fp.fecha = to_date('" + fechaCalendario + "', 'mm/dd/yyyy') and fp.fkObra = o.idObra order by fp.fecha");
+                llenarTabla(tablaBD);
+            }
 
         }
 
