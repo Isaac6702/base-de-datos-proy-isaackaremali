@@ -89,3 +89,4 @@ C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Musi
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Facturas.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.DirectorObra.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.MusicoInvitado.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Menu.resources

@@ -35,7 +35,6 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Nombres");
             tablaAux.Columns.Add("Apellidos");
             tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("Bandera", typeof(Image));
             tablaAux.Columns.Add("Direccíon");
             tablaAux.Columns.Add("Teléfono");
             tablaAux.Columns.Add("Estudios");
@@ -55,12 +54,12 @@ namespace pruebaGridView
                     byte[] fotoBailarin = (byte[])tablaBD["FOTOBAILARIN"];
                     Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"] + tablaBD["NOMBRES"].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], foto);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], foto);
 
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], null);
+                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], null);
 
 
                 }

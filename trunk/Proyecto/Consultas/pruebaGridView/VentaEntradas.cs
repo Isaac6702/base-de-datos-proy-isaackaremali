@@ -32,13 +32,13 @@ namespace pruebaGridView
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select COUNT (e.identrada) total from entrada e, ubicacion a, ubicacion z, fecha_presentacion fp, obra o where e.FKUBICACION = a.idubicacion AND a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' and e.pagada = 0 and e.FKPRESENTACION = fp.idfp and fp.FKOBRA = o.idobra and fp.fecha = to_date('"+listaUsurio[0].FechaPresentacion+"','dd/mm/yy') and z.idubicacion ="+listaUsurio[0].IdZona[0].ToString()+" and o.nombre = '"+listaUsurio[0].Obra+"'");
+                OracleDataReader tablaBD = conexion.EjecutarSelect("select COUNT (e.identrada) total from entrada e, ubicacion a, ubicacion z, fecha_presentacion fp, obra o where e.FKUBICACION = a.idubicacion AND a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' and e.pagada = 0 and e.FKPRESENTACION = fp.idfp and fp.FKOBRA = o.idobra and fp.fecha = to_date('"+listaUsurio[0].FechaPresentacion+"','dd/mm/yy') and z.idubicacion ="+listaUsurio[0].IdZona[0].ToString()+" and o.nombre = '"+listaUsurio[0].Obra.Trim()+"'");
 
                 try
                 {
                     while (tablaBD.Read())
                     {
-                       // Console.WriteLine("pruebaaa... " + listaUsurio[0].Obra +" ... "+ tablaBD["TOTAL"].ToString() + " < " + listaUsurio[0].Nro_entradas);
+                        Console.WriteLine("pruebaaa... " + listaUsurio[0].Obra + " ... " + listaUsurio[0].IdZona[0]+ " ... " + listaUsurio[0].FechaPresentacion + " ... " + tablaBD["TOTAL"].ToString() + " < " + listaUsurio[0].Nro_entradas);
                         if (int.Parse(tablaBD["TOTAL"].ToString()) < listaUsurio[0].Nro_entradas)
                         {
 
@@ -107,11 +107,6 @@ namespace pruebaGridView
        
                         break;
 
-                    case "detalleDireccion":
-
-                        u.DetalleDireccion = linea[1];
-
-                        break;
 
                     case "ciudad":
                         try
@@ -186,13 +181,16 @@ namespace pruebaGridView
                  OracleDataReader idFactura = conexion.EjecutarSelect("Select SEQFACTURA.nextval from dual");
                  while (idFactura.Read())
                  {
+                    
                      insertDB = conexion.EjecutarInsert("insert into factura (IDFACTURA,FECHA,FKUSUARIO) values(" + idFactura["NEXTVAL"].ToString() + ",to_date('" + listaUsurio[0].FechaPresentacion + "','dd/mm/yyyy'),1)");
+                    
                      if (insertDB == 1)
                      {
-                         OracleDataReader tabla1 = conexion.EjecutarSelect("select z.nombre zona, a.nombre asiento, e.identrada, e.costo from entrada e, ubicacion a, ubicacion z, fecha_presentacion fp, obra o where e.FKUBICACION = a.idubicacion AND a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' and e.pagada = 0 and e.FKPRESENTACION = fp.idfp and fp.FKOBRA = o.idobra and fp.fecha = to_date('11/01/13','dd/mm/yy') and z.idubicacion = 15 and o.nombre = 'opera2'");
+                         OracleDataReader tabla1 = conexion.EjecutarSelect("select z.nombre zona, a.nombre asiento, e.identrada, e.costo from entrada e, ubicacion a, ubicacion z, fecha_presentacion fp, obra o where e.FKUBICACION = a.idubicacion AND a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' and e.pagada = 0 and e.FKPRESENTACION = fp.idfp and fp.FKOBRA = o.idobra and fp.fecha = to_date('" + listaUsurio[0].FechaPresentacion + "','dd/mm/yy') and z.idubicacion =" + listaUsurio[0].IdZona[0].ToString() + " and o.nombre = '" + listaUsurio[0].Obra.Trim()+ "' and rownum < "+listaUsurio[0].Nro_entradas);
                          while (tabla1.Read())
                          {
                              insertDB = conexion.EjecutarInsert("insert into DETALLE_FACTURA (IDDF, MONTO, FKFACTURA, FKENTRADA) values(SEQDF.nextval, " + tabla1["COSTO"] + ", " + idFactura["NEXTVAL"] + ", " + tabla1["IDENTRADA"]+")");
+                           
                              if (insertDB != 1)
                              {
                                  MessageBox.Show("ERROR el detalle de la factura");
@@ -236,6 +234,7 @@ namespace pruebaGridView
             bool b2 = validarCantidadPuestos();
             if (b1 && b2)
             {
+                Console.WriteLine("entrooo en validar");
                 insertEntradas();
             }
 
