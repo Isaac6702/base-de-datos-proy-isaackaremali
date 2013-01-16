@@ -767,3 +767,21 @@ add constraint ni_fkInvitado
 foreign key (pkInvitado)
 references INVITADO_ESPECIAL(idIE)
 on delete cascade;
+
+alter table FACTURA_DIGITALIZACION
+add constraint fd_usuario
+foreign key (fkUsuario)
+references USUARIO(idUsuario)
+on delete cascade;
+
+alter table DETALLE_FACTURA_DIGITALIZADA
+add constraint dfd_video
+foreign key (fkVideo)
+references VIDEO(idVideo)
+on delete cascade;
+
+alter table DETALLE_FACTURA_DIGITALIZADA
+add constraint dfd_audio
+foreign key (fkAudio)
+references AUDIO(idAudio)
+on delete cascade;
