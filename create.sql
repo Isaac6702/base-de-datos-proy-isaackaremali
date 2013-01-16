@@ -246,7 +246,25 @@ create table PARTE (
     CONSTRAINT              chParte_tipo                        CHECK (tipo IN ('acto', 'cavatina', 'barcarola', 'aria', 'obertura', 'recitativo', 'coro', 'duo', 'trio', 'cuarteto', 'concertante','romanza'))
 );
 
+create table AUDIO (
+    idAudio                 number(10)                          not null,
+    descripcion             varchar2(2000)                        not null,
+    formato                 varchar2(1000)                        not null,
+    contenido               blob                                not null,
+    fkPresentacion          number(10)                          not null, 
+    CONSTRAINT              pkAudio_idAudio                     PRIMARY KEY (idAudio),
+    CONSTRAINT              chAudio_formato                     CHECK (formato IN ('mp3', 'wav', 'rmi', 'midi', 'amf', 'mtn', 'wma'))
+);
 
+create table VIDEO (
+    idVideo                 number(10)                          not null,
+    descripcion             varchar2(2000)                        not null,
+    formato                 varchar2(2000)                        not null,
+    contenido               blob                                not null,
+    fkPresentacion          number(10)                          not null, 
+    CONSTRAINT              pkVideo_idVideo                     PRIMARY KEY (idVideo),
+    CONSTRAINT              chVideo_formato                     CHECK (formato IN ('3gp', 'aaf', 'asf', 'avi', 'camproj', 'divx', 'flv', 'mp4', 'mpg'))
+);
 
 create table OBRA (
     idObra                  number(10)                          not null,
@@ -336,23 +354,6 @@ create table DETALLE_FACTURA (
     fkEntrada               number(10)                                  ,
     fkLibreto               number(10)                                  ,
     CONSTRAINT              pkDF_idDF                           PRIMARY KEY (idDF)
-);
-
-create table FACTURA_DIGITALIZACION (
-    idFD                    number(10)                          not null,
-    fecha                   date                                not null,
-    fkUsuario               number(10)                          not null,
-    CONSTRAINT              pkFactura_idFD                      PRIMARY KEY (idFD)
-);
-
-create table DETALLE_FACTURA_DIGITALIZADA (
-    idDFD                   number(10)                          not null,
-    cantidad                number(10)                          not null,
-    monto                   number(12,2)                        not null,
-    fkFactura               number(10)                          not null,
-    fkVideo                 number(10)                                  ,
-    fkAudio                 number(10)                                  ,
-    CONSTRAINT              pkDF_idDFD                           PRIMARY KEY (idDFD)
 );
 
 create table PREMIACION (
