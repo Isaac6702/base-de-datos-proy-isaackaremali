@@ -16,16 +16,22 @@ namespace pruebaGridView
 {
     public partial class Stilo : Form
     {
-        DataTable tablaAux = new DataTable();
         public Stilo()
         {
             InitializeComponent();
+            Conexion conexion = new Conexion();
+
+            if (conexion.AbrirConexion("isaac", "isaac"))
+            {
+                DataTable tablaBD = conexion.procemiento("prueba");
+                llenarTabla(tablaBD);
+            }
         }
 
-        public void llenarTabla(OracleDataReader tablaBD)
+        public void llenarTabla(DataTable tablaAux)
         {
 
-            
+            tabla.DataSource = tablaAux;
            
         }
 

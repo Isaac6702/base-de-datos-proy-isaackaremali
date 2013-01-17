@@ -16,6 +16,7 @@ namespace pruebaGridView
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new Stilo());
             Application.Run(new NroProgramas());
         }
     }
