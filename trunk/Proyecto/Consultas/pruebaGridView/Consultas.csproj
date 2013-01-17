@@ -84,6 +84,18 @@
     <Compile Include="BailarinesInvitados.Designer.cs">
       <DependentUpon>BailarinesInvitados.cs</DependentUpon>
     </Compile>
+    <Compile Include="NroProgramas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NroProgramas.Designer.cs">
+      <DependentUpon>NroProgramas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PrecioEntradas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PrecioEntradas.Designer.cs">
+      <DependentUpon>PrecioEntradas.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +197,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BailarinesInvitados.resx">
       <DependentUpon>BailarinesInvitados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NroProgramas.resx">
+      <DependentUpon>NroProgramas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PrecioEntradas.resx">
+      <DependentUpon>PrecioEntradas.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>
