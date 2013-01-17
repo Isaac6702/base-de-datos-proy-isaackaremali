@@ -102,5 +102,17 @@ namespace pruebaViewGrid
                 return false;
             }
         }
+
+
+        public DataTable  procemiento(string nombre)
+        {
+            OracleCommand cmd = new OracleCommand(nombre, conexion);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("REC_CUR", OracleType.Cursor).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            dt.Load((OracleDataReader) cmd.Parameters["REC_CUR"].Value);
+            return dt;
+        }
     }
 }
