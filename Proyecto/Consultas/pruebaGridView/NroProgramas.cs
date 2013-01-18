@@ -35,20 +35,11 @@ namespace pruebaGridView
             Conexion conexion = new Conexion();
             if (conexion.AbrirConexion(usuario, password))
             {
-             //   OracleDataReader tablaDB = conexion.EjecutarSelect("select lower(o.nombre) obra, ((2258 * a.nroPresentaciones) - count(fp.idfp)) programas from entrada e, obra o, fecha_presentacion fp, ( select o.idobra id, count(idFP) nroPresentaciones from fecha_presentacion fp, obra o where  fp.fkObra = o.idObra group by o.idobra) a where fp.fkObra = o.idObra and e.pagada = 0 and fp.idfp = e.fkpresentacion and a.id = o.idObra group by o.nombre, a.nroPresentaciones");
-           
-                                        
-              
-    
-             /*   if (tablaDB != null)
+                DataTable tablaDB = conexion.procemiento("numero_programas");
+                if (tablaDB != null)
                 {
-                    while (tablaDB.Read())
-                    {
-                        tablaAux.Rows.Add(tablaDB["obra"], tablaDB["programas"]);
-                    }
-
-                    tabla.DataSource = tablaAux;
-                }*/
+                    tabla.DataSource = tablaDB;
+                }
             }
         }
 
@@ -60,17 +51,33 @@ namespace pruebaGridView
             Conexion conexion = new Conexion();
             if (conexion.AbrirConexion(usuario, password))
             {
-                OracleDataReader obras = conexion.EjecutarSelect("select lower(o.nombre) nombre from obra o order by o.nombre");
-                if (obras != null)
+                DataTable obras = conexion.procemiento("obras");
+               
+                foreach (DataRow x in obras.Rows)
                 {
-                    while (obras.Read())
-                    {
-                        comboObra.Items.Add(obras["nombre"]);
-                    }
+                    comboObra.Items.Add(x[0].ToString());
                 }
+                
             }
 
         }
+
+       private void comboObra_SelectedIndexChanged(object sender, EventArgs e)
+        {
+     /*       if (comboObra.SelectedIndex > 0)
+            {
+                string nombreObra = comboObra.SelectedItem.ToString();
+                System.Console.WriteLine(nombreObra);
+                Conexion conexion = new Conexion();
+                if (conexion.AbrirConexion(usuario, password))
+                {
+                   
+                    if (tablaDB != null)
+                        tabla.DataSource = tablaDB;
+
+                }
+            }
+        */}
 
 
    }
