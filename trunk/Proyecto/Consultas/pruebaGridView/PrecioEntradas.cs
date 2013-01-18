@@ -39,15 +39,14 @@ namespace pruebaGridView
             Conexion conexion = new Conexion();
             if (conexion.AbrirConexion(usuario, password))
             {
-                OracleDataReader monedas = conexion.EjecutarSelect("select m.idMoneda id, lower(m.nombre) nombre from moneda m order by nombre");
-
-                if (monedas != null)
+                DataTable monedas = conexion.procemiento("monedas");
+               
+                foreach (DataRow x in monedas.Rows)
                 {
-                    while (monedas.Read())
-                    {
-                        comboMoneda.Items.Add(monedas["nombre"]);
-                    }
+                    comboMoneda.Items.Add(x[0].ToString());
                 }
+                
+
                 
             }
 
@@ -79,19 +78,14 @@ namespace pruebaGridView
             Conexion conexion = new Conexion();
             if (conexion.AbrirConexion(usuario, password))
             {
-                OracleDataReader tablaDB = conexion.EjecutarSelect("select lower(o.nombre) nombre, to_char(fp.fecha, 'dd/mm/yyyy hh:mi:ssam') presentacion, u.nombre ubicacion, (u.porcentaje*fp.zonamascara) precio from obra o, fecha_presentacion fp, ubicacion u where fp.fkObra = o.idObra and u.tipo = 'zona' order by o.nombre, fp.fecha");
+                DataTable tablaDB = conexion.procemiento("precio_entradas");
                 if (tablaDB != null)
                 {
-                    while (tablaDB.Read())
-                    {
-                        tablaAux.Rows.Add(tablaDB["nombre"], tablaDB["presentacion"], tablaDB["ubicacion"], tablaDB["precio"]);
-                    }
-                    tabla.DataSource = tablaAux;
+                    tabla.DataSource = tablaDB;
                 }
             }
         
         }
-
        
         // cuando cambio de fecha
         private void timeInicio_ValueChanged(object sender, EventArgs e)
