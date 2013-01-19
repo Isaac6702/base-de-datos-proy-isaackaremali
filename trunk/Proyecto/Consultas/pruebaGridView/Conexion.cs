@@ -114,5 +114,17 @@ namespace pruebaViewGrid
             dt.Load((OracleDataReader) cmd.Parameters["REC_CUR"].Value);
             return dt;
         }
+
+        public DataTable filtrar(string nombre, string TB)
+        {
+            OracleCommand cmd = new OracleCommand(nombre, conexion);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.Parameters.Add("REC_CUR", OracleType.Cursor).Direction = ParameterDirection.Output;
+            cmd.Parameters.AddWithValue("buscador", TB);
+            cmd.ExecuteNonQuery();
+            DataTable dt = new DataTable();
+            dt.Load((OracleDataReader)cmd.Parameters["REC_CUR"].Value);
+            return dt;
+        }
     }
 }

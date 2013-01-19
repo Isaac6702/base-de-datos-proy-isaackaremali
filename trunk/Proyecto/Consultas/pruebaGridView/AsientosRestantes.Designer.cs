@@ -1,6 +1,6 @@
 ﻿namespace pruebaGridView
 {
-    partial class Stilo
+    partial class AsientosRestantes
     {
         /// <summary>
         /// Required designer variable.
@@ -37,7 +37,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.nombreReporte = new System.Windows.Forms.Label();
             this.BTBuscar = new System.Windows.Forms.Button();
-            this.TBPrueba = new System.Windows.Forms.TextBox();
+            this.TBObra = new System.Windows.Forms.TextBox();
+            this.Obra = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.TBUbicacion = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -121,9 +124,9 @@
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.nombreReporte.Location = new System.Drawing.Point(448, 12);
             this.nombreReporte.Name = "nombreReporte";
-            this.nombreReporte.Size = new System.Drawing.Size(77, 28);
+            this.nombreReporte.Size = new System.Drawing.Size(233, 28);
             this.nombreReporte.TabIndex = 3;
-            this.nombreReporte.Text = "Titulo";
+            this.nombreReporte.Text = "Asientos Restantes";
             // 
             // BTBuscar
             // 
@@ -135,20 +138,48 @@
             this.BTBuscar.UseVisualStyleBackColor = true;
             this.BTBuscar.Click += new System.EventHandler(this.BTBuscar_Click);
             // 
-            // TBPrueba
+            // TBObra
             // 
-            this.TBPrueba.Location = new System.Drawing.Point(781, 61);
-            this.TBPrueba.Name = "TBPrueba";
-            this.TBPrueba.Size = new System.Drawing.Size(100, 20);
-            this.TBPrueba.TabIndex = 5;
+            this.TBObra.Location = new System.Drawing.Point(608, 62);
+            this.TBObra.Name = "TBObra";
+            this.TBObra.Size = new System.Drawing.Size(100, 20);
+            this.TBObra.TabIndex = 5;
             // 
-            // Stilo
+            // Obra
+            // 
+            this.Obra.AutoSize = true;
+            this.Obra.Location = new System.Drawing.Point(574, 65);
+            this.Obra.Name = "Obra";
+            this.Obra.Size = new System.Drawing.Size(30, 13);
+            this.Obra.TabIndex = 6;
+            this.Obra.Text = "Obra";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(723, 65);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 13);
+            this.label1.TabIndex = 7;
+            this.label1.Text = "Ubicacion";
+            // 
+            // TBUbicacion
+            // 
+            this.TBUbicacion.Location = new System.Drawing.Point(781, 61);
+            this.TBUbicacion.Name = "TBUbicacion";
+            this.TBUbicacion.Size = new System.Drawing.Size(100, 20);
+            this.TBUbicacion.TabIndex = 8;
+            // 
+            // AsientosRestantes
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(974, 581);
-            this.Controls.Add(this.TBPrueba);
+            this.Controls.Add(this.TBUbicacion);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.Obra);
+            this.Controls.Add(this.TBObra);
             this.Controls.Add(this.BTBuscar);
             this.Controls.Add(this.nombreReporte);
             this.Controls.Add(this.tabla);
@@ -157,8 +188,8 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(990, 620);
             this.MinimumSize = new System.Drawing.Size(990, 620);
-            this.Name = "Stilo";
-            this.Text = "Stilo";
+            this.Name = "AsientosRestantes";
+            this.Text = "Asientos Restantes";
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -174,7 +205,10 @@
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label nombreReporte;
         private System.Windows.Forms.Button BTBuscar;
-        private System.Windows.Forms.TextBox TBPrueba;
+        private System.Windows.Forms.TextBox TBObra;
+        private System.Windows.Forms.Label Obra;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox TBUbicacion;
     }
 }
 

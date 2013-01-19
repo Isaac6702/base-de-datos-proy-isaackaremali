@@ -14,16 +14,18 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class EntradasVendidas : Form
+    public partial class EntradasVendidasDetalle : Form
     {
         DataTable tablaAux = new DataTable();
         Conexion conexion = new Conexion();
-        public EntradasVendidas()
+        public EntradasVendidasDetalle()
         {
             InitializeComponent();
+            DTFechaVentas.CustomFormat = "dd/MM/yyyy";
+            DTFechaPresentacion.CustomFormat = "dd/MM/yyyy";    
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas");
+                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas_momento");
                 llenarTabla(tablaBD); 
             }
         }
@@ -40,29 +42,38 @@ namespace pruebaGridView
 
         private void BTBuscar_Click(object sender, EventArgs e)
         {
+            string fecha1, fecha2, aux;
 
-             if (TBDesde.Left == 0)
+            if (!DTFechaVentas.Checked)
             {
-                TBDesde.Text="null";
+                fecha2 = "null";
             }
-             if (TBHasta.Left == 0)
-            {
-                TBHasta.Text="null";
-            }
-            if (TBUbicacion.Left == 0)
-            {
-                TBUbicacion.Text = "null";
+            else
+                fecha2 = DTFechaVentas.Text;
 
-            }
+             if (!DTFechaPresentacion.Checked)
+             {
+                 fecha1 = "null";
+             }
+             else
+                 fecha1 = DTFechaPresentacion.Text;
 
-            if (conexion.AbrirConexion("isaac", "isaac") && TBDesde.Left == 0 && TBUbicacion.Left == 0&& TBHasta.Left == 0)
+             if (TBObra.Text == "")
+             {
+                 aux = "null";
+
+             }
+             else
+                 aux = TBObra.Text;
+
+            if (conexion.AbrirConexion("isaac", "isaac") && !DTFechaVentas.Checked && aux == "null" && !DTFechaPresentacion.Checked)
             {
-                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas");
+                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas_momento");
                 llenarTabla(tablaBD);
             }
             else
             {
-                DataTable tablaBD = conexion.filtrar("FT_entradas_vendidas", TBUbicacion.Text+","+TBDesde.Text+","+TBHasta.Text);
+                DataTable tablaBD = conexion.filtrar(" FT_entradas_vendidas_momento", aux + "," + fecha1 + "," + fecha2);
                 llenarTabla(tablaBD);
 
             }
@@ -71,12 +82,17 @@ namespace pruebaGridView
 
         private void TBDesde_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Generico.tbSoloNumero(e);
+            
         }
 
         private void TBHasta_KeyPress(object sender, KeyPressEventArgs e)
         {
-            Generico.tbSoloNumero(e);
+        
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
         }
 
 

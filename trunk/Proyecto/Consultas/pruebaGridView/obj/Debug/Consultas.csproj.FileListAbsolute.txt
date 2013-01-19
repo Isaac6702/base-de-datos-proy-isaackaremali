@@ -95,3 +95,8 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Men
 >>>>>>> .r174
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csprojResolveAssemblyReference.cache
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.NroProgramas.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.NroProgramas.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.PrecioEntradas.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.AsientosRestantes.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.AsientosVendidos.resources
+C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.EntradasVendidasDetalle.resources

@@ -35,6 +35,12 @@ namespace pruebaGridView
            
         }
 
+        private void BTBuscar_Click(object sender, EventArgs e)
+        {
+            string prueba = null;
+            Console.WriteLine(prueba);
+        }
+
 
 
 

@@ -84,6 +84,24 @@
     <Compile Include="BailarinesInvitados.Designer.cs">
       <DependentUpon>BailarinesInvitados.cs</DependentUpon>
     </Compile>
+    <Compile Include="AsientosRestantes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsientosRestantes.Designer.cs">
+      <DependentUpon>AsientosRestantes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="AsientosVendidos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AsientosVendidos.Designer.cs">
+      <DependentUpon>AsientosVendidos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EntradasVendidasDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EntradasVendidasDetalle.Designer.cs">
+      <DependentUpon>EntradasVendidasDetalle.cs</DependentUpon>
+    </Compile>
     <Compile Include="NroProgramas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -197,6 +215,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="BailarinesInvitados.resx">
       <DependentUpon>BailarinesInvitados.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsientosRestantes.resx">
+      <DependentUpon>AsientosRestantes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="AsientosVendidos.resx">
+      <DependentUpon>AsientosVendidos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EntradasVendidasDetalle.resx">
+      <DependentUpon>EntradasVendidasDetalle.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="NroProgramas.resx">
       <DependentUpon>NroProgramas.cs</DependentUpon>
