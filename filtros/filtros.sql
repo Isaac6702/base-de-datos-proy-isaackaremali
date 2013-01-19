@@ -1,9 +1,4 @@
 create or replace PROCEDURE FT_Asientos_Rest(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
-  CURSOR BUSQUEDA IS select o.nombre obra, z.nombre Zona, a.nombre asiento 
-                        from entrada e, fecha_presentacion fp,ubicacion z, ubicacion a, OBRA o
-                        where a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' AND e.fkubicacion = a.idubicacion AND  e.FKPRESENTACION = fp.idfp 
-                        AND fp.FKOBRA = o.idobra AND e.FKPRESENTACION = fp.IDFP AND e.PAGADA = 0 and rownum<=5; 
-  fila BUSQUEDA%ROWTYPE;
   v_query     VARCHAR2(2550);
   obra varchar2(2000);
   ubicacion varchar2(2000);
@@ -29,12 +24,6 @@ BEGIN
 END;
 /
 create or replace PROCEDURE FT_Asientos_vendidos(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
-  CURSOR BUSQUEDA IS select o.nombre obra, z.nombre Zona, a.nombre asiento 
-                        from entrada e, fecha_presentacion fp,ubicacion z, ubicacion a, obra o  
-                        where a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' AND e.fkubicacion = a.idubicacion
-                        AND  e.FKPRESENTACION = fp.idfp AND fp.FKOBRA = o.idobra AND e.PAGADA = 1;
-
-  fila BUSQUEDA%ROWTYPE;
   v_query     VARCHAR2(2550);
   obra varchar2(2000);
   ubicacion varchar2(2000);
@@ -60,13 +49,6 @@ BEGIN
 END;
 /
 create or replace PROCEDURE FT_entradas_vendidas(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
-  CURSOR BUSQUEDA IS select o.nombre opera, z.nombre Ubicacion,  (COUNT(a.idubicacion) - entradas_restantes(COUNT(a.idubicacion), Z.IDUBICACION, o.idobra)) total 
-                        , entradas_restantes(COUNT(a.idubicacion), Z.IDUBICACION, o.idobra) restantes, e.COSTO
-                        from ubicacion z, ubicacion a, ubicacion p, obra o, entrada e
-                        where z.fkubicacion = p.idubicacion AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
-                        GROUP BY z.idubicacion, z.nombre, o.nombre, o.idobra, e.COSTO;
-
-  fila BUSQUEDA%ROWTYPE;
   v_query     VARCHAR2(4000);
   ubicacion varchar2(2000);
   costo1 varchar2(2000);
@@ -98,12 +80,6 @@ END;
 /
     
 create or replace PROCEDURE FT_entradas_vendidas_momento(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
-  CURSOR BUSQUEDA IS select o.nombre obra, COUNT(e.identrada) "TOTAL ENTRADAS", TO_DATE(fp.fecha,'dd/mm/yy') "FECHA PRESENTACION" ,TO_DATE(o.FECHAVENTA,'dd/mm/yy') " FECHA DE VENTA" 
-                        from entrada e, fecha_presentacion fp,ubicacion z, ubicacion a, obra o  
-                        where a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' AND e.fkubicacion = a.idubicacion AND  e.FKPRESENTACION = fp.idfp AND fp.FKOBRA = o.idobra AND e.PAGADA = 1
-                        GROUP BY o.nombre, fp.fecha, o.FECHAVENTA; 
-
-  fila BUSQUEDA%ROWTYPE;
   v_query     VARCHAR2(2550);
   obra varchar2(2000);
   fecha1 varchar2(2000);
@@ -135,14 +111,6 @@ END;
 /
   
 create or replace PROCEDURE FT_Bailarin_invitado(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
-  CURSOR BUSQUEDA IS select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad,
-                        consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos,
-                        ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idbailarin) estudios, Bailarini_obras(idbailarin) Obras, b.foto foto  
-                        from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l 
-                        WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
-                        AND n.fkpais = l.idlugar AND b.invitado = 1;
-
-  fila BUSQUEDA%ROWTYPE;
   v_query     VARCHAR2(4000);
   nombre varchar2(2000);
   apellido varchar2(2000);
