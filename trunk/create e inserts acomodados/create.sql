@@ -390,7 +390,6 @@ create table LIBRETO (
     costo                   number(12,2)                        not null,
     fkIdioma                number(10)                          not null,
     fkObra                  number(10)                          not null,
-    fkAutor                 number(10)                          not null,
     idiomaOriginal          number(1)                           not null,
     CONSTRAINT              chbooleanIdiomaOriginal             CHECK (idiomaOriginal IN (0,1)),
     CONSTRAINT              pkLibreto_idLibreto                 PRIMARY KEY (idLibreto)
