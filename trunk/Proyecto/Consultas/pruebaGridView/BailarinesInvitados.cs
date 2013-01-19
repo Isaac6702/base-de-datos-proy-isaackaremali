@@ -106,16 +106,17 @@ namespace pruebaGridView
             else
                 lista.Add("null");
 
-            if (TBObra.TextLength != 0)
+            if ( TBObra.TextLength != 0)
             {
                 lista.Add(TBObra.Text);
             }
             else
                 lista.Add("null");
 
+
             //Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
 
-            if (conexion.AbrirConexion("isaac", "isaac") && TBNombres.TextLength== 0 && TBApellidos.TextLength==0)
+            if (conexion.AbrirConexion("isaac", "isaac") && TBObra.TextLength == 0 && TBNacionalidad.TextLength == 0 && TBIdentificador.TextLength == 0 && TBNombres.TextLength == 0 && TBApellidos.TextLength == 0 && TBAntiguedad.TextLength == 0)
             {
                 DataTable tablaBD = conexion.procemiento("CT_Bailarines_invitados");
                 llenarTabla(tablaBD);

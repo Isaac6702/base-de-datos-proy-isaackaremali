@@ -2299,7 +2299,7 @@ AUX ÊBUSQUEDA % ROWTYPE;
 
 BEGIN
 FOR AUX IN BUSQUEDA LOOP
- Ê Ê RESULTADO := 'Tipo de Voz: '||AUX.nombre|| ' , Descripcion: ' ||AUX.descripcion||'. ';
+ Ê Ê RESULTADO := AUX.nombre|| ', Descripcion: ' ||AUX.descripcion||'. ';
 END LOOP;
  Ê Ê
 RETURN (RESULTADO);
