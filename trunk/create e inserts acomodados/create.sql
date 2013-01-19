@@ -230,7 +230,6 @@ create table AUDICION_CANTANTE (
     idAC                    number(10)                          not null,
     fecha                   date                                not null,
     aprobo                  number(1)                           not null,
-    valores                 BLOB                                not null,
     fkCantante              number(10)                          not null,
     fkPersonaje             number(10)                          not null, 
     CONSTRAINT              pkAC_idAC                           PRIMARY KEY (idAC)
@@ -380,7 +379,6 @@ create table AUDICION_MUSICO (
     idAM                    number(10)                          not null,
     fecha                   date                                not null,
     aprobo                  number(1)                           not null,
-    valores                 blob                                not null,
     fkPartitura             number(10)                          not null,
     fkMusico                number(10)                          not null,
     CONSTRAINT              chbooleanAprobo                     CHECK (aprobo IN (0,1)),
@@ -717,10 +715,72 @@ create table DETALLE_FACTURA_DIGITALIZADA (
     idDFD                   number(10)                          not null,
     cantidad                number(10)                          not null,
     monto                   number(12,2)                        not null,
-    fkFactura               number(10)                          not null,
+    fkFD                    number(10)                          not null,
     fkVideo                 number(10)                                  ,
     fkAudio                 number(10)                                  ,
     CONSTRAINT              pkDF_idDFD                           PRIMARY KEY (idDFD)
+);
+
+create table PAGO_DIGITALIZACION (
+    idPD                    number(10)                          not null,
+    monto                   number(12,2)                        not null,
+    fecha                   date                                not null,
+    formaPago               varchar2(2000)                      not null,
+    costoExtranjero         number(12,2)                                ,
+    fkMoneda                number(10)                                  ,
+    fkFD                    number(10)                         not null,   
+    CONSTRAINT              pkPagoD_idPD                       PRIMARY KEY (idPD),
+    CONSTRAINT              chPagoD_formaPD                    CHECK (formaPago IN ('tdc', 'tdd', 'efectivo'))
+);
+
+create table REGISTRO_VOZ_PERSONAJE (
+    idRVP                   number(10)                          not null,
+    pkPersonaje             number(10)                          not null,
+    x                       number(10)                          not null,
+    y                       number(10)                          not null,
+    CONSTRAINT              pkRVP_id                            PRIMARY KEY (idRVP, pkPersonaje)
+);
+
+create table REGISTRO_INSTRUMENTO (
+    idRI                    number(10)                          not null,
+    pkPartitura             number(10)                          not null,
+    x                       number(10)                          not null,
+    y                       number(10)                          not null,
+    CONSTRAINT              pkRI_id                            PRIMARY KEY (idRI, pkPartitura)
+);
+
+create table VOZ_AUDICION (
+    idVA                    number(10)                          not null,
+    pkAC                    number(10)                          not null,
+    x                       number(10)                          not null,
+    y                       number(10)                          not null,
+    CONSTRAINT              pkVA_id                            PRIMARY KEY (idVA, pkAC)
+);
+
+create table INSTRUMENTO_AUDICION (
+    idIA                    number(10)                          not null,
+    pkAM                    number(10)                          not null,
+    x                       number(10)                          not null,
+    y                       number(10)                          not null,
+    CONSTRAINT              pkIA_id                            PRIMARY KEY (idIA, pkAM)
+);
+
+create table HISTORIAL_PAGO (
+    idHP                    number(10)                          not null,
+    fecha                   date                                not null,
+    monto                   number(12,2)                        not null,
+    fkFP                    number(10)                          not null,
+    fkTrabajador            number(10)                                  ,
+    fkMusico                number(10)                                  ,
+    fkBailarin              number(10)                                  ,
+    fkCantante              number(10)                                  ,
+    fkEscenografo           number(10)                                  ,
+    fkAutor                 number(10)                                  ,
+    fkDirectorEscenografia  number(10)                                  ,
+    fkCoreografo            number(10)                                  ,
+    fkDirector              number(10)                                  ,
+    fkDM                    number(10)                                  ,
+    CONSTRAINT               pkHP_id                           PRIMARY KEY (idHP)
 );
 
 CREATE SEQUENCE seqDepartamento
@@ -1073,4 +1133,44 @@ CREATE SEQUENCE seqDFD
      MINVALUE 1
      NOMAXVALUE
      NOCYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqHP
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqIA
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     MAXVALUE 100
+     CYCLE
+     CACHE 10;
+     
+CREATE SEQUENCE seqRI
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     MAXVALUE 100
+     CYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqVA
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     MAXVALUE 100
+     CYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqRVP
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     MAXVALUE 100
+     CYCLE
      CACHE 10;

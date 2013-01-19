@@ -785,3 +785,105 @@ add constraint dfd_audio
 foreign key (fkAudio)
 references AUDIO(idAudio)
 on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_trabajador
+foreign key (fkTrabajador)
+references TRABAJADOR(idTrabajador)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_cantante
+foreign key (fkCantante)
+references CANTANTE(idCantante)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_musico
+foreign key (fkMusico)
+references MUSICO(idMusico)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_escenografo
+foreign key (fkEscenografo)
+references ESCENOGRAFO(idEscenografo)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_bailarin
+foreign key (fkBailarin)
+references BAILARIN(idBailarin)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_autor
+foreign key (fkAutor)
+references AUTOR(idAutor)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_de
+foreign key (fkDirectorEscenografia)
+references DIRECTOR_ESCENOGRAFIA(idDE)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_coreografo
+foreign key (fkCoreografo)
+references COREOGRAFO(idCoreografo)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_director
+foreign key (fkDirector)
+references DIRECTOR(idDirector)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_dm
+foreign key (fkDM)
+references DIRECTOR_MUSICAL(idDM)
+on delete cascade;
+
+alter table HISTORIAL_PAGO
+add constraint hp_fp
+foreign key (fkFP)
+references FECHA_PRESENTACION(idFP)
+on delete cascade;
+
+alter table INSTRUMENTO_AUDICION
+add constraint ia_pkAM
+foreign key (pkAM)
+references AUDICION_MUSICO(idAM)
+on delete cascade;
+
+alter table VOZ_AUDICION
+add constraint va_pkAC
+foreign key (pkAC)
+references AUDICION_CANTANTE(idAC)
+on delete cascade;
+
+alter table REGISTRO_INSTRUMENTO
+add constraint ri_pkPartitura
+foreign key (pkPartitura)
+references PARTITURA(idPartitura)
+on delete cascade;
+
+alter table REGISTRO_VOZ_PERSONAJE
+add constraint rvp_pkPersonaje
+foreign key (pkPersonaje)
+references PERSONAJE(idPersonaje)
+on delete cascade;
+
+alter table PAGO_DIGITALIZACION
+add constraint pd_fkMoneda
+foreign key (fkMoneda)
+references MONEDA(idMoneda)
+on delete cascade;
+
+alter table PAGO_DIGITALIZACION
+add constraint pd_fkFD
+foreign key (fkFD)
+references FACTURA_DIGITALIZACION(idFD)
+on delete cascade;
