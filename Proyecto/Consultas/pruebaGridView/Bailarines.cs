@@ -17,19 +17,18 @@ namespace pruebaGridView
     public partial class Bailarines : Form
     {
         DataTable tablaAux = new DataTable();
+        Conexion conexion = new Conexion();
         public Bailarines()
         {
             InitializeComponent();
-            Conexion conexion = new Conexion();
-
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select b.foto foto, l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idBailarin) estudios, l.bandera bandera, b.foto fotobailarin from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN AND n.fkpais = l.idlugar AND b.invitado = 0");
+                DataTable tablaBD = conexion.procemiento("CT_Bailarines");
                 llenarTabla(tablaBD);
             }
         }
 
-        public void llenarTabla(OracleDataReader tablaBD)
+        public void llenarTabla(DataTable tablaBD)
         {
             tablaAux.Columns.Add("Identificardor");
             tablaAux.Columns.Add("Nombres");
@@ -42,29 +41,29 @@ namespace pruebaGridView
             tablaAux.Columns.Add("Antigüedad");
             tablaAux.Columns.Add("Ballet anteriores");
             tablaAux.Columns.Add("Foto", typeof(Image));
-            while (tablaBD.Read())
-            {
-                try
-                {
+
+               
                     //byte[] bandera = (byte[])tablaBD["bandera"];
                     //Image imagenBandera = Generico.llenarImagen(bandera, tablaBD["idlugar"] + tablaBD["pais"].ToString());
+                    foreach (DataRow aux in tablaBD.Rows)
+                    {
+                        try
+                        {
 
-                    byte[] fotoBailarin = (byte[])tablaBD["foto"];
-                    Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"].ToString() + tablaBD["NOMBRES"].ToString());
-                    
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], foto);
+                            byte[] fotoBailarin = (byte[])aux[11];
+                            Image foto = Generico.llenarImagen(fotoBailarin, aux[2].ToString() + aux[3].ToString());
+                            tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[5].ToString(), null, aux[6].ToString(), aux[7].ToString(), aux[10].ToString(), aux[8].ToString(), aux[9].ToString(), foto);
+                        }
 
-                }
-                catch
-                {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], null, tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["balletAnteriores"], null);
+                        catch
+                        {
+                            tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[5].ToString(), null, aux[6].ToString(), aux[7].ToString(), aux[10].ToString(), aux[8].ToString(), aux[9].ToString(), null);
 
+                        }
 
-                }
-
-            }
-
-
+                    }
+                
+                
             tabla.DataSource = tablaAux;
         }
 

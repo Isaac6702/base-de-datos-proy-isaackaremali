@@ -41,7 +41,7 @@ namespace pruebaGridView
                 if (i == lista.Count() - 1)
                     parametro = parametro + lista[i];
                 else
-                    parametro = parametro + lista[i] + " AND ";
+                    parametro = parametro + lista[i] + ",";
 
             }
             return parametro;
