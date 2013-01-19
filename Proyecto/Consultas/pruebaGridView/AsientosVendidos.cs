@@ -14,17 +14,16 @@ using System.Windows.Forms;
 
 namespace pruebaGridView
 {
-    public partial class EntradasVendidas : Form
+    public partial class AsientosVendidos : Form
     {
-        DataTable tablaAux = new DataTable();
         Conexion conexion = new Conexion();
-        public EntradasVendidas()
+        public AsientosVendidos()
         {
             InitializeComponent();
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas");
-                llenarTabla(tablaBD); 
+                DataTable tablaBD = conexion.procemiento("CT_Asientos_vendidos");
+                llenarTabla(tablaBD);
             }
         }
 
@@ -32,22 +31,17 @@ namespace pruebaGridView
         {
 
             tabla.DataSource = tablaAux;
-
-            Console.WriteLine("numero"+tabla.RowCount);
-            
            
         }
 
         private void BTBuscar_Click(object sender, EventArgs e)
         {
 
-             if (TBDesde.Left == 0)
+            if (TBObra.Left == 0)
             {
-                TBDesde.Text="null";
-            }
-             if (TBHasta.Left == 0)
-            {
-                TBHasta.Text="null";
+                TBObra.Text="null";
+
+
             }
             if (TBUbicacion.Left == 0)
             {
@@ -55,28 +49,18 @@ namespace pruebaGridView
 
             }
 
-            if (conexion.AbrirConexion("isaac", "isaac") && TBDesde.Left == 0 && TBUbicacion.Left == 0&& TBHasta.Left == 0)
+            if (conexion.AbrirConexion("isaac", "isaac") && TBObra.Left == 0 && TBUbicacion.Left == 0)
             {
-                DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas");
+                DataTable tablaBD = conexion.procemiento("CT_Asientos_vendidos");
                 llenarTabla(tablaBD);
             }
             else
             {
-                DataTable tablaBD = conexion.filtrar("FT_entradas_vendidas", TBUbicacion.Text+","+TBDesde.Text+","+TBHasta.Text);
+                DataTable tablaBD = conexion.filtrar("FT_Asientos_Vendidos", TBObra.Text+","+TBUbicacion.Text);
                 llenarTabla(tablaBD);
 
             }
-           
-        }
 
-        private void TBDesde_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Generico.tbSoloNumero(e);
-        }
-
-        private void TBHasta_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            Generico.tbSoloNumero(e);
         }
 
 
