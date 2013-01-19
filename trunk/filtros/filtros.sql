@@ -133,3 +133,64 @@ BEGIN
 
 END;
 /
+  
+create or replace PROCEDURE FT_Bailarin_invitado(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  CURSOR BUSQUEDA IS select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad,
+                        consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos,
+                        ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idbailarin) estudios, Bailarini_obras(idbailarin) Obras, b.foto foto  
+                        from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l 
+                        WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
+                        AND n.fkpais = l.idlugar AND b.invitado = 1;
+
+  fila BUSQUEDA%ROWTYPE;
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  antiguedad varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  obra varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    antiguedad := split(buscador ,3,',');
+    identificador := split(buscador ,4,',');
+    nacionalidad := split(buscador ,5,',');
+    obra := split(buscador ,6,',');
+    v_query := 'select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad,
+                        consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad ,
+                        ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idbailarin) estudios, Bailarini_obras(idbailarin) Obras, b.foto foto  
+                        from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l 
+                        WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
+                        AND n.fkpais = l.idlugar AND b.invitado = 1';
+                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(b.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(b.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+    IF antiguedad != 'null' THEN
+        v_query := v_query || ' AND  antiguedad(tc.FECHAINICIO) like ''%'||antiguedad||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  b.pasaporte ='||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+    
+    
+    IF obra != 'null' THEN
+        v_query := v_query || ' AND  Bailarini_obras(idbailarin) like ''%'||obra||'%''';
+    END IF;
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
