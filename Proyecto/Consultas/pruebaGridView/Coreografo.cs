@@ -17,45 +17,46 @@ namespace pruebaGridView
     public partial class Coreografo : Form
     {
         DataTable tablaAux = new DataTable();
+        Conexion conexion = new Conexion();
 
         public Coreografo()
         {
             InitializeComponent();
 
-            Conexion conexion = new Conexion();
+        
              
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(co.fklugar, co.detalleDireccion) direccion, idcoreografo id, co.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) nombres, apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO)antiguedad, n.nombre nacionalidad, co.foto from coreografo co, cargo c, NACIONALIDAD_COREOGRAFO nc, nacionalidad n, trabajador_cargo tc where tc.FKCARGO = c.IDCARGO AND co.idcoreografo = tc.FKCOREOGRAFO AND  invitado = 0 AND nc.PKCOREOGRAFO = co.idcoreografo AND nc.PKNACIONALIDAD = n.idnacionalidad AND tc.FECHAFIN is NULL");  
+                DataTable tablaBD = conexion.procemiento("CT_Coreografo");
+                tablaAux.Columns.Add("Identificador");
+                tablaAux.Columns.Add("Nombres");
+                tablaAux.Columns.Add("Apellidos");
+                tablaAux.Columns.Add("Direccion");
+                tablaAux.Columns.Add("Teléfono");
+                tablaAux.Columns.Add("Antigüedad");
+                tablaAux.Columns.Add("Nacionalidad");
+                tablaAux.Columns.Add("foto", typeof(Image));
                 llenarTabla(tablaBD);
             }
         }
 
        
-        public void llenarTabla(OracleDataReader tablaBD)
+        public void llenarTabla(DataTable tablaBD)
         {
-
-            tablaAux.Columns.Add("Identificador");
-            tablaAux.Columns.Add("Nombres");
-            tablaAux.Columns.Add("Apellidos");
-            tablaAux.Columns.Add("Direccion");
-            tablaAux.Columns.Add("Teléfono");
-            tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("foto", typeof(Image));
-
-            while (tablaBD.Read())
+            tablaAux.Clear();
+            foreach (DataRow aux in tablaBD.Rows)
             {
+         
                 try
                 {
-                    byte[] auxByte = (byte[])tablaBD["foto"];
-                    Image imagen = Generico.llenarImagen(auxByte, tablaBD["ID"] + tablaBD["NOMBRES"].ToString());
+                    byte[] auxByte = (byte[])aux[9];
+                    Image imagen = Generico.llenarImagen(auxByte, aux[2].ToString() + aux[3].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["nacionalidad"], imagen);
+                    tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[0].ToString(), aux[5].ToString(), aux[7].ToString(), aux[8].ToString(), imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["nacionalidad"], null);
+                    tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[0].ToString(), aux[5].ToString(), aux[7].ToString(), aux[8].ToString(), null);
                
                 }
             
@@ -71,30 +72,44 @@ namespace pruebaGridView
 
             if (TBNombes.TextLength != 0)
             {
-                lista.Add("Nombres like '%" + TBNombes.Text + "%'");
+                lista.Add(TBNombes.Text);
             }
+            else
+                lista.Add("null");
 
             if (TBApellidos.TextLength!= 0)
             {
-                lista.Add("Apellidos like '%" + TBApellidos.Text + "%'");
+                lista.Add(TBApellidos.Text);
             }
+            else
+                lista.Add("null");
+
             if (TBIdentificador.TextLength != 0)
             {
-                lista.Add("identificador ='" + TBIdentificador.Text + "'");
+                lista.Add(TBIdentificador.Text);
             }
+            else
+                lista.Add("null");
 
             if (TBNacionalidad.TextLength!= 0)
             {
-                lista.Add("Nacionalidad  like '%" + TBNacionalidad.Text + "%'");
+                lista.Add(TBNacionalidad.Text);
             }
+            else
+                lista.Add("null");
 
 
-            Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
-
-            if (lista.Count() == 0) //reinicia la tabla a como estaba original antes de filtrar
+            if (conexion.AbrirConexion("isaac", "isaac") && TBNombes.TextLength==0 && TBNacionalidad.TextLength == 0 && TBIdentificador.TextLength == 0 &&  TBApellidos.TextLength == 0 )
             {
-                tabla.DataSource = tablaAux;
+                DataTable tablaBD = conexion.procemiento("CT_Coreografo");
+                llenarTabla(tablaBD);
             }
+            else
+            {
+                DataTable tablaBD = conexion.filtrar("FT_Coreografo", Generico.generarParametroFiltrado(lista));
+                llenarTabla(tablaBD);
+
+            }   
 
         }
 

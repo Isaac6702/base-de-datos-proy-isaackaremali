@@ -127,7 +127,7 @@
             // 
             this.nombreReporte.AutoSize = true;
             this.nombreReporte.Font = new System.Drawing.Font("Arial Rounded MT Bold", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nombreReporte.Location = new System.Drawing.Point(482, 12);
+            this.nombreReporte.Location = new System.Drawing.Point(486, 12);
             this.nombreReporte.Name = "nombreReporte";
             this.nombreReporte.Size = new System.Drawing.Size(237, 28);
             this.nombreReporte.TabIndex = 3;

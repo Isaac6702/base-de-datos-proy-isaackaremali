@@ -17,47 +17,49 @@ namespace pruebaGridView
     public partial class DirectorMusical : Form
     {
         DataTable tablaAux = new DataTable();
+        Conexion conexion = new Conexion();
 
         public DirectorMusical()
         {
             InitializeComponent();
 
-            Conexion conexion = new Conexion();
-             
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select consultar_direccion(dm.fklugar, dm.detalleDireccion) direccion, IDDM id, dm.pasaporte pasaporte , Nombres(NOMBRECOMPLETO) Nombres, Apellidos(NOMBRECOMPLETO) Apellidos, consultar_telefonos(TELEFONO) telefonos, c.nombre cargo, Antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_DM(dm.iddm) obras, dm.FALLECIMIENTO, n.nombre nacionalidad from director_musical dm, cargo c, trabajador_cargo tc, nacionalidad n, NACIONALIDAD_DM nd where tc.FKCARGO = c.IDCARGO AND dm.IDDM = tc.FKDM  AND invitado = 0  AND nd.PKDM = dm.iddm AND nd.PKNACIONALIDAD = n.idnacionalidad");  
+
+                DataTable tablaBD = conexion.procemiento("CT_DM");
+                tablaAux.Columns.Add("Identificador");
+                tablaAux.Columns.Add("Nombres");
+                tablaAux.Columns.Add("Apellidos");
+                tablaAux.Columns.Add("Direccion");
+                tablaAux.Columns.Add("Teléfono");
+                tablaAux.Columns.Add("Antigüedad");
+                tablaAux.Columns.Add("Obras dirigidas");
+                tablaAux.Columns.Add("Fallecimiento");
+                tablaAux.Columns.Add("Nacionalidad");
+                tablaAux.Columns.Add("foto", typeof(Image));
+
                 llenarTabla(tablaBD);
             }
         }
 
        
-        public void llenarTabla(OracleDataReader tablaBD)
+        public void llenarTabla(DataTable tablaBD)
         {
 
-            tablaAux.Columns.Add("Identificador");
-            tablaAux.Columns.Add("Nombres");
-            tablaAux.Columns.Add("Apellidos");
-            tablaAux.Columns.Add("Direccion");
-            tablaAux.Columns.Add("Teléfono");
-            tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Obras dirigidas");
-            tablaAux.Columns.Add("Fallecimiento");
-            tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("foto", typeof(Image));
-
-            while (tablaBD.Read())
+            tablaAux.Clear();
+            foreach (DataRow aux in tablaBD.Rows)
             {
+
                 try
                 {
-                    byte[] auxByte = (byte[])tablaBD["foto"];
-                    Image imagen = Generico.llenarImagen(auxByte, tablaBD["ID"] + tablaBD["NOMBRES"].ToString());
+                    byte[] auxByte = (byte[])aux[11];
+                    Image imagen = Generico.llenarImagen(auxByte, aux[2].ToString() + aux[3].ToString());
 
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["OBRAS"], tablaBD["FALLECIMIENTO"],tablaBD["NACIONALIDAD"], imagen);
+                    tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[0].ToString(), aux[5].ToString(), aux[7].ToString(), aux[8].ToString(), aux[9].ToString(), aux[10].ToString(), imagen);
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["antiguedad"], tablaBD["OBRAS"], tablaBD["FALLECIMIENTO"], tablaBD["NACIONALIDAD"], null);
+                    tablaAux.Rows.Add(aux[2].ToString(), aux[3].ToString(), aux[4].ToString(), aux[0].ToString(), aux[5].ToString(), aux[7].ToString(), aux[8].ToString(), aux[9].ToString(), aux[10].ToString(), null);
                
                 }
             
@@ -70,33 +72,46 @@ namespace pruebaGridView
         {
             List<string> lista = new List<string>();
 
-            if (TBNacionalidad.TextLength != 0)
-            {
-                lista.Add("Nacionalidad like '%" + TBNacionalidad.Text + "%'");
-            }
 
-
-            if (TBNombres.TextLength != 0)
+            if (TBNombre.TextLength != 0)
             {
-                lista.Add("Nombres like '%" + TBNombres.Text + "%'");
+                lista.Add(TBNombre.Text);
             }
+            else
+                lista.Add("null");
 
-            if (TBApellidos.TextLength!= 0)
+            if (TBApellidos.TextLength != 0)
             {
-                lista.Add("Apellidos like '%" + TBApellidos.Text + "%'");
+                lista.Add(TBApellidos.Text);
             }
+            else
+                lista.Add("null");
+
             if (TBIdentificador.TextLength != 0)
             {
-                lista.Add("identificador like '%" + TBIdentificador.Text + "%'");
+                lista.Add(TBIdentificador.Text);
             }
+            else
+                lista.Add("null");
 
-
-
-            Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
-
-            if (lista.Count() == 0) //reinicia la tabla a como estaba original antes de filtrar
+            if (TBNacionalidad.TextLength != 0)
             {
-                tabla.DataSource = tablaAux;
+                lista.Add(TBNacionalidad.Text);
+            }
+            else
+                lista.Add("null");
+
+
+            if (conexion.AbrirConexion("isaac", "isaac") && TBNombre.TextLength == 0 && TBNacionalidad.TextLength == 0 && TBIdentificador.TextLength == 0 && TBApellidos.TextLength == 0)
+            {
+                DataTable tablaBD = conexion.procemiento("CT_DM");
+                llenarTabla(tablaBD);
+            }
+            else
+            {
+                DataTable tablaBD = conexion.filtrar("FT_DM", Generico.generarParametroFiltrado(lista));
+                llenarTabla(tablaBD);
+
             }
 
         }

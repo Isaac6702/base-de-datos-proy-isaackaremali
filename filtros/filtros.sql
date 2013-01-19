@@ -162,3 +162,295 @@ BEGIN
 
 END;
 /
+  
+create or replace PROCEDURE FT_Bailarin(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  antiguedad varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    antiguedad := split(buscador ,3,',');
+    identificador := split(buscador ,4,',');
+    nacionalidad := split(buscador ,5,',');
+    
+    v_query := 'select  l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos,
+                    n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos,
+                    antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idBailarin) estudios,
+                    b.foto
+                    from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l
+                    WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
+                    AND n.fkpais = l.idlugar AND b.invitado = 0';
+                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(b.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(b.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+    IF antiguedad != 'null' THEN
+        v_query := v_query || ' AND  antiguedad(tc.FECHAINICIO) like ''%'||antiguedad||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  b.pasaporte ='||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+    
+
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+
+create or replace PROCEDURE FT_Cantante(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  antiguedad varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  voz varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    antiguedad := split(buscador ,3,',');
+    identificador := split(buscador ,4,',');
+    nacionalidad := split(buscador ,5,',');
+    voz := split(buscador ,6,',');
+    
+    v_query := 'select voz_cantante (c.idcantante) voz,c.pasaporte pasaporte, l.nombre pais, l.idlugar, nombres(c.NOMBRECOMPLETO) nombres,
+        apellidos(c.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(c.FKLUGAR, c.DETALLEDIRECCION)direccion,
+        consultar_telefonos(c.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad,  estudios_cantante(idcantante) estudios, c.foto
+    from CANTANTE c, NACIONALIDAD_CANTANTE nc, NACIONALIDAD n, trabajador_cargo tc, lugar l
+    WHERE nc.PKCANTANTE = c.IDCANTANTE AND nc.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKCANTANTE = c.IDCANTANTE
+            AND n.fkpais = l.idlugar AND c.invitado = 0';
+                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(c.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(c.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+    IF antiguedad != 'null' THEN
+        v_query := v_query || ' AND  antiguedad(tc.FECHAINICIO) like ''%'||antiguedad||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  c.pasaporte ='||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+    
+    IF voz != 'null' THEN
+        v_query := v_query || ' AND  voz_cantante (c.idcantante) like ''%'||voz||'%''';
+    END IF;
+    
+
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_Cargo(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  tipoA varchar2(2000);
+  cargo varchar2(2000);
+
+  
+BEGIN
+    tipoA := split(buscador ,1,',');
+    cargo := split(buscador ,2,',');
+
+    
+    v_query := 'select c.NOMBRE cargo, d.NOMBRE departamento, d.TIEMPOASCENSO tiempo, c.TIPOASCENSO "TIPO DE ASCENSO"
+    from cargo c, departamento d 
+    where c.FKDEPARTAMENTO = d.IDDEPARTAMENTO';
+                                            
+    IF tipoA != 'null' THEN
+        v_query := v_query || ' AND  c.TIPOASCENSO  like ''%'||tipoA||'%''';
+    END IF;
+    
+    IF cargo != 'null' THEN
+        v_query := v_query || ' AND  c.NOMBRE like ''%'||cargo||'%''';
+    END IF;
+    
+
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_Coreografo(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    identificador := split(buscador ,3,',');
+    nacionalidad := split(buscador ,4,',');
+    v_query := 'select consultar_direccion(co.fklugar, co.detalleDireccion) direccion, idcoreografo id, co.pasaporte pasaporte ,
+                    Nombres(NOMBRECOMPLETO) nombres, apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos,
+                    c.nombre cargo, Antiguedad(tc.FECHAINICIO)antiguedad, n.nombre nacionalidad, co.foto
+                    from coreografo co, cargo c, NACIONALIDAD_COREOGRAFO nc, nacionalidad n, trabajador_cargo tc
+                    where tc.FKCARGO = c.IDCARGO AND co.idcoreografo = tc.FKCOREOGRAFO AND  invitado = 0 AND nc.PKCOREOGRAFO = co.idcoreografo
+                        AND nc.PKNACIONALIDAD = n.idnacionalidad AND tc.FECHAFIN is NULL';
+                                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(co.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(co.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  co.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_DM(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    identificador := split(buscador ,3,',');
+    nacionalidad := split(buscador ,4,',');
+    v_query := 'select consultar_direccion(dm.fklugar, dm.detalleDireccion) direccion, IDDM id, dm.pasaporte pasaporte ,
+                    Nombres(NOMBRECOMPLETO) Nombres, Apellidos(NOMBRECOMPLETO) Apellidos, consultar_telefonos(TELEFONO) telefonos,
+                    c.nombre cargo, Antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_DM(dm.iddm) obras, dm.FALLECIMIENTO,
+                    n.nombre nacionalidad, dm.foto foto
+                    from director_musical dm, cargo c, trabajador_cargo tc, nacionalidad n, NACIONALIDAD_DM nd
+                    where tc.FKCARGO = c.IDCARGO AND dm.IDDM = tc.FKDM  AND invitado = 0  AND nd.PKDM = dm.iddm
+                    AND nd.PKNACIONALIDAD = n.idnacionalidad';
+                                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(dm.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(dm.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  dm.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_DO(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    identificador := split(buscador ,3,',');
+    nacionalidad := split(buscador ,4,',');
+    v_query := 'select d.pasaporte ,l.nombre pais, l.idlugar, nombres(d.NOMBRECOMPLETO) nombres, apellidos(d.NOMBRECOMPLETO) apellidos,
+                    n.nombre nacionalidad, consultar_direccion(d.FKLUGAR, d.DETALLEDIRECCION)direccion, consultar_telefonos(d.telefono) telefonos,
+                    antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_d(idDirector) obra, estudios_director(iddirector) estudios, d.foto foto
+                    from DIRECTOR d, NACIONALIDAD_DIRECTOR nd, NACIONALIDAD n, trabajador_cargo tc, lugar l
+                    WHERE nd.PKDIRECTOR = d.IDDIRECTOR AND nd.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKDIRECTOR = d.IDDIRECTOR
+                    AND n.fkpais = l.idlugar AND d.invitado = 0';
+                                                            
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(d.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(d.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  d.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_Escenografo(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    identificador := split(buscador ,3,',');
+    nacionalidad := split(buscador ,4,',');
+    v_query := 'select consultar_direccion(e.fklugar, e.detalleDireccion) direccion, IDESCENOGRAFO id, e.pasaporte pasaporte ,
+                    nombres(NOMBRECOMPLETO) nombres,  apellidos(NOMBRECOMPLETO) apellidos, consultar_telefonos(TELEFONO) telefonos,
+                    c.nombre cargo, Antiguedad(tc.FECHAINICIO) antiguedad , n.nombre nacionalidad, e.foto foto
+                    from ESCENOGRAFO e, cargo c, trabajador_cargo tc, nacionalidad n, NACIONALIDAD_ESCENOGRAFO ne
+                    where tc.FKCARGO = c.IDCARGO AND e.IDESCENOGRAFO = tc.FKESCENOGRAFO AND tc.FECHAFIN is NULL
+                    AND invitado = 0 AND ne.PKNACIONALIDAD = n.idnacionalidad AND ne.PKESCENOGRAFO = e.idescenografo';
+                                                                        
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(e.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(e.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  e.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
