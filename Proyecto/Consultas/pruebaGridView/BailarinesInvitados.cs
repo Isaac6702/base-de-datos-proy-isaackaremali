@@ -19,29 +19,33 @@ namespace pruebaGridView
         DataTable tablaAux = new DataTable();
         DataTable tablaBD = new DataTable();
         Conexion conexion = new Conexion();
+
         public BailarinesInvitados()
         {
             InitializeComponent();
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 DataTable tablaBD = conexion.procemiento("CT_Bailarines_invitados");
+                tablaAux.Columns.Add("Identificardor");
+                tablaAux.Columns.Add("Nombres");
+                tablaAux.Columns.Add("Apellidos");
+                tablaAux.Columns.Add("Nacionalidad");
+                tablaAux.Columns.Add("Direccíon");
+                tablaAux.Columns.Add("Teléfono");
+                tablaAux.Columns.Add("Estudios");
+                tablaAux.Columns.Add("Antigüedad");
+                tablaAux.Columns.Add("Obras");
+                tablaAux.Columns.Add("Foto", typeof(Image));
                 llenarTabla(tablaBD);
             }
+
+            
         }
 
         public void llenarTabla(DataTable tablaBD)
         {
-            tablaAux.Columns.Add("Identificardor");
-            tablaAux.Columns.Add("Nombres");
-            tablaAux.Columns.Add("Apellidos");
-            tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("Direccíon");
-            tablaAux.Columns.Add("Teléfono");
-            tablaAux.Columns.Add("Estudios");
-            tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Obras");
-            tablaAux.Columns.Add("Foto", typeof(Image));
-           
+
+            tablaAux.Clear();
                 foreach (DataRow aux in tablaBD.Rows)
                 {
                     try
@@ -111,17 +115,17 @@ namespace pruebaGridView
 
             //Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
 
-            //if (conexion.AbrirConexion("isaac", "isaac") && TBNombres.TextLength == 0 && TBApellidos.TextLength )
-            //{
-            //    DataTable tablaBD = conexion.procemiento("CT_Asientos_restantes");
-            //    llenarTabla(tablaBD);
-            //}
-            //else
-            //{
-            //    DataTable tablaBD = conexion.filtrar("FT_Asientos_Rest", TBObra.Text + "," + TBUbicacion.Text);
-            //    llenarTabla(tablaBD);
+            if (conexion.AbrirConexion("isaac", "isaac") && TBNombres.TextLength== 0 && TBApellidos.TextLength==0)
+            {
+                DataTable tablaBD = conexion.procemiento("CT_Bailarines_invitados");
+                llenarTabla(tablaBD);
+            }
+            else
+            {
+                DataTable tablaBD = conexion.filtrar("FT_Bailarin_invitado", Generico.generarParametroFiltrado(lista));
+                llenarTabla(tablaBD);
 
-            //}
+            }
 
         }
 
