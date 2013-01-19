@@ -783,6 +783,13 @@ create table HISTORIAL_PAGO (
     CONSTRAINT               pkHP_id                           PRIMARY KEY (idHP)
 );
 
+
+create table NACIONALIDAD_USUARIO (
+    pkNacionalidad          number(10)                          not null,
+    pkUsuario              number(10)                          not null,  
+    CONSTRAINT              pkNB_idNU                           PRIMARY KEY (pkNacionalidad, pkusuario)
+);
+
 CREATE SEQUENCE seqDepartamento
      START WITH 1
      INCREMENT BY 1
