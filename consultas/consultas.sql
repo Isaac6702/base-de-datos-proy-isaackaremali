@@ -40,3 +40,28 @@ where a.fkubicacion = z.idubicacion AND a.tipo = 'asiento' AND e.fkubicacion = a
 GROUP BY o.nombre, fp.fecha, o.FECHAVENTA; 
 END;
 /
+create or replace procedure CT_Bailarines(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+select  l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos,
+        n.nombre nacionalidad, consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos,
+        antiguedad(tc.FECHAINICIO) antiguedad , ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idBailarin) estudios,
+        l.bandera bandera, b.foto fotobailarin, b.foto
+        from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l
+        WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
+        AND n.fkpais = l.idlugar AND b.invitado = 0;
+END;
+/
+create or replace procedure CT_Bailarines_invitados(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+select l.nombre pais, l.idlugar, b.pasaporte pasaporte, nombres(b.NOMBRECOMPLETO) nombres, apellidos(b.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad,
+        consultar_direccion(b.FKLUGAR, b.DETALLEDIRECCION)direccion, consultar_telefonos(b.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad ,
+        ballet_anteriores(b.idbailarin) balletAnteriores, estudios_bailarin(idbailarin) estudios, Bailarini_obras(idbailarin) Obras, b.foto foto  
+        from BAILARIN b, NACIONALIDAD_BAILARIN nb, NACIONALIDAD n, trabajador_cargo tc, lugar l 
+        WHERE nb.PKBAILARIN = b.IDBAILARIN AND nb.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKBAILARIN = b.IDBAILARIN
+        AND n.fkpais = l.idlugar AND b.invitado = 1;
+
+END;
