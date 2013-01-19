@@ -368,8 +368,6 @@ create table PREMIACION (
 
 create table PARTITURA (
     idPartitura             number(10)                          not null,
-    contenido               blob                                not null,
-    registroInstrumentoPerfecto blob                            not null,
     fkInstrumento           number(10)                          not null,
     fkObra                  number(10)                          not null,
     CONSTRAINT              pkPartitura_idPartitura             PRIMARY KEY (idPartitura)
@@ -432,7 +430,6 @@ create table PERSONAJE (
     idPersonaje             number(10)                          not null,
     nombre                  varchar2(2000)                        not null,
     descripcion             varchar2(1000)                               ,
-    registroVoz             blob                                not null,
     principal               number(1)                           not null,
     fkVoz                   number(10)                          not null,
     fkObra                  number(10)                          not null, 
@@ -781,13 +778,6 @@ create table HISTORIAL_PAGO (
     fkDirector              number(10)                                  ,
     fkDM                    number(10)                                  ,
     CONSTRAINT               pkHP_id                           PRIMARY KEY (idHP)
-);
-
-
-create table NACIONALIDAD_USUARIO (
-    pkNacionalidad          number(10)                          not null,
-    pkUsuario              number(10)                          not null,  
-    CONSTRAINT              pkNB_idNU                           PRIMARY KEY (pkNacionalidad, pkusuario)
 );
 
 CREATE SEQUENCE seqDepartamento
