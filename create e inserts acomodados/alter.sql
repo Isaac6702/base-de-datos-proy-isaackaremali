@@ -289,12 +289,6 @@ references IDIOMA(idIdioma)
 on delete cascade;
 
 alter table LIBRETO
-add constraint libreto_fkAutor
-foreign key (fkAutor)
-references AUTOR(idAutor)
-on delete cascade;
-
-alter table LIBRETO
 add constraint libreto_fkObra
 foreign key (fkObra)
 references OBRA(idObra)
