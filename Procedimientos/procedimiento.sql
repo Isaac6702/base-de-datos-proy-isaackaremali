@@ -1515,7 +1515,7 @@ AUX  BUSQUEDA % ROWTYPE;
 
 BEGIN
 FOR AUX IN BUSQUEDA LOOP
-     RESULTADO := 'Orquesta:  '||AUX.orquesta||  ' ,  Posicion: ' ||AUX.posicion|| ' , fecha Inicio:  ' ||AUX.fechainicio|| ' , fecha fin:  ' ||AUX.fechafin||   '. ';
+     RESULTADO := AUX.orquesta||  ' ,  Posicion: ' ||AUX.posicion|| ' , fecha Inicio:  ' ||AUX.fechainicio|| ' , fecha fin:  ' ||AUX.fechafin||   '. ';
 END LOOP;
     
 RETURN (RESULTADO);

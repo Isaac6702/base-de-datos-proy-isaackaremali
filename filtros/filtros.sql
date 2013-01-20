@@ -454,3 +454,128 @@ BEGIN
 
 END;
 /
+create or replace PROCEDURE FT_Musico(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  antiguedad varchar2(2000);
+  orquesta varchar2(2000);
+  obra varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    antiguedad := split(buscador ,3,',');
+    identificador := split(buscador ,4,',');
+    nacionalidad := split(buscador ,5,',');
+    orquesta:= split(buscador ,6,',');
+    obra:= split(buscador ,7,',');
+    
+    
+    v_query := 'select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos,
+                    n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos,
+                    antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) "POSICION ORQUESTA", estudios_musico(idMusico) estudios,
+                    musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra,
+                    musico_instrumentP(idMusico) " INSTRUMENTO POSICION", m.foto foto
+                    from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l
+                    WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO
+                    AND n.fkpais = l.idlugar AND m.invitado = 0 ';
+                                                                                        
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(m.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(m.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+    IF antiguedad != 'null' THEN
+        v_query := v_query || ' AND  antiguedad(tc.FECHAINICIO) like ''%'||antiguedad||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  m.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+    
+     IF orquesta != 'null' THEN
+        v_query := v_query || ' AND  musico_orquest(idMusico)  like ''%'||orquesta||'%''';
+    END IF;
+    
+    IF obra != 'null' THEN
+        v_query := v_query || ' AND  consultar_obras_m(idMusico) like ''%'||obra||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+
+create or replace PROCEDURE FT_Musico_invitado(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(4000);
+  nombre varchar2(2000);
+  apellido varchar2(2000);
+  identificador varchar2(2000);
+  nacionalidad varchar2(2000);
+  antiguedad varchar2(2000);
+  orquesta varchar2(2000);
+  obra varchar2(2000);
+  
+BEGIN
+    nombre := split(buscador ,1,',');
+    apellido := split(buscador ,2,',');
+    antiguedad := split(buscador ,3,',');
+    identificador := split(buscador ,4,',');
+    nacionalidad := split(buscador ,5,',');
+    orquesta:= split(buscador ,6,',');
+    obra:= split(buscador ,7,',');
+    
+    
+    v_query := ' select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos,
+                    n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos,
+                    antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) Posiconobra, estudios_musico(idMusico) estudios,
+                    musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra,
+                    musico_instrumentP(idMusico) "INSTRUMENTO POSICION", m.foto foto
+                    from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l
+                    WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO
+                    AND n.fkpais = l.idlugar AND m.invitado = 1 ';
+                                                                                        
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(m.NOMBRECOMPLETO)  like ''%'||nombre||'%''';
+    END IF;
+    
+    IF apellido != 'null' THEN
+        v_query := v_query || ' AND  apellidos(m.NOMBRECOMPLETO) like ''%'||apellido||'%''';
+    END IF;
+    
+    IF antiguedad != 'null' THEN
+        v_query := v_query || ' AND  antiguedad(tc.FECHAINICIO) like ''%'||antiguedad||'%''';
+    END IF;
+    
+     IF identificador != 'null' THEN
+        v_query := v_query || ' AND  m.pasaporte = '||identificador;
+    END IF;
+    
+    IF nacionalidad != 'null' THEN
+        v_query := v_query || ' AND  n.nombre like ''%'||nacionalidad||'%''';
+    END IF;
+    
+     IF orquesta != 'null' THEN
+        v_query := v_query || ' AND  musico_orquest(idMusico)  like ''%'||orquesta||'%''';
+    END IF;
+    
+    IF obra != 'null' THEN
+        v_query := v_query || ' AND  consultar_obras_m(idMusico) like ''%'||obra||'%''';
+    END IF;
+
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/

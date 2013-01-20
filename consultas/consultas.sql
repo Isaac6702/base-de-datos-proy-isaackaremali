@@ -142,3 +142,33 @@ OPEN REC_CUR FOR
 
 END;
 /
+create or replace procedure CT_Musico (REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+    select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos,
+    n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos,
+    antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) "POSICION OBRA", estudios_musico(idMusico) estudios,
+    musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra,
+    musico_instrumentP(idMusico) " INSTRUMENTO POSICION", m.foto foto
+    from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l
+    WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO
+    AND n.fkpais = l.idlugar AND m.invitado = 0;
+
+END;
+/
+create or replace procedure CT_Musico_invitado (REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+    select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos,
+    n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos,
+    antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) Posiconobra, estudios_musico(idMusico) estudios,
+    musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra,
+    musico_instrumentP(idMusico) "INSTRUMENTO POSICION", m.foto foto
+    from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l
+    WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO
+    AND n.fkpais = l.idlugar AND m.invitado = 1;
+
+END;
+/
