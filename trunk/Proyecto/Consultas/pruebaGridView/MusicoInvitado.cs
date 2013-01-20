@@ -17,51 +17,49 @@ namespace pruebaGridView
     public partial class MusicoInvitado : Form
     {
         DataTable tablaAux = new DataTable();
+        Conexion conexion = new Conexion();
         public MusicoInvitado()
         {
             InitializeComponent();
-            Conexion conexion = new Conexion();
+            
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                OracleDataReader tablaBD = conexion.EjecutarSelect("select m.pasaporte, l.nombre pais, l.idlugar, nombres(m.NOMBRECOMPLETO) nombres, apellidos(m.NOMBRECOMPLETO) apellidos, n.nombre nacionalidad, consultar_direccion(m.FKLUGAR, m.DETALLEDIRECCION)direccion, consultar_telefonos(m.telefono) telefonos, antiguedad(tc.FECHAINICIO) antiguedad, consultar_obras_m(idMusico) Posiconobra, estudios_musico(idMusico) estudios, musico_instrument(idMusico) instrumento, musico_orquest(idMusico) orquesta, consultar_obras_m(idMusico) obra, musico_instrumentP(idMusico) InstrumentoP from MUSICO m, NACIONALIDAD_MUSICO nm, NACIONALIDAD n, trabajador_cargo tc, lugar l WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO AND n.fkpais = l.idlugar AND m.invitado = 1");
+                DataTable tablaBD = conexion.procemiento("CT_Musico_invitado");
+                tablaAux.Columns.Add("Identificardor");
+                tablaAux.Columns.Add("Nombres");
+                tablaAux.Columns.Add("Apellidos");
+                tablaAux.Columns.Add("Nacionalidad");
+                tablaAux.Columns.Add("Direccíon");
+                tablaAux.Columns.Add("Teléfono");
+                tablaAux.Columns.Add("Estudios");
+                tablaAux.Columns.Add("Antigüedad");
+                tablaAux.Columns.Add("Instrumentos que ejecutan y tiempo de ejecución");
+                tablaAux.Columns.Add("Instrumento principal y tiempo de ejecución");
+                tablaAux.Columns.Add("Orquesta");
+                tablaAux.Columns.Add("Obras");
+                tablaAux.Columns.Add("Foto", typeof(Image));
                 llenarTabla(tablaBD);
             }
         }
 
-        public void llenarTabla(OracleDataReader tablaBD)
+        public void llenarTabla(DataTable tablaBD)
         {
-            tablaAux.Columns.Add("Identificardor");
-            tablaAux.Columns.Add("Nombres");
-            tablaAux.Columns.Add("Apellidos");
-            tablaAux.Columns.Add("Nacionalidad");
-            tablaAux.Columns.Add("Direccíon");
-            tablaAux.Columns.Add("Teléfono");
-            tablaAux.Columns.Add("Estudios");
-            tablaAux.Columns.Add("Antigüedad");
-            tablaAux.Columns.Add("Instrumentos que ejecutan y tiempo de ejecución");
-            tablaAux.Columns.Add("Instrumento principal y tiempo de ejecución");
-            tablaAux.Columns.Add("Orquesta");
-            tablaAux.Columns.Add("Obras");
-            tablaAux.Columns.Add("Foto", typeof(Image));
-            while (tablaBD.Read())
+            tablaAux.Clear();
+            foreach (DataRow aux in tablaBD.Rows)
             {
+
                 try
                 {
-                    //byte[] bandera = (byte[])tablaBD["bandera"];
-                    //Image imagenBandera = Generico.llenarImagen(bandera, tablaBD["idlugar"] + tablaBD["pais"].ToString());
+                    byte[] fotoMusico = (byte[])aux[15];
+                    Image foto = Generico.llenarImagen(fotoMusico, aux[0].ToString()+ aux[3].ToString());
 
-                    byte[] fotoBailarin = (byte[])tablaBD["FOTOBAILARIN"];
-                    Image foto = Generico.llenarImagen(fotoBailarin, tablaBD["PASAPORTE"] + tablaBD["NOMBRES"].ToString());
-
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"],  tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], foto);
+                    tablaAux.Rows.Add(aux[0].ToString(), aux[3].ToString(), aux[4].ToString(), aux[5].ToString(),  aux[6].ToString(), aux[7].ToString(), aux[10].ToString(), aux[8].ToString(), aux[11].ToString(), aux[14].ToString(), aux[12].ToString(), aux[13].ToString(), foto);
 
                 }
                 catch
                 {
-                    tablaAux.Rows.Add(tablaBD["PASAPORTE"], tablaBD["NOMBRES"], tablaBD["APELLIDOS"], tablaBD["NACIONALIDAD"], tablaBD["DIRECCION"], tablaBD["TELEFONOS"], tablaBD["ESTUDIOS"], tablaBD["ANTIGUEDAD"], tablaBD["INSTRUMENTO"], tablaBD["INSTRUMENTOP"], tablaBD["ORQUESTA"], tablaBD["OBRA"], null);
-
-
+                    tablaAux.Rows.Add(aux[0].ToString(), aux[3].ToString(), aux[4].ToString(), aux[5].ToString(), aux[6].ToString(), aux[7].ToString(), aux[10].ToString(), aux[8].ToString(), aux[11].ToString(), aux[14].ToString(), aux[12].ToString(), aux[13].ToString(), null);
                 }
 
             }
@@ -77,42 +75,65 @@ namespace pruebaGridView
 
             if (TBNombres.TextLength != 0)
             {
-                lista.Add("Nombres like '%" + TBNombres.Text + "%'");
+                lista.Add(TBNombres.Text);
             }
+            else
+                lista.Add("null");
 
             if (TBApellidos.TextLength != 0)
             {
-                lista.Add("Apellidos like '%" + TBApellidos.Text + "%'");
+                lista.Add(TBApellidos.Text);
             }
+            else
+                lista.Add("null");
 
             if (TBAntiguedad.TextLength != 0)
             {
-                lista.Add("Antigüedad like '%" + TBAntiguedad.Text + "%'");
+                lista.Add(TBAntiguedad.Text);
             }
+            else
+                lista.Add("null");
+
             if (TBIdentificador.TextLength != 0)
             {
-                lista.Add("Identificardor='" + TBIdentificador.Text + "'");
+                lista.Add(TBIdentificador.Text);
             }
+            else
+                lista.Add("null");
+
             if (TBNacionalidad.TextLength != 0)
             {
-                lista.Add("Nacionalidad like'%" + TBNacionalidad.Text + "%'");
+                lista.Add(TBNacionalidad.Text);
             }
+            else
+                lista.Add("null");
+
             if (TBOrquesta.TextLength != 0)
             {
-                lista.Add("Orquesta like'%" + TBOrquesta.Text + "%'");
+                lista.Add(TBOrquesta.Text);
             }
-            if (TBOrquesta.TextLength != 0)
+            else
+                lista.Add("null");
+
+            if (TBObra.TextLength != 0)
             {
-                lista.Add("Obras like'%" + TBObra.Text + "%'");
+                lista.Add(TBObra.Text);
             }
+            else
+                lista.Add("null");
 
-
-            Generico.filtrar(tabla, tablaAux, Generico.generarParametroFiltrado(lista));
-
-            if (lista.Count() == 0) //reinicia la tabla a como estaba original antes de filtrar
+            if (conexion.AbrirConexion("isaac", "isaac") && TBOrquesta.TextLength == 0 && TBObra.TextLength == 0 && TBNacionalidad.TextLength == 0 && TBIdentificador.TextLength == 0 && TBNombres.TextLength == 0 && TBApellidos.TextLength == 0 && TBAntiguedad.TextLength == 0)
             {
-                tabla.DataSource = tablaAux;
+                DataTable tablaBD = conexion.procemiento("CT_Musico_invitado");
+                llenarTabla(tablaBD);
             }
+            else
+            {
+                DataTable tablaBD = conexion.filtrar("FT_Musico_invitado", Generico.generarParametroFiltrado(lista));
+                llenarTabla(tablaBD);
+
+            }
+
 
         }
 
