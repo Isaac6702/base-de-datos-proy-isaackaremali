@@ -1,0 +1,24 @@
+---------------------/diaS habiles/-----------------------------------
+
+create or replace 
+TRIGGER  "DIASHABILES" 
+BEFORE INSERT OR UPDATE ON DETALLE_FACTURA_DIGITALIZADA
+FOR EACH ROW
+DECLARE
+FECHA date;
+BEGIN
+IF ((:NEW.FKVIDEO IS NOT NULL) AND (:NEW.FKAUDIO IS NOT NULL)) OR ((:NEW.FKVIDEO IS NULL) AND (:NEW.FKAUDIO IS NULL)) THEN
+Raise_application_error (-20002,'NO INGRESO LOS DATOS NECESARIOS');
+END IF;
+if (:new.fkvideo is not null) then
+Select Distinct(fp.FECHA + 28) INTO FECHA from FECHA_PRESENTACION fp, video v, OBRA o where fp.FKOBRA = o.IDOBRA AND v.FKPRESENTACION = fp.idfp AND :new.fkvideo = v.idvideo;
+IF FECHA > SYSDATE THEN
+	Raise_application_error (-20000,'NO SE CUMPLE EL PLAZO MINIMO PARA LA VENTA DEL VIDEO');
+end if;
+else
+Select Distinct(fp.FECHA + 28) INTO FECHA from FECHA_PRESENTACION fp, audio a, OBRA o where fp.FKOBRA = o.IDOBRA AND a.FKPRESENTACION = fp.idfp AND :new.fkaudio = a.idaudio;
+IF FECHA > SYSDATE THEN
+	Raise_application_error (-20001,'NO SE CUMPLE EL PLAZO MINIMO PARA LA VENTA DEL AUDIO');
+end if;
+END if;
+END;
