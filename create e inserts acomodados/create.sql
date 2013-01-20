@@ -247,7 +247,7 @@ create table PARTE (
 
 create table AUDIO (
     idAudio                 number(10)                          not null,
-    descripcion             varchar2(2000)                      not null,
+    descripcion             varchar2(2000)                              ,
     formato                 varchar2(1000)                      not null,
     contenido               blob                                not null,
     fkPresentacion          number(10)                          not null,
@@ -258,7 +258,7 @@ create table AUDIO (
 
 create table VIDEO (
     idVideo                 number(10)                          not null,
-    descripcion             varchar2(2000)                      not null,
+    descripcion             varchar2(2000)                              ,
     formato                 varchar2(2000)                      not null,
     contenido               blob                                not null,
     fkPresentacion          number(10)                          not null,
