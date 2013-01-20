@@ -343,7 +343,8 @@ create table DETALLE_RESERVA (
 create table FACTURA (
     idFactura               number(10)                          not null,
     fecha                   date                                not null,
-    fkUsuario               number(10)                          not null,
+    fkUsuario               number(10)                          ,
+    fkEmpresa               number(10)                          ,
     CONSTRAINT              pkFactura_idFactura                 PRIMARY KEY (idFactura)
 );
 
@@ -779,6 +780,16 @@ create table HISTORIAL_PAGO (
     CONSTRAINT               pkHP_id                           PRIMARY KEY (idHP)
 );
 
+create table EMPRESA (
+    idEmpresa               number(10)                          not null,
+    rif                     number(10)                          not null,
+    nombre                  varchar2(1000)                      not null,
+    fkLugar                 number(10)                          not null,
+    detalleLugar            varchar2(1000)                      not null,
+    telefono                telefonos                                   ,
+    CONSTRAINT              pk_idEmpresa                        PRIMARY KEY (idEmpresa)
+);
+
 CREATE SEQUENCE seqDepartamento
      START WITH 1
      INCREMENT BY 1
@@ -1169,4 +1180,12 @@ CREATE SEQUENCE seqRVP
      MINVALUE 1
      MAXVALUE 100
      CYCLE
+     CACHE 10;
+
+CREATE SEQUENCE seqEmpresa
+     START WITH 1
+     INCREMENT BY 1
+     MINVALUE 1
+     NOMAXVALUE
+     NOCYCLE
      CACHE 10;
