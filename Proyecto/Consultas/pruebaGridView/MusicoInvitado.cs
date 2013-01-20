@@ -21,8 +21,8 @@ namespace pruebaGridView
         public MusicoInvitado()
         {
             InitializeComponent();
-            
 
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 DataTable tablaBD = conexion.procemiento("CT_Musico_invitado");

@@ -23,6 +23,7 @@ namespace pruebaGridView
         public NroProgramas()
         {
             InitializeComponent();
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             llenarComboObras();
             tablaAux.Columns.Add("obra");
             tablaAux.Columns.Add("programas");

@@ -23,6 +23,8 @@ namespace pruebaGridView
         public BailarinesInvitados()
         {
             InitializeComponent();
+         
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 DataTable tablaBD = conexion.procemiento("CT_Bailarines_invitados");
@@ -37,11 +39,14 @@ namespace pruebaGridView
                 tablaAux.Columns.Add("Obras");
                 tablaAux.Columns.Add("Foto", typeof(Image));
                 llenarTabla(tablaBD);
+                
             }
 
             
         }
 
+
+       
         public void llenarTabla(DataTable tablaBD)
         {
 
@@ -133,6 +138,11 @@ namespace pruebaGridView
         private void TBIdentificador_KeyPress(object sender, KeyPressEventArgs e)
         {
             Generico.tbSoloNumero(e);
+        }
+
+        private void tabla_Paint(object sender, PaintEventArgs e)
+        {
+            
         }
 
       

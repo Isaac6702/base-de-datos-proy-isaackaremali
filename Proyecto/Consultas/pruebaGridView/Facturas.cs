@@ -38,6 +38,7 @@ namespace pruebaGridView
         public Facturas()
         {
             InitializeComponent();
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             tablaAux.Columns.Add("Asiento");
             tablaAux.Columns.Add("Zona");
             tablaAux.Columns.Add("Status");

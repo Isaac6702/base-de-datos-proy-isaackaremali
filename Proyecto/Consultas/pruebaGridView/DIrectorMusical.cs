@@ -22,7 +22,7 @@ namespace pruebaGridView
         public DirectorMusical()
         {
             InitializeComponent();
-
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
 
