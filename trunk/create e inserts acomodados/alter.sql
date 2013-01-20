@@ -881,3 +881,9 @@ add constraint pd_fkFD
 foreign key (fkFD)
 references FACTURA_DIGITALIZACION(idFD)
 on delete cascade;
+
+alter table FACTURA
+add constraint f_fkEmpresa
+foreign key (fkEmpresa)
+references EMPRESA(idEmpresa)
+on delete cascade;
