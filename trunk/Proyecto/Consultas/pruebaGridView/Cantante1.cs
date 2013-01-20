@@ -22,6 +22,7 @@ namespace pruebaGridView
         public Cantante1()
         {
             InitializeComponent();
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
 
             if (conexion.AbrirConexion("isaac", "isaac"))
             {

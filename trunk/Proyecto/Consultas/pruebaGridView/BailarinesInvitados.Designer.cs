@@ -106,6 +106,7 @@
             this.tabla.Size = new System.Drawing.Size(834, 492);
             this.tabla.TabIndex = 0;
             this.tabla.TabStop = false;
+            this.tabla.Paint += new System.Windows.Forms.PaintEventHandler(this.tabla_Paint);
             // 
             // pictureBox2
             // 

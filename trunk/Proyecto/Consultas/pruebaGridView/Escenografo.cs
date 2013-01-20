@@ -22,6 +22,7 @@ namespace pruebaGridView
         public Escenografo()
         {
             InitializeComponent();
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
   
             if (conexion.AbrirConexion("isaac", "isaac"))
             {

@@ -20,6 +20,7 @@ namespace pruebaGridView
         public Stilo()
         {
             InitializeComponent();
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
         }
 
         public void llenarTabla(OracleDataReader tablaBD)

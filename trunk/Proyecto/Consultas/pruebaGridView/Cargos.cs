@@ -21,8 +21,8 @@ namespace pruebaGridView
         public Cargos()
         {
             InitializeComponent();
-            
 
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 DataTable tablaBD = conexion.procemiento("CT_Cargo");

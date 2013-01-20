@@ -22,7 +22,8 @@ namespace pruebaGridView
         {
             InitializeComponent();
             DTFechaVentas.CustomFormat = "dd/MM/yyyy";
-            DTFechaPresentacion.CustomFormat = "dd/MM/yyyy";    
+            DTFechaPresentacion.CustomFormat = "dd/MM/yyyy";
+            tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
                 DataTable tablaBD = conexion.procemiento("CT_entradas_vendidas_momento");
