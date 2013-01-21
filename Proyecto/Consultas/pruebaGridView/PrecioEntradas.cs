@@ -19,6 +19,7 @@ namespace pruebaGridView
         DataTable tablaAux = new DataTable();
         string usuario = "isaac";
         string password = "isaac";
+        
         public PrecioEntradas()
         {
             InitializeComponent();
@@ -29,7 +30,7 @@ namespace pruebaGridView
             llenarComboMonedas();
             llenarComboObras();
             llenarTabla();
-
+            timeInicio.CustomFormat = "dd/MM/yyyy";
         }
         // llena el combo con todas las monedas
         public void llenarComboMonedas()
@@ -93,10 +94,11 @@ namespace pruebaGridView
             String fecha = timeInicio.Text;
             if (timeInicio.ShowCheckBox == true)
                     System.Console.WriteLine(fecha);
+        
         }
 
         
-
+        
 
    }
 
