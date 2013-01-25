@@ -20,7 +20,7 @@ and a.factura = f.idFactura
 order by u.idusuario, f.idfactura;
 
 END;
-
+/
 CREATE OR REPLACE function montoExtranjero (id IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -74,7 +74,7 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
-
+/
 CREATE OR REPLACE function nombreUbicacion (id IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -120,7 +120,7 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
-
+/
 CREATE OR REPLACE function datosObraComprador(id IN NUMBER, fact IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -149,7 +149,7 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
-
+/
 CREATE OR REPLACE function metodoPagoFactura(id IN NUMBER, fact IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -189,3 +189,4 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
+/

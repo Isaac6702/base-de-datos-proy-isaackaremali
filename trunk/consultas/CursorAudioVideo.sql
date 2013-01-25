@@ -14,7 +14,7 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
-
+/
 CREATE OR REPLACE function datosDirectores(id IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -32,7 +32,7 @@ END LOOP;
     
 RETURN (RESULTADO);
 END;
-
+/
 CREATE OR REPLACE function datosOrquesta(id IN NUMBER)
 RETURN VARCHAR2 IS
 RESULTADO VARCHAR2(1000);
@@ -73,3 +73,4 @@ OPEN REC_CUR FOR
     order by o.idObra, fp.fecha;
 
 END;
+/

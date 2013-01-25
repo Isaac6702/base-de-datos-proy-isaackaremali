@@ -29,7 +29,7 @@ from ubicacion z, ubicacion a, ubicacion p, obra o, entrada e
 where z.fkubicacion = p.idubicacion AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
 GROUP BY z.idubicacion, z.nombre, o.nombre, o.idobra, e.COSTO;
 END;
-    /
+/
 create or replace procedure CT_entradas_vendidas_momento(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -170,6 +170,274 @@ OPEN REC_CUR FOR
     WHERE nm.PKMUSICO = m.IDMUSICO AND nm.PKNACIONALIDAD = n.IDNACIONALIDAD AND tc.FKMUSICO = m.IDMUSICO
     AND n.fkpais = l.idlugar AND m.invitado = 1;
 
+END;
+/
+CREATE OR REPLACE function datosObraAutor(id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select lower(o.nombre) obra, lower(nombres(nombreCompleto)) nombre, lower(apellidos(nombreCompleto)) apellido
+from autor a, obra o
+where o.fkAutor = a.idAutor
+and o.idObra = id;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+FOR AUX IN BUSQUEDA LOOP
+     RESULTADO := AUX.obra|| ' - ' ||AUX.NOMBRE || ' '|| AUX.APELLIDO;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function datosDirectores(id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select lower(nombres(dm.nombreCompleto)) dmnombre, lower(apellidos(dm.nombreCompleto)) dmapellido, lower(nombres(d.nombreCompleto)) dnombre, lower(apellidos(d.nombreCompleto)) dapellido
+from director_musical dm, director d, obra o
+where dm.idDM = o.fkDM
+and o.fkDirector = d.idDirector 
+and o.idObra = id;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+FOR AUX IN BUSQUEDA LOOP
+     RESULTADO := 'Director Musical: '||AUX.dmnombre|| ' ' ||AUX.dmapellido || ' Director: '|| AUX.dnombre || ' ' || AUX.dapellido;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function datosOrquesta(id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select lower(o.nombre) orquesta
+from orquesta o, obra ob
+where o.idOrquesta = ob.fkOrquesta
+and ob.idObra= id;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+FOR AUX IN BUSQUEDA LOOP
+     RESULTADO := 'Royal Opera House - Orquesta invitada: '||AUX.orquesta;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+create or replace procedure CT_Audio(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+    select datosObraAutor(o.idObra) obra, datosDirectores(o.idObra) directores, to_char(fp.fecha,'dd/mm/yyyy hh:mi:ssam') fecha, datosOrquesta(o.idObra) orquesta, a.formato formato
+    from obra o, fecha_presentacion fp, audio a
+    where fp.fkObra = o.idObra
+    and a.fkpresentacion = fp.idFP
+    order by o.idObra, fp.fecha;
+
+END;
+/
+create or replace procedure CT_VIDEO(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+    select datosObraAutor(o.idObra) obra, datosDirectores(o.idObra) directores, to_char(fp.fecha,'dd/mm/yyyy hh:mi:ssam') fecha, datosOrquesta(o.idObra) orquesta, v.formato formato
+    from obra o, fecha_presentacion fp, video v
+    where fp.fkObra = o.idObra
+    and v.fkpresentacion = fp.idFP
+    order by o.idObra, fp.fecha;
+
+END;
+/
+create or replace procedure CT_COMPRADOR(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+
+OPEN REC_CUR FOR
+select u.idUsuario "ID", nombres(u.nombre) "NOMBRES", apellidos(u.nombre) "APELLIDOS", n.nombre "NACIONALIDAD", consultar_direccion(u.fkLugar, u.detalleDireccion) "DIRECCION", metodoPagoFactura(u.idUsuario, f.idFactura) "METODO DE PAGO", datosObraComprador(u.idUsuario, f.idFactura) "OBRAS", ticketsComprados(f.idFactura) "NRO TICKETS", nombreUbicacion(f.idFactura) "UBICACION", nombreAsientos(f.idFactura) "ASIENTOS", aux.monto "TOTAL NACIONAL", montoExtranjero(f.idFactura) "TOTAL EXTRANJERO"
+from usuario u, factura f, nacionalidad n, (select f.idFactura factura, sum(df.monto) monto
+                                            from factura f, detalle_factura df
+                                            where f.idFactura = df.fkfactura
+                                            group by idFactura) aux,
+(select lower(o.nombre)obra, to_char(fp.fecha, 'dd/mm/yyyy hh24:mi:ss') presentacion, f.idFactura factura
+ from fecha_presentacion fp, obra o, entrada e, detalle_factura df, factura f
+ where fp.fkobra = o.idobra
+ and df.fkEntrada = e.identrada
+ and e.fkpresentacion = fp.idfp
+ and f.idfactura = df.fkfactura) a
+where u.idUsuario = f.fkUsuario
+and n.idnacionalidad = u.fknacionalidad
+and aux.factura = f.idFactura
+and a.factura = f.idFactura
+order by u.idusuario, f.idfactura;
+
+END;
+/
+CREATE OR REPLACE function montoExtranjero (id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select lower(m.nombre) nombre, p.costoExtranjero extranjero
+                    from factura f, pago p, moneda m
+                    where f.idFactura = id
+                    and p.fkFactura = f.idFactura
+                    and m.idMoneda = p.fkMoneda;
+                   
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+
+FOR AUX IN BUSQUEDA LOOP
+    if AUX.nombre = 'libra' then
+        
+        RESULTADO := 'no aplica';
+    else
+        RESULTADO := AUX.extranjero || ' ' || AUX.nombre || 's';
+    end if;
+    
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function nombreAsientos (id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+BOOLEAN NUMBER(1);
+CURSOR BUSQUEDA IS select lower(x.nombre) ubicacion
+                    from factura f, detalle_factura df, ubicacion x, entrada e
+                    where f.idFactura = ID
+                    and f.idFactura = df.fkFactura
+                    and e.idEntrada = df.fkEntrada
+                    and e.fkUbicacion = x.idUbicacion;
+                   
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+BOOLEAN := 0;
+FOR AUX IN BUSQUEDA LOOP
+    if BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO := AUX.ubicacion;
+    else
+        RESULTADO := RESULTADO || ', ' || AUX.ubicacion;
+    end if;
+    
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function nombreUbicacion (id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+BOOLEAN NUMBER(1);
+CURSOR BUSQUEDA IS select lower(u.nombre) ubicacion
+                    from factura f, detalle_factura df, ubicacion u, ubicacion x, entrada e
+                    where f.idFactura = ID
+                    and f.idFactura = df.fkFactura
+                    and e.idEntrada = df.fkEntrada
+                    and e.fkUbicacion = x.idUbicacion
+                    and x.fkUbicacion = u.idUbicacion;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+BOOLEAN := 0;
+FOR AUX IN BUSQUEDA LOOP
+    if BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO := AUX.ubicacion;
+    else
+        RESULTADO := RESULTADO || ', ' || AUX.ubicacion;
+    end if;
+    
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function ticketsComprados (id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+BOOLEAN NUMBER(1);
+CURSOR BUSQUEDA IS select count(*) ticket
+                   from detalle_factura df, factura f
+                   where f.idFactura = id
+                   and f.idFactura = df.fkFactura;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+FOR AUX IN BUSQUEDA LOOP
+    RESULTADO := AUX.ticket;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function datosObraComprador(id IN NUMBER, fact IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+BOOLEAN NUMBER(1);
+CURSOR BUSQUEDA IS select lower(o.nombre) obra, to_char(fp.fecha, 'dd/mm/yyyy hh24:mi:ssam') fecha
+                    from obra o, fecha_presentacion fp, entrada e, detalle_factura df, factura f, usuario u
+                    where u.idUsuario = id
+                    and f.idFactura = fact
+                    and o.idObra = fp.fkObra
+                    and fp.idFP = e.fkPresentacion
+                    and e.idEntrada = df.fkEntrada
+                    and f.idFactura = df.fkFactura
+                    and u.idUsuario = f.fkUsuario;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+BOOLEAN := 0;
+FOR AUX IN BUSQUEDA LOOP
+    if BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO :=  '- '|| AUX.obra || ' ' || AUX.fecha;
+    elsif BOOLEAN = 1 then 
+        RESULTADO := RESULTADO ||'- '|| AUX.obra || ' ' || AUX.fecha;
+    end if;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+CREATE OR REPLACE function metodoPagoFactura(id IN NUMBER, fact IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+BOOLEAN NUMBER(1);
+CURSOR BUSQUEDA IS select p.formaPago pago
+                   from usuario u, pago p, factura f
+                   where u.idUsuario = id
+                   and u.idUsuario = f.fkUsuario
+                   and p.fkFactura = fact 
+                   and f.idFactura = p.fkFactura;
+                
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+BOOLEAN:= 0;
+FOR AUX IN BUSQUEDA LOOP
+    if AUX.pago = 'tdc' and BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO := 'tarjeta de credito';
+    elsif AUX.pago = 'tdd' and BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO := 'tarjeta de debito';
+    elsif AUX.pago = 'efectivo' and BOOLEAN = 0 then
+        BOOLEAN := 1;
+        RESULTADO := 'efectivo';
+    elsif AUX.pago = 'tdc' and BOOLEAN = 1 then
+        BOOLEAN := 1;
+        RESULTADO := RESULTADO  || ', tarjeta de credito';
+    elsif AUX.pago = 'tdd' and BOOLEAN = 1 then
+        BOOLEAN := 1;
+        RESULTADO := RESULTADO  || ', tarjeta de debito';
+    elsif AUX.pago = 'efectivo' and BOOLEAN = 1 then
+        BOOLEAN := 1;
+        RESULTADO := RESULTADO || ', efectivo';
+    end if;
+END LOOP;
+    
+RETURN (RESULTADO);
 END;
 /
 create or replace procedure CT_obraMasVendida(REC_CUR OUT SYS_REFCURSOR) is
@@ -576,3 +844,24 @@ OPEN REC_CUR FOR
 where rownum <=1;
 END;
 /
+create or replace procedure precio_entradas(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+OPEN REC_CUR FOR
+    select lower(o.nombre) nombre, to_char(fp.fecha, 'dd/mm/yyyy hh:mi:ssam') presentacion, u.nombre ubicacion, (u.porcentaje*fp.zonamascara) precio
+    from obra o, fecha_presentacion fp, ubicacion u
+    where fp.fkObra = o.idObra and u.tipo = 'zona'
+    order by o.nombre, fp.fecha;
+
+END;
+  /
+create or replace procedure numero_programas(REC_CUR OUT SYS_REFCURSOR) is
+BEGIN
+OPEN REC_CUR FOR
+    select lower(o.nombre) obra, ((2258 * a.nroPresentaciones) - count(fp.idfp)) programas
+    from entrada e, obra o, fecha_presentacion fp, ( select o.idobra id, count(idFP) nroPresentaciones
+                                                     from fecha_presentacion fp, obra o
+                                                     where fp.fkObra = o.idObra group by o.idobra) a
+    where fp.fkObra = o.idObra and e.pagada = 0 and fp.idfp = e.fkpresentacion and a.id = o.idObra group by o.nombre, a.nroPresentaciones;
+
+END;
+/ 
