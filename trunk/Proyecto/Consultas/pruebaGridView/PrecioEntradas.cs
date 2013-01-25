@@ -97,6 +97,26 @@ namespace pruebaGridView
         
         }
 
+        private void BTBuscar_Click(object sender, EventArgs e)
+        {
+             Conexion conexion = new Conexion();
+            string fecha = "";
+             if (conexion.AbrirConexion(usuario, password))
+             {
+                if( !timeInicio.Checked)
+                    fecha = "null";
+                else
+                    fecha = timeInicio.ToString();
+
+                 DataTable tablaDB = conexion.filtrar("FT_precios_entradas",comboObra.Text.Trim() + "," + comboMoneda.Text+","+fecha);
+                 if (tablaDB != null)
+                 {
+                     tabla.DataSource = tablaDB;
+                 }
+             }
+
+        }
+
         
         
 

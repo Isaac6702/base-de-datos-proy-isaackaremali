@@ -80,6 +80,22 @@ namespace pruebaGridView
             }
         */}
 
+       private void NroProgramas_Load(object sender, EventArgs e)
+       {
+
+       }
+
+       private void button1_Click(object sender, EventArgs e)
+       {
+        Conexion conexion = new Conexion();
+        if (conexion.AbrirConexion(usuario, password))
+        {
+            DataTable tablaDB = conexion.filtrar("FT_numero_programas ", comboObra.Text.Trim());
+            tabla.DataSource = tablaDB;
+        }
+
+       }
+
 
    }
 

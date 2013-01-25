@@ -117,6 +117,7 @@ namespace pruebaViewGrid
 
         public DataTable filtrar(string nombre, string TB)
         {
+            Console.WriteLine(TB);
             OracleCommand cmd = new OracleCommand(nombre, conexion);
             cmd.CommandType = CommandType.StoredProcedure;
             cmd.Parameters.Add("REC_CUR", OracleType.Cursor).Direction = ParameterDirection.Output;
