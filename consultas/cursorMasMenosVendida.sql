@@ -12,7 +12,7 @@ OPEN REC_CUR FOR
         ORDER BY SUM(DF.CANTIDAD) desc) t
    where rownum<=1;
 END;
-
+/
 create or replace procedure CT_balletMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -28,7 +28,7 @@ OPEN REC_CUR FOR
          order by sum(d.cantidad) desc) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_orquestaMasVendida(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -44,7 +44,7 @@ OPEN REC_CUR FOR
    order by sum(d.cantidad) desc) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_autorMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -60,7 +60,7 @@ OPEN REC_CUR FOR
          order by sum(d.cantidad) desc) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_directorMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -73,7 +73,7 @@ OPEN REC_CUR FOR
            ORDER BY sum(df.monto) DESC) t
    WHERE rownum <=1;
 END;
-
+/
 create or replace procedure CT_mezzoMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -94,7 +94,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_tenorMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -115,7 +115,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_baritonoMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -136,8 +136,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
-
+/
 create or replace procedure CT_bajoMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -158,7 +157,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_contraltoMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -179,7 +178,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_sopranoMasVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -200,7 +199,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad) desc)aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_obraMenosVendida(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -215,7 +214,7 @@ OPEN REC_CUR FOR
         ORDER BY SUM(DF.CANTIDAD)  ) t
    where rownum<=1;
 END;
-
+/
 create or replace procedure CT_balletMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -231,7 +230,7 @@ OPEN REC_CUR FOR
          order by sum(d.cantidad)  ) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_orquestaMenosVendida(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -247,7 +246,7 @@ OPEN REC_CUR FOR
    order by sum(d.cantidad)  ) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_autorMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -263,7 +262,7 @@ OPEN REC_CUR FOR
          order by sum(d.cantidad)  ) aut
    where rownum <=1;
 END;
-
+/
 create or replace procedure CT_directorMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -276,7 +275,7 @@ OPEN REC_CUR FOR
            ORDER BY sum(df.monto)  ) t
    WHERE rownum <=1;
 END;
-
+/
 create or replace procedure CT_mezzoMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -297,7 +296,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad)  )aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_tenorMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -318,7 +317,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad)  )aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_baritonoMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -339,8 +338,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad)  )aux
 where rownum <=1;
 END;
-
-
+/
 create or replace procedure CT_bajoMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -361,7 +359,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad))aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_contraltoMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -382,7 +380,7 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad))aux
 where rownum <=1;
 END;
-
+/
 create or replace procedure CT_sopranoMenosVendido(REC_CUR OUT SYS_REFCURSOR) is
 BEGIN
 
@@ -403,3 +401,4 @@ OPEN REC_CUR FOR
         order by sum(df.cantidad))aux
 where rownum <=1;
 END;
+/
