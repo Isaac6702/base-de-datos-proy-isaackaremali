@@ -108,6 +108,18 @@
     <Compile Include="Comprador.Designer.cs">
       <DependentUpon>Comprador.cs</DependentUpon>
     </Compile>
+    <Compile Include="DetalleObra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DetalleObra.Designer.cs">
+      <DependentUpon>DetalleObra.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Obra1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Obra1.Designer.cs">
+      <DependentUpon>Obra1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Premiacion.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -257,6 +269,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Comprador.resx">
       <DependentUpon>Comprador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DetalleObra.resx">
+      <DependentUpon>DetalleObra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Obra1.resx">
+      <DependentUpon>Obra1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Premiacion.resx">
       <DependentUpon>Premiacion.cs</DependentUpon>
