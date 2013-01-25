@@ -59,9 +59,9 @@ namespace pruebaGridView
 
 
               
-                wplayer.openPlayer("C:\\BaseDeDatosII\\audios\\laboheme.mp3");
-               //  wplayer.URL = "C:\\BaseDeDatosII\\audios\\laboheme.mp3";
-                //wplayer.controls.play();
+             //   wplayer.openPlayer("C:\\BaseDeDatosII\\audios\\laboheme.mp3");
+                 wplayer.URL = "C:\\BaseDeDatosII\\audios\\laboheme.mp3";
+               // wplayer.controls.play();
                
                 row[5] = wplayer;
                 
@@ -76,7 +76,8 @@ namespace pruebaGridView
       
         private void tabla_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-         
+            wplayer.openPlayer("C:\\BaseDeDatosII\\audios\\laboheme.mp3");
+            //wplayer.controls.play();
         }
 
     
