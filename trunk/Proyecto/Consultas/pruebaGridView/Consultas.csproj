@@ -96,6 +96,24 @@
     <Compile Include="AsientosVendidos.Designer.cs">
       <DependentUpon>AsientosVendidos.cs</DependentUpon>
     </Compile>
+    <Compile Include="Audio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Audio.Designer.cs">
+      <DependentUpon>Audio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Peor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Peor.Designer.cs">
+      <DependentUpon>Peor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Mejor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Mejor.Designer.cs">
+      <DependentUpon>Mejor.cs</DependentUpon>
+    </Compile>
     <Compile Include="EntradasVendidasDetalle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -222,6 +240,15 @@
     <EmbeddedResource Include="AsientosVendidos.resx">
       <DependentUpon>AsientosVendidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Audio.resx">
+      <DependentUpon>Audio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Peor.resx">
+      <DependentUpon>Peor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Mejor.resx">
+      <DependentUpon>Mejor.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="EntradasVendidasDetalle.resx">
       <DependentUpon>EntradasVendidasDetalle.cs</DependentUpon>
     </EmbeddedResource>
@@ -298,6 +325,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\black.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

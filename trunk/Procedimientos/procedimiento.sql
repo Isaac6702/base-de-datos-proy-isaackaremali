@@ -2387,6 +2387,24 @@ EXCEPTION WHEN OTHERS THEN
 END;
 /
 
+CREATE OR REPLACE function datosOBraAutor(id IN NUMBER)
+RETURN VARCHAR2 IS
+RESULTADO VARCHAR2(1000);
+CURSOR BUSQUEDA IS select lower(o.nombre) obra, lower(nombres(nombreCompleto)) nombre, lower(apellidos(nombreCompleto)) apellido
+from autor a, obra o
+where o.fkAutor = a.idAutor
+and o.idObra = id;
+AUX  BUSQUEDA % ROWTYPE;
+
+BEGIN
+FOR AUX IN BUSQUEDA LOOP
+     RESULTADO := AUX.obra|| ' - ' ||AUX.NOMBRE || ' '|| AUX.APELLIDO;
+END LOOP;
+    
+RETURN (RESULTADO);
+END;
+/
+
  
 
 
