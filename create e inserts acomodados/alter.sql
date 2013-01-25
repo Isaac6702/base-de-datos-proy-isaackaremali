@@ -324,18 +324,6 @@ foreign key (fkDirectorEscenografia)
 references DIRECTOR_ESCENOGRAFIA(idDE)
 on delete cascade;
 
-alter table ESCENOGRAFIA_MATERIAL
-add constraint em_fkMaterial
-foreign key (fkMaterial)
-references MATERIAL(idMaterial)
-on delete cascade;
-
-alter table ESCENOGRAFIA_MATERIAL
-add constraint em_fkEscenografia
-foreign key (fkEscenografia)
-references ESCENOGRAFIA(idEscenografia)
-on delete cascade;
-
 alter table PERSONAJE
 add constraint personaje_fkVoz
 foreign key (fkVoz)

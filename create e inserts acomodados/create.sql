@@ -96,13 +96,6 @@ create table MONEDA (
     CONSTRAINT              pkMoneda_idMoneda                   PRIMARY KEY (idMoneda)
 );
 
-create table MATERIAL (
-    idMaterial              number(10)                          not null,
-    nombre                  varchar2(2000)                        not null,
-    costo                   number(12,2)                        not null, 
-    CONSTRAINT              pkMaterial_idMaterial               PRIMARY KEY (idMaterial)
-);
-
 create table BAILARIN_BALLET (
     pkBallet                number(10)                          not null,
     pkBailarin              number(10)                          not null,
@@ -410,21 +403,14 @@ create table PAGO (
 
 create table ESCENOGRAFIA (
     idEscenografia          number(10)                          not null,
-    descripcion             varchar2(2000)                       not null,
+    descripcion             varchar2(2000)                      not null,
     fkObra                  number(10)                          not null,
     fkEscenografo           number(10)                          not null,
     fkDirectorEscenografia  number(10)                          not null,
+    monto                   number(12,2)                          not null,
     CONSTRAINT              pkEscenografia_idEscenografia       PRIMARY KEY (idEscenografia)
 );
 
-create table ESCENOGRAFIA_MATERIAL (
-    idEM                    number(10)                          not null,
-    costo                   number(12,2)                        not null,
-    cantidad                number(12,2)                        not null,
-    fkMaterial              number(10)                          not null,
-    fkEscenografia          number(10)                          not null,
-    CONSTRAINT              pkEM_idEM                           PRIMARY KEY (idEM)
-);
 
 create table PERSONAJE (
     idPersonaje             number(10)                          not null,
@@ -846,21 +832,7 @@ CREATE SEQUENCE seqTrabajadorCargo
      NOCYCLE
      CACHE 10;
 
-CREATE SEQUENCE seqMaterial
-     START WITH 1
-     INCREMENT BY 1
-     MINVALUE 1
-     NOMAXVALUE
-     NOCYCLE
-     CACHE 10;
 
-CREATE SEQUENCE seqEscenografiaMaterial
-     START WITH 1
-     INCREMENT BY 1
-     MINVALUE 1
-     NOMAXVALUE
-     NOCYCLE
-     CACHE 10;
 
 CREATE SEQUENCE seqEscenografia
      START WITH 1
