@@ -39,8 +39,29 @@ namespace pruebaGridView
 
         private void BTBuscar_Click(object sender, EventArgs e)
         {
-            string prueba = null;
-            Console.WriteLine(prueba);
+            string nombre, obra, apellido;
+            if (TBApellidos.TextLength == 0)
+                apellido = "null";
+            else
+                apellido = TBApellidos.Text;
+
+            if (TBNombres.TextLength == 0)
+                nombre = "null";
+            else
+                nombre = TBNombres.Text;
+
+            if (TBObra.TextLength == 0)
+                obra = "null";
+            else
+                obra = TBObra.Text;
+
+            Conexion conexion = new Conexion();
+            if (conexion.AbrirConexion("isaac", "isaac"))
+            {
+                DataTable tablaDB = conexion.filtrar("FT_comprador", obra + "," + nombre + "," + apellido);
+                tabla.DataSource = tablaDB;
+            }
+
         }
 
 

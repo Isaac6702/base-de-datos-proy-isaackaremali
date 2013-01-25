@@ -65,7 +65,7 @@ namespace pruebaGridView
 
              }
              else
-                 aux = TBObra.Text;
+                 aux = TBObra.Text.Trim();
 
             if (conexion.AbrirConexion("isaac", "isaac") && !DTFechaVentas.Checked && aux == "null" && !DTFechaPresentacion.Checked)
             {

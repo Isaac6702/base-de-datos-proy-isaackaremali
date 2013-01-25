@@ -38,6 +38,7 @@
             this.nombreReporte = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.comboObra = new System.Windows.Forms.ComboBox();
+            this.BTBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -128,7 +129,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(790, 65);
+            this.label2.Location = new System.Drawing.Point(718, 65);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 13);
             this.label2.TabIndex = 11;
@@ -138,11 +139,21 @@
             // 
             this.comboObra.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboObra.FormattingEnabled = true;
-            this.comboObra.Location = new System.Drawing.Point(832, 61);
+            this.comboObra.Location = new System.Drawing.Point(760, 61);
             this.comboObra.Name = "comboObra";
             this.comboObra.Size = new System.Drawing.Size(121, 21);
             this.comboObra.TabIndex = 10;
             this.comboObra.SelectedIndexChanged += new System.EventHandler(this.comboObra_SelectedIndexChanged);
+            // 
+            // BTBuscar
+            // 
+            this.BTBuscar.Location = new System.Drawing.Point(894, 59);
+            this.BTBuscar.Name = "BTBuscar";
+            this.BTBuscar.Size = new System.Drawing.Size(61, 23);
+            this.BTBuscar.TabIndex = 12;
+            this.BTBuscar.Text = "Buscar";
+            this.BTBuscar.UseVisualStyleBackColor = true;
+            this.BTBuscar.Click += new System.EventHandler(this.button1_Click);
             // 
             // NroProgramas
             // 
@@ -150,6 +161,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(974, 581);
+            this.Controls.Add(this.BTBuscar);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.comboObra);
             this.Controls.Add(this.nombreReporte);
@@ -161,6 +173,7 @@
             this.MinimumSize = new System.Drawing.Size(990, 620);
             this.Name = "NroProgramas";
             this.Text = "Stilo";
+            this.Load += new System.EventHandler(this.NroProgramas_Load);
             ((System.ComponentModel.ISupportInitialize)(this.tabla)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -177,6 +190,7 @@
         private System.Windows.Forms.Label nombreReporte;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox comboObra;
+        private System.Windows.Forms.Button BTBuscar;
     }
 }
 
