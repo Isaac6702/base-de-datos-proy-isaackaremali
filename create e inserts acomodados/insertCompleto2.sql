@@ -232,3 +232,8 @@ insert into DETALLE_FACTURA_DIGITALIZADA (idDFD, cantidad, monto, fkfd, fkvideo,
 insert into DETALLE_FACTURA_DIGITALIZADA (idDFD, cantidad, monto, fkfd, fkvideo, fkaudio) values(	115	,	3	,	146	,	115	,	17	,	null	);
 insert into DETALLE_FACTURA_DIGITALIZADA (idDFD, cantidad, monto, fkfd, fkvideo, fkaudio) values(	116	,	1	,	83	,	116	,	null	,	10	);
 insert into DETALLE_FACTURA_DIGITALIZADA (idDFD, cantidad, monto, fkfd, fkvideo, fkaudio) values(	117	,	5	,	83	,	117	,	null	,	10	);
+insert into NACIONALIDAD_AUTOR values (	3	,	5	);
+insert into NACIONALIDAD_AUTOR values (	70	,	6	);
+insert into NACIONALIDAD_AUTOR values (	39	,	7	);
+insert into NACIONALIDAD_AUTOR values (	70	,	8	);
+insert into NACIONALIDAD_AUTOR values (	70	,	9	);
