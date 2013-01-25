@@ -2405,6 +2405,255 @@ RETURN (RESULTADO);
 END;
 /
 
+create or replace procedure audicionMusico (idp number, idm number, ruta varchar2) is
+
+archivo utl_file.file_type;
+linea varchar2(1024);
+x number;
+y number;
+contador number;
+CURSOR BUSQUEDA IS select ri.x, ri.y, ri.IDRI
+                        from partitura p, registro_instrumento ri
+                        where p.idpartitura = ri.PKPARTITURA AND idpartitura = idp
+                        order by ri.IDRI;
+
+ AUX BUSQUEDA % ROWTYPE;
+
+CURSOR BUSQUEDA2 IS select SEQAUDICIONMUSICO.nextval from dual;
+ID BUSQUEDA2 % ROWTYPE;
+v_idva number := 1;
+begin
+ 
+archivo := utl_file.fopen ('DIR_TMP', ruta, 'r');
+contador := 0;
+FOR AUX IN BUSQUEDA LOOP
+
+    utl_file.get_line (archivo, linea);
+    x := split(linea ,1,',');
+    y := split(linea ,2,',');
+    IF x-AUX.X >=-1 AND x-AUX.X<=1 AND y-AUX.Y >=-1 AND y-AUX.Y<=1  THEN
+        contador := contador +1;
+    END IF;
+END LOOP;
+
+FOR ID IN BUSQUEDA2 LOOP
+    IF contador >=90 THEN
+        dbms_output.put_line('Pasaste la prueba');
+    
+        INSERT INTO AUDICION_MUSICO (IDAM, FECHA, APROBO, FKPARTITURA, FKMUSICO)
+            VALUES (ID.NEXTVAL, SYSDATE, 1, idp, idm);
+        
+    ELSE
+       dbms_output.put_line('NO pasastes la prueba'); 
+       INSERT INTO AUDICION_MUSICO (IDAM, FECHA, APROBO, FKPARTITURA, FKMUSICO)
+            VALUES (ID.NEXTVAL, SYSDATE, 0, idp, idm);
+
+    END IF;
+
+    FOR AUX IN BUSQUEDA LOOP
+    
+        INSERT INTO INSTRUMENTO_AUDICION (IDIA, PKAM, X, Y)
+            VALUES(v_idva, ID.NEXTVAL, AUX.X, AUX.Y);
+            
+         v_idva:= v_idva +1;
+   END LOOP;
+END LOOP;
+
+utl_file.fclose(archivo); 
+exception
+ when no_data_found then
+   dbms_output.put_line ('Fin del archivo');
+end;
+/
+create or replace procedure audicionCantante (idp number, idc number, ruta varchar2) is
+
+archivo utl_file.file_type;
+linea varchar2(1024);
+x number;
+y number;
+contador number;
+CURSOR BUSQUEDA IS select rp.x, rp.y, idrvp
+                    from personaje p, REGISTRO_VOZ_PERSONAJE rp
+                    where rp.PKPERSONAJE = p.idpersonaje and p.idpersonaje = idp
+                    order by idrvp;
+ AUX BUSQUEDA % ROWTYPE;
+
+CURSOR BUSQUEDA2 IS select SEQAUDICIONCANTANTE.nextval from dual;
+ID BUSQUEDA2 % ROWTYPE;
+v_idva number := 1;
+begin
+ 
+archivo := utl_file.fopen ('DIR_TMP', ruta, 'r');
+contador := 0;
+FOR AUX IN BUSQUEDA LOOP
+
+    utl_file.get_line (archivo, linea);
+    x := split(linea ,1,',');
+    y := split(linea ,2,',');
+    IF x-AUX.X >=-1 AND x-AUX.X<=1 AND y-AUX.Y >=-1 AND y-AUX.Y<=1  THEN
+        contador := contador +1;
+    END IF;
+END LOOP;
+
+FOR ID IN BUSQUEDA2 LOOP
+    IF contador >=90 THEN
+        dbms_output.put_line('Pasaste la prueba');
+    
+        INSERT INTO AUDICION_CANTANTE (IDAC, FECHA, APROBO, FKCANTANTE, FKPERSONAJE)
+            VALUES (ID.NEXTVAL, SYSDATE, 1, idc, idp);
+        
+    ELSE
+       dbms_output.put_line('NO pasastes la prueba'); 
+       INSERT INTO AUDICION_CANTANTE (IDAC, FECHA, APROBO, FKCANTANTE, FKPERSONAJE)
+            VALUES (ID.NEXTVAL, SYSDATE, 0, idc, idp);
+
+    END IF;
+
+    FOR AUX IN BUSQUEDA LOOP
+    
+        INSERT INTO VOZ_AUDICION (IDVA, PKAC, X, Y)
+            VALUES(v_idva, ID.NEXTVAL, AUX.X, AUX.Y);
+            
+         v_idva:= v_idva +1;
+   END LOOP;
+END LOOP;
+
+utl_file.fclose(archivo); 
+exception
+ when no_data_found then
+   dbms_output.put_line ('Fin del archivo');
+end;
+/
+create or replace procedure cargaMasiva( ruta varchar2)  is
+
+archivo utl_file.file_type;
+linea varchar2(2000);
+parametro varchar2(2000);
+rif varchar2(2000);
+nombre varchar2(2000); 
+idlugar varchar2(2000);
+detalle varchar2(2000); 
+codigoTele varchar2(2000);
+telefeno varchar2(2000); 
+idzona varchar2(2000); 
+numeroPuestos varchar2(2000);
+NAsientos number;
+
+
+CURSOR BUSQUEDA IS select SEQFACTURA.nextval from dual;
+IDF BUSQUEDA % ROWTYPE;
+
+CURSOR BUSQUEDA2 IS select seqempresa.nextval from dual;
+IDE BUSQUEDA2 % ROWTYPE;
+
+type v_type is ref cursor;
+
+CURSOR BUSQUEDA3 IS select e.IDENTRADA, e.costo
+                                        from ubicacion a, ubicacion z, entrada e
+                                        where a.tipo = 'asiento' AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
+                                        AND e.pagada = 0;
+AUX BUSQUEDA3 % ROWTYPE;
+type c_type is ref cursor;
+v_cursor c_type;
+
+begin
+ 
+archivo := utl_file.fopen ('DIR_TMP', ruta, 'r');
+loop
+    
+    utl_file.get_line (archivo, linea);
+    parametro := split(linea ,1,':');
+    
+    IF parametro = 'RIF' THEN
+        rif := split(linea ,2,':');
+    END IF;
+    
+    IF parametro = 'NOMBRE' THEN
+        nombre := split(linea ,2,':');
+    END IF;
+    
+    IF parametro = 'RIF' THEN
+        rif := split(linea ,2,':');
+    END IF;
+    
+    IF parametro = 'IDLUGAR' THEN
+        idlugar := split(linea ,2,':');
+    END IF;
+    
+    IF parametro = 'DETALLE DIRECCION' THEN
+        detalle := split(linea ,2,':');
+    END IF;
+    
+    IF parametro = 'TELEFONO' THEN
+        codigoTele := split(linea ,2,':');
+        telefeno := split(linea ,3,':');
+    END IF;
+    
+    IF parametro = 'IDZONA' THEN
+        idzona := split(linea ,2,':');
+    END IF;
+    
+     IF parametro = 'NUMERO PUESTOS' THEN
+        numeroPuestos := split(linea ,2,':');
+    END IF;
+       
+end loop;
+utl_file.fclose(archivo);
+
+exception
+ when no_data_found then
+ 
+    SELECT p.pagado + r.reservado disponibles
+    INTO NAsientos
+    from (select count(z.idubicacion) pagado
+            from ubicacion a, ubicacion z, entrada e
+            where a.tipo = 'asiento' AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
+            AND e.pagada = 0 and z.idubicacion = idzona) p,
+            (select count(z.idubicacion) reservado
+            from ubicacion a, ubicacion z, entrada e, detalle_reserva dr
+            where a.tipo = 'asiento' AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
+            AND dr.PKRESERVA = e.identrada or dr.status ='c' AND z.idubicacion = idzona) r;
+
+    IF NAsientos <  numeroPuestos THEN    
+        RAISE_APPLICATION_ERROR(-20000,'NO HAY SUFICIENTES PUESTOS '||NAsientos ||' < '||  numeroPuestos );
+        
+    ELSE
+        FOR IDE IN BUSQUEDA2 LOOP
+            INSERT INTO EMPRESA (IDEMPRESA, RIF, NOMBRE, FKLUGAR, DETALLELUGAR, TELEFONO)
+             VALUES (IDE.NEXTVAL, rif, nombre, idlugar, detalle, TELEFONOS(TELEFONO(codigoTele,telefeno)));
+            
+            
+            FOR IDF IN BUSQUEDA LOOP
+            
+                INSERT INTO FACTURA (IDFACTURA, FECHA, FKEMPRESA)
+                    VALUES (IDF.NEXTVAL, SYSDATE, IDE.NEXTVAL);
+                    
+                    OPEN v_cursor FOR 'select e.IDENTRADA, e.costo
+                                        from ubicacion a, ubicacion z, entrada e
+                                        where a.tipo = ''asiento'' AND a.fkubicacion = z.idubicacion AND e.FKUBICACION = a.idubicacion
+                                        AND e.pagada = 0 and rownum <= '||numeroPuestos||' and z.idubicacion = '||idzona;
+                                        
+                        loop
+                            fetch v_cursor into AUX;
+                            exit when v_cursor%notfound;
+                            
+                                INSERT INTO DETALLE_FACTURA (IDDF, MONTO, FKFACTURA, FKENTRADA)
+                                    VALUES (SEQDF.nextval, AUX.COSTO, IDF.NEXTVAL, AUX.IDENTRADA);
+                        end loop;
+
+                    CLOSE v_cursor;
+            
+            END LOOP;
+            
+            
+        END LOOP;
+    END IF; 
+
+ 
+   dbms_output.put_line ('Fin del archivo');
+end;
+/
+
  
 
 
