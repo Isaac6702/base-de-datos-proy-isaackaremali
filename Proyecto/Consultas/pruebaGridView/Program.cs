@@ -17,7 +17,11 @@ namespace pruebaGridView
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
            // Application.Run(new Stilo());
+<<<<<<< .mine
+            Application.Run(new Obra1());
+=======
             Application.Run(new Comprador());
+>>>>>>> .r220
         }
     }
 }
