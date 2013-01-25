@@ -103,3 +103,8 @@ C:\BasesDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Ent
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.AsientosRestantes.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.AsientosVendidos.resources
 C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.EntradasVendidasDetalle.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Audio.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Interop.WMPLib.dll
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\Consultas.csproj.ResolveComReference.cache
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Mejor.resources
+C:\BaseDeDatosII\Proyecto\Consultas\pruebaGridView\obj\Debug\pruebaGridView.Peor.resources
