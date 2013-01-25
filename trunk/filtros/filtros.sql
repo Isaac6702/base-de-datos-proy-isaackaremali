@@ -569,12 +569,140 @@ BEGIN
      IF orquesta != 'null' THEN
         v_query := v_query || ' AND  musico_orquest(idMusico)  like ''%'||orquesta||'%''';
     END IF;
-    
+                
     IF obra != 'null' THEN
         v_query := v_query || ' AND  consultar_obras_m(idMusico) like ''%'||obra||'%''';
     END IF;
 
  
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_precios_entradas (buscador in varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query VARCHAR2(4000);
+  v_nombre varchar2(2000);
+  v_moneda varchar2(2000);
+  auxMoneda varchar2(2000);
+  v_fecha varchar2(2000);
+  
+BEGIN
+    v_nombre := split(buscador,1,',');
+    v_moneda := split(buscador,2,',');
+    v_fecha := split(buscador,3,',');
+    
+    IF v_moneda = 'libra' THEN
+        auxMoneda := '1';
+    ELSE
+        select m.valor
+        INTO auxMoneda
+            from moneda m
+            where m.nombre = v_moneda;
+    END IF;     
+    
+    v_query := 'select lower(o.nombre) nombre, to_char(fp.fecha, ''dd/mm/yyyy hh:mi:ssam'') presentacion, u.nombre ubicacion,
+    (u.porcentaje*fp.zonamascara* '||auxMoneda||' ) precio
+    from obra o, fecha_presentacion fp, ubicacion u
+    where fp.fkObra = o.idObra and u.tipo = ''zona''';
+                                                                                        
+    IF v_nombre != 'todas' THEN
+        v_query := v_query || ' AND  lower(o.nombre) = '''||v_nombre||'''';
+    END IF;
+    
+    IF v_fecha != 'null' THEN
+    
+         v_query := v_query || ' AND  to_char(fp.fecha,''dd/mm/yy'') = to_char('''||v_fecha||''', ''dd/mm/yy'') ' ;
+    END IF;
+    
+
+    v_query:= v_query || ' order by o.nombre, fp.fecha';
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+
+create or replace PROCEDURE FT_numero_programas (buscador in varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query VARCHAR2(4000);
+  v_nombre varchar2(2000);  
+BEGIN
+    v_nombre := buscador;
+      v_query := 'select lower(o.nombre) obra, ((2258 * a.nroPresentaciones) - count(fp.idfp)) programas
+    from entrada e, obra o, fecha_presentacion fp, ( select o.idobra id, count(idFP) nroPresentaciones
+                                                     from fecha_presentacion fp, obra o
+                                                     where fp.fkObra = o.idObra group by o.idobra) a
+    where fp.fkObra = o.idObra and e.pagada = 0 and fp.idfp = e.fkpresentacion and a.id = o.idObra';
+                                                                                        
+    IF v_nombre != 'todas' THEN
+        v_query := v_query || ' AND  lower(o.nombre) = '''||v_nombre||'''';
+    END IF;
+    
+    v_query := v_query|| ' group by o.nombre, a.nroPresentaciones';
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+
+
+create or replace PROCEDURE FT_numero_programas (buscador in varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query VARCHAR2(4000);
+  v_nombre varchar2(2000);  
+BEGIN
+    v_nombre := buscador;
+      v_query := 'select lower(o.nombre) obra, ((2258 * a.nroPresentaciones) - count(fp.idfp)) programas
+    from entrada e, obra o, fecha_presentacion fp, ( select o.idobra id, count(idFP) nroPresentaciones
+                                                     from fecha_presentacion fp, obra o
+                                                     where fp.fkObra = o.idObra group by o.idobra) a
+    where fp.fkObra = o.idObra and e.pagada = 0 and fp.idfp = e.fkpresentacion and a.id = o.idObra';
+                                                                                        
+    IF v_nombre != 'todas' THEN
+        v_query := v_query || ' AND  lower(o.nombre) = '''||v_nombre||'''';
+    END IF;
+    
+    v_query := v_query|| ' group by o.nombre, a.nroPresentaciones';
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_comprador (buscador in varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query VARCHAR2(4000);
+  obra varchar2(2000);
+  nombre varchar2(2000);
+  apellidos varchar2(2000);
+  
+BEGIN
+    obra := split(buscador,1,',');
+    nombre := split(buscador,2,',');
+    apellidos := split(buscador,3,',');
+      v_query := 'select u.idUsuario "ID", nombres(u.nombre) "NOMBRES", apellidos(u.nombre) "APELLIDOS", n.nombre "NACIONALIDAD", consultar_direccion(u.fkLugar, u.detalleDireccion) "DIRECCION", metodoPagoFactura(u.idUsuario, f.idFactura) "METODO DE PAGO",
+      datosObraComprador(u.idUsuario, f.idFactura) "OBRAS", ticketsComprados(f.idFactura) "NRO TICKETS", nombreUbicacion(f.idFactura) "UBICACION", nombreAsientos(f.idFactura) "ASIENTOS", aux.monto "TOTAL NACIONAL", montoExtranjero(f.idFactura) "TOTAL EXTRANJERO"
+                    from usuario u, factura f, nacionalidad n, (select f.idFactura factura, sum(df.monto) monto
+                                                                from factura f, detalle_factura df
+                                                                where f.idFactura = df.fkfactura
+                                                                group by idFactura) aux,
+                    (select lower(o.nombre)obra, to_char(fp.fecha, ''dd/mm/yyyy hh24:mi:ss'') presentacion, f.idFactura factura
+                     from fecha_presentacion fp, obra o, entrada e, detalle_factura df, factura f
+                     where fp.fkobra = o.idobra
+                     and df.fkEntrada = e.identrada
+                     and e.fkpresentacion = fp.idfp
+                     and f.idfactura = df.fkfactura) a
+                    where u.idUsuario = f.fkUsuario
+                    and n.idnacionalidad = u.fknacionalidad
+                    and aux.factura = f.idFactura
+                    and a.factura = f.idFactura';
+                                                                                        
+    IF nombre != 'null' THEN
+        v_query := v_query || ' AND  nombres(u.nombre)  like ''%'||nombre||'%''';
+    END IF;
+    IF obra != 'null' THEN
+        v_query := v_query || ' AND  datosObraComprador(u.idUsuario, f.idFactura)  like ''%'||obra||'%''';
+    END IF;
+    IF apellidos != 'null' THEN
+        v_query := v_query || ' AND  apellidos(u.nombre)  like ''%'||apellidos||'%''';
+    END IF;
+    
+    
+    v_query := v_query|| ' order by u.idusuario, f.idfactura';
   OPEN REC_CUR FOR v_query;
 
 END;
