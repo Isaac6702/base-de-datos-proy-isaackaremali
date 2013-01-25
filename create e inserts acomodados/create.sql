@@ -403,7 +403,7 @@ create table PAGO (
 
 create table ESCENOGRAFIA (
     idEscenografia          number(10)                          not null,
-    descripcion             varchar2(2000)                      not null,
+    descripcion             varchar2(2000)                      ,
     fkObra                  number(10)                          not null,
     fkEscenografo           number(10)                          not null,
     fkDirectorEscenografia  number(10)                          not null,
