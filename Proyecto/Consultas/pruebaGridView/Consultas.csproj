@@ -102,6 +102,18 @@
     <Compile Include="Audio.Designer.cs">
       <DependentUpon>Audio.cs</DependentUpon>
     </Compile>
+    <Compile Include="Comprador.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Comprador.Designer.cs">
+      <DependentUpon>Comprador.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Premiacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Premiacion.Designer.cs">
+      <DependentUpon>Premiacion.cs</DependentUpon>
+    </Compile>
     <Compile Include="Peor.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -242,6 +254,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Audio.resx">
       <DependentUpon>Audio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Comprador.resx">
+      <DependentUpon>Comprador.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Premiacion.resx">
+      <DependentUpon>Premiacion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Peor.resx">
       <DependentUpon>Peor.cs</DependentUpon>
