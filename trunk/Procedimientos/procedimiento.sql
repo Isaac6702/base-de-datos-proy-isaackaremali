@@ -2680,7 +2680,32 @@ VALUES (SEQDFD.NEXTVAL, v_cantidad,  v_precio,  ID.NEXTVAL, ida);
 END LOOP;
 END;
 /
+create or replace PROCEDURE comprarVideo  (idu number, idv number, v_cantidad number) is
 
+CURSOR BUSQUEDA IS select SEQDF.NEXTVAL  from dual;
+ID BUSQUEDA % ROWTYPE;
+
+v_precio varchar2(2000);
+
+BEGIN
+
+select v.precio
+into v_precio
+from video v
+where v.idvideo = idv;
+
+FOR ID IN BUSQUEDA LOOP
+
+INSERT INTO FACTURA_DIGITALIZACION ( IDFD, FECHA, FKUSUARIO) 
+VALUES (ID.NEXTVAL, SYSDATE, idu );
+
+INSERT INTO  DETALLE_FACTURA_DIGITALIZADA (IDDFD, CANTIDAD,  MONTO, FKFD,  FKVIDEO)
+VALUES (SEQDFD.NEXTVAL, v_cantidad,  v_precio,  ID.NEXTVAL, idv);
+
+   dbms_output.put_line ('numero de factura '|| ID.nextval);
+
+END LOOP;
+END;
  
 
 
