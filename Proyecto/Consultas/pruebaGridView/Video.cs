@@ -17,21 +17,20 @@ using WMPLib;
 namespace pruebaGridView
 {
     
-    public partial class Audio : Form
+    public partial class Video : Form
     {
         WindowsMediaPlayer wplayer = new WindowsMediaPlayer();
         Conexion conexion = new Conexion();
-        public Audio()
+        public Video()
         {
             DataTable tablaAux = new DataTable();
             
             InitializeComponent();
             DTFecha.CustomFormat = "dd/MM/yyyy";
             tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-           
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
-                DataTable tablaBD = conexion.procemiento("CT_Audio");
+                DataTable tablaBD = conexion.procemiento("CT_Video");
                 
                 
                 llenarTabla(tablaBD);
@@ -41,26 +40,27 @@ namespace pruebaGridView
         public void llenarTabla(DataTable tablaAux)
         {
             tabla.DataSource = tablaAux;
-           
         }
 
 
       
         private void tabla_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+
+            
                 Conexion conexion = new Conexion();
                 tabla.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 if (conexion.AbrirConexion("isaac", "isaac"))
                 {
                     wplayer.close();
-                    DataTable tablaAudio = conexion.filtrar("CT_Contenido_Audio", tabla.Rows[e.RowIndex].Cells[0].Value.ToString());
+                    DataTable tablaAudio = conexion.filtrar("CT_Contenido_Video", tabla.Rows[e.RowIndex].Cells[0].Value.ToString());
                     if (tablaAudio != null)
                     {
                         byte[] bytes = (byte[])tablaAudio.Rows[0][0];
                         
                         try
                         {
-                            wplayer.openPlayer(Generico.llenarAudio(bytes, "audio" + tabla.Rows[e.RowIndex].Cells[0].Value.ToString()));
+                            wplayer.openPlayer(Generico.llenarAudio(bytes, "video" + tabla.Rows[e.RowIndex].Cells[0].Value.ToString()));
                         }
                         catch
                         {
@@ -72,12 +72,16 @@ namespace pruebaGridView
            
         }
 
-        private void Audio_Load(object sender, EventArgs e)
+        private void label1_Click(object sender, EventArgs e)
         {
+
+
+
+
 
         }
 
-        private void BTBuscar_Click(object sender, EventArgs e)
+        private void BTbuscar_Click(object sender, EventArgs e)
         {
             List<string> lista = new List<string>();
 
@@ -108,11 +112,9 @@ namespace pruebaGridView
             if (conexion.AbrirConexion("isaac", "isaac"))
             {
 
-                DataTable tablaBD = conexion.filtrar("FT_Audio", Generico.generarParametroFiltrado(lista));
+                DataTable tablaBD = conexion.filtrar("FT_Video", Generico.generarParametroFiltrado(lista));
                 llenarTabla(tablaBD);
             }
-
-
         }
 
     

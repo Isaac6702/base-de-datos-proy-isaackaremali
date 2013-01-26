@@ -92,5 +92,48 @@ namespace pruebaGridView
 
         }
 
+        public static String llenarPDF(byte[] pdfBlob, String nombre)
+        {
+            
+            String rutaPDF = "C:/pdf/" + nombre + ".pdf";
+
+
+            if (pdfBlob.Length != 0)
+            {
+
+                byte[] blob = pdfBlob;
+                FileStream FS = new FileStream(rutaPDF, FileMode.Create);
+                FS.Write(blob, 0, blob.Length);
+                FS.Close();
+
+                return rutaPDF;
+
+            }
+            return null;
+
+        }
+        public static String llenarAudio(byte[] audioBlob, String nombre)
+        {
+            String rutaAudio = "C:/audio/" + nombre + ".mp3";
+
+            if (audioBlob.Length != 0)
+            {
+                try
+                {
+                    byte[] blob = audioBlob;
+                    FileStream FS = new FileStream(rutaAudio, FileMode.Create);
+                    FS.Write(blob, 0, blob.Length);
+                    FS.Close();
+                    return rutaAudio;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+            return null;
+
+        }
+
     }
 }
