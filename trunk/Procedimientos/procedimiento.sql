@@ -2640,8 +2640,20 @@ CURSOR BUSQUEDA IS select SEQDF.NEXTVAL  from dual;
 ID BUSQUEDA % ROWTYPE;
 
 v_precio varchar2(2000);
+dias number;
 
 BEGIN
+
+select floor( sysdate  - fp.fecha)
+into dias 
+from audio a, fecha_presentacion fp
+where a.idaudio = ida AND fp.idfp = a.fkpresentacion;
+
+
+IF dias < 20 THEN
+RAISE_APPLICATION_ERROR(-20000,'ERROR  no se puede vender el audio antes de los 20 d’as despuŽs  de la presentaci—n ');
+
+END IF;
 
 select a.precio
 into v_precio
@@ -2667,8 +2679,19 @@ CURSOR BUSQUEDA IS select SEQDF.NEXTVAL  from dual;
 ID BUSQUEDA % ROWTYPE;
 
 v_precio varchar2(2000);
+dias number;
 
 BEGIN
+
+select floor( sysdate  - fp.fecha)
+into dias 
+from video v, fecha_presentacion fp
+where v.idvideo = idv AND fp.idfp = v.fkpresentacion;
+
+
+IF dias < 20 THEN
+RAISE_APPLICATION_ERROR(-20000,'ERROR  no se puede vender el video antes de los 20 d’as despuŽs  de la presentaci—n ');
+end if;
 
 select v.precio
 into v_precio
@@ -2761,7 +2784,111 @@ EXCEPTION WHEN OTHERS THEN
 
 END;
 /
+create or replace PROCEDURE pagoPersonalObra(fechaPresentacion date) is
 
+CURSOR BUSQUEDA IS select nombres(m.nombreCompleto) musico, tc.sueldo, m.idmusico id, fp.IDFP fecha
+                    from fecha_presentacion fp, obra o, musico_obra mo, musico m, trabajador_cargo tc
+                    where fp.fkobra = o.idobra AND  mo.pkpresentacion = fp.idfp AND mo.pkmusico = m.idmusico
+                    and tc.fkmusico = m.idmusico and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+
+musicos BUSQUEDA % ROWTYPE;
+
+CURSOR BUSQUEDA2 IS select nombres(b.nombrecompleto) " BAILARINES INVITADOS", tc.sueldo, b.idbailarin id, fp.IDFP fecha 
+                        from bailarin b,  BALLET bl, BAILARIN_BALLET bb, obra o, fecha_presentacion fp , trabajador_cargo tc
+                        where o.fkballet = bl.idballet and bb.pkballet = bl.idballet
+                        and bb.pkbailarin = b.idbailarin and fp.fkobra = o.idobra 
+                        and tc.fkbailarin = b.idbailarin and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+bailarinesInvitados BUSQUEDA2 % ROWTYPE;
+
+CURSOR BUSQUEDA3 IS select nombres(c.nombrecompleto) cantantes, tc.sueldo, c.idcantante id, fp.IDFP fecha
+                        from obra o, fecha_presentacion fp, elenco e, cantante c , trabajador_cargo tc
+                        where fp.fkobra = o.idobra and fp.idfp = e.pkfechaPresentacion and e.pkcantante = c.idcantante
+                        and tc.fkcantante = c.idcantante and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+cantantes BUSQUEDA3 % ROWTYPE;
+
+CURSOR BUSQUEDA4 IS select nombres(m.nombrecompleto) "MUSICO INVITADOS", tc.sueldo, m.idmusico id, fp.IDFP fecha
+                from obra o, fecha_presentacion fp, orquesta oq, musico_orquesta mo, musico m , trabajador_cargo tc
+                where fp.fkobra = o.idobra and o.fkorquesta = oq.idorquesta and mo.pkorquesta = oq.idorquesta
+                and mo.pkmusico = m.idmusico
+                and tc.fkmusico = m.idmusico and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+musicoInvitados BUSQUEDA4 % ROWTYPE;
+
+CURSOR BUSQUEDA5 IS select nombres(b.nombreCompleto) bailarin, tc.sueldo, b.idbailarin id, fp.IDFP fecha
+                        from obra o, fecha_presentacion fp, bailarin_obra bo, bailarin b, trabajador_cargo tc 
+                        where fp.fkobra = o.idobra and fp.idfp = bo.pkpresentacion and  bo.pkbailarin = b.idbailarin
+                        and tc.fkbailarin = b.idbailarin and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+bailarin BUSQUEDA5 % ROWTYPE;
+
+CURSOR BUSQUEDA6 IS select nombres(eg.nombreCompleto) escenografo, tc.sueldo, eg.idescenografo id, fp.IDFP fecha
+                        from obra o, fecha_presentacion fp, escenografia e, escenografo eg, trabajador_cargo tc
+                        where  fp.fkobra = o.idobra and o.idobra = e.fkescenografo and  e.fkescenografo = eg.idescenografo
+                        and tc.fkescenografo = eg.idescenografo and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+escenografo BUSQUEDA6 % ROWTYPE;
+
+CURSOR BUSQUEDA7 IS select nombres(de.nombreCompleto) "directo escenografia", tc.sueldo, de.idde id, fp.IDFP fecha
+                        from obra o, fecha_presentacion fp, escenografia e, director_escenografia de, trabajador_cargo tc
+                        where  fp.fkobra = o.idobra and o.idobra = e.fkescenografo and  e.fkescenografo = de.idde
+                        and tc. FKDIRECTORESCENOGRAFIA = de.idde and to_date(fp.fecha,'dd/mm/yy') = to_date(fechaPresentacion,'dd/mm/yy');
+
+D_escenografo BUSQUEDA7 % ROWTYPE;
+
+
+
+BEGIN
+
+FOR musicos IN BUSQUEDA LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKMUSICO, FKFP)
+    VALUES (SEQHP.nextval, sysdate, musicos.sueldo, musicos.id, musicos.fecha);
+
+END LOOP;
+
+FOR bailarinesInvitados IN BUSQUEDA2 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKBAILARIN, FKFP)
+    VALUES (SEQHP.nextval, sysdate, bailarinesInvitados.sueldo, bailarinesInvitados.id, bailarinesInvitados.fecha);
+
+END LOOP;
+
+FOR cantantes IN BUSQUEDA3 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKCANTANTE, FKFP)
+    VALUES (SEQHP.nextval, sysdate, cantantes.sueldo, cantantes.id, cantantes.fecha);
+
+END LOOP;
+
+FOR musicoInvitados IN BUSQUEDA4 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKMUSICO, FKFP)
+    VALUES (SEQHP.nextval, sysdate, musicoInvitados.sueldo, musicoInvitados.id, musicoInvitados.fecha);
+
+END LOOP;
+
+FOR bailarin IN BUSQUEDA5 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKBAILARIN, FKFP)
+    VALUES (SEQHP.nextval, sysdate, bailarin.sueldo, bailarin.id, bailarin.fecha);
+
+END LOOP;
+
+FOR escenografo IN BUSQUEDA6 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKESCENOGRAFO, FKFP)
+    VALUES (SEQHP.nextval, sysdate, escenografo.sueldo, escenografo.id, escenografo.fecha);
+
+END LOOP;
+
+FOR D_escenografo IN BUSQUEDA7 LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKDIRECTORESCENOGRAFIA, FKFP)
+    VALUES (SEQHP.nextval, sysdate, D_escenografo.sueldo, D_escenografo.id, D_escenografo.fecha);
+
+END LOOP;
+
+commit;
+
+END;
+/
 
  
 
