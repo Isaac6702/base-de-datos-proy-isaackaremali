@@ -2653,6 +2653,33 @@ exception
    dbms_output.put_line ('Fin del archivo');
 end;
 /
+create or replace PROCEDURE comprarAudio  (idu number, ida number, v_cantidad number) is
+
+CURSOR BUSQUEDA IS select SEQDF.NEXTVAL  from dual;
+ID BUSQUEDA % ROWTYPE;
+
+v_precio varchar2(2000);
+
+BEGIN
+
+select a.precio
+into v_precio
+from audio a
+where a.idaudio = ida;
+
+FOR ID IN BUSQUEDA LOOP
+
+INSERT INTO FACTURA_DIGITALIZACION ( IDFD, FECHA, FKUSUARIO) 
+VALUES (ID.NEXTVAL, SYSDATE, idu );
+
+INSERT INTO  DETALLE_FACTURA_DIGITALIZADA (IDDFD, CANTIDAD,  MONTO, FKFD,  FKAUDIO)
+VALUES (SEQDFD.NEXTVAL, v_cantidad,  v_precio,  ID.NEXTVAL, ida);
+
+   dbms_output.put_line ('numero de factura '|| ID.nextval);
+
+END LOOP;
+END;
+/
 
  
 
