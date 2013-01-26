@@ -2386,25 +2386,6 @@ EXCEPTION WHEN OTHERS THEN
    RAISE;
 END;
 /
-
-CREATE OR REPLACE function datosOBraAutor(id IN NUMBER)
-RETURN VARCHAR2 IS
-RESULTADO VARCHAR2(1000);
-CURSOR BUSQUEDA IS select lower(o.nombre) obra, lower(nombres(nombreCompleto)) nombre, lower(apellidos(nombreCompleto)) apellido
-from autor a, obra o
-where o.fkAutor = a.idAutor
-and o.idObra = id;
-AUX  BUSQUEDA % ROWTYPE;
-
-BEGIN
-FOR AUX IN BUSQUEDA LOOP
-     RESULTADO := AUX.obra|| ' - ' ||AUX.NOMBRE || ' '|| AUX.APELLIDO;
-END LOOP;
-    
-RETURN (RESULTADO);
-END;
-/
-
 create or replace procedure audicionMusico (idp number, idm number, ruta varchar2) is
 
 archivo utl_file.file_type;
@@ -2706,6 +2687,82 @@ VALUES (SEQDFD.NEXTVAL, v_cantidad,  v_precio,  ID.NEXTVAL, idv);
 
 END LOOP;
 END;
+/
+create or replace PROCEDURE pagoFacturaD(idF NUMBER, pagos listaAuxPago ) IS
+
+total NUMBER;
+totalPago NUMBER;
+valorMoneda NUMBER;
+BEGIN
+    select SUM(p.monto)
+        INTO totalPago
+        from pago_digitalizacion p
+        where p.fkFd = idF;
+        
+        IF totalPago is null THEN
+            totalPago:= 0;
+        END IF;
+    
+    select SUM(df.monto)
+        INTO total
+        from factura_digitalizacion f, detalle_factura_digitalizada df
+        where df.fkfd = f.idfd AND f.idfd = idF
+        GROUP BY f.idfd;
+        
+    IF totalPago < total THEN
+        IF pagos IS NOT NULL THEN    
+            FOR i IN 1..pagos.COUNT LOOP
+                select valor
+                    into valorMoneda 
+                    from moneda
+                    where idmoneda = pagos(i).idMoneda;
+                    
+                totalPago := totalPago + pagos(i).montoPagado*valorMoneda;
+                
+            END LOOP;
+            
+            IF total = totalPago THEN
+                FOR i IN 1..pagos.COUNT LOOP
+               
+                    INSERT INTO PAGO_DIGITALIZACION
+                        (IDPD, MONTO, FECHA, FORMAPAGO, FKMONEDA, FKFD)
+                    VALUES
+                        (SEQPAGOD.NEXTVAL, pagos(i).montoPagado, TO_DATE(SYSDATE,'dd/mm/yyyy'), pagos(i).formaPago, pagos(i).idMoneda, idF);
+               
+                END LOOP;
+                        
+                dbms_output.put_line('Pago completo');
+            
+            END IF;
+            
+            IF total > totalPago  THEN
+                    RAISE_APPLICATION_ERROR(-20000,'FALTA PAGAR un monto de ' || to_char(total-totalPago));    
+            END IF;
+            
+            IF total < totalPago  THEN
+                    RAISE_APPLICATION_ERROR(-20000,'EL PAGO ESCEDIO un monto de ' || to_char(totalPago-total));    
+            END IF;   
+                
+        ELSE
+            RAISE_APPLICATION_ERROR(-20000,'Debe introducir al menos un pago');
+        END IF;
+        
+    ELSE
+        
+        RAISE_APPLICATION_ERROR(-20000,'LA factura ya fue pagada');
+    END IF;
+    
+    
+COMMIT;
+ 
+EXCEPTION WHEN OTHERS THEN
+   ROLLBACK;
+   RAISE;
+
+END;
+/
+
+
  
 
 
