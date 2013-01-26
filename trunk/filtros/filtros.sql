@@ -707,3 +707,96 @@ BEGIN
 
 END;
 /
+create or replace PROCEDURE FT_Audio(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(2550);
+  obra varchar2(2000);
+  autor varchar2(2000);
+  fecha varchar2(2000);
+  
+BEGIN
+    obra:= split(buscador ,1,',');
+    autor:= split(buscador ,2,',');
+    fecha:= split(buscador ,3,',');
+  v_query := 'select a.idAudio "ID", datosObraAutor(o.idObra) "OBRA", datosDirectores(o.idObra) "DIRECTORES",
+                    to_char(fp.fecha,''dd/mm/yyyy hh:mi:ssam'') "FECHA", datosOrquesta(o.idObra) "ORQUESTA", reparto_ppal(fp.idFP) "ELENCO", a.formato "FORMATO"
+                    from obra o, fecha_presentacion fp, audio a
+                    where fp.fkObra = o.idObra
+                    and a.fkpresentacion = fp.idFP';
+                        
+    IF obra != 'null' THEN
+     v_query := v_query || ' AND  datosObraAutor(o.idObra) like ''%'||obra||'%''';
+    END IF;
+    IF autor != 'null' THEN
+     v_query := v_query || ' AND  datosObraAutor(o.idObra) like''%'||autor||'%''';
+    END IF;
+    IF fecha != 'null' THEN
+     v_query := v_query || ' AND  to_date(fp.fecha,''dd/mm/yy'') = to_date('''||fecha||''',''dd/mm/yy'')';
+    END IF;
+    
+    v_query := v_query ||' order by o.idObra, fp.fecha';
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_video(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(2550);
+  obra varchar2(2000);
+  autor varchar2(2000);
+  fecha varchar2(2000);
+  
+BEGIN
+    obra:= split(buscador ,1,',');
+    autor:= split(buscador ,2,',');
+    fecha:= split(buscador ,3,',');
+  v_query := 'select v.idVideo "ID", datosObraAutor(o.idObra) "OBRA", datosDirectores(o.idObra) "DIRECTORES", to_char(fp.fecha,''dd/mm/yyyy hh:mi:ssam'') "FECHA", datosOrquesta(o.idObra) "ORQUESTA", reparto_ppal(fp.idFP) "ELENCO", v.formato "FORMATO"
+                from obra o, fecha_presentacion fp, video v
+                where fp.fkObra = o.idObra
+                and v.fkpresentacion = fp.idFP';
+                                    
+    IF obra != 'null' THEN
+     v_query := v_query || ' AND  datosObraAutor(o.idObra) like ''%'||obra||'%''';
+    END IF;
+    IF autor != 'null' THEN
+     v_query := v_query || ' AND  datosObraAutor(o.idObra) like''%'||autor||'%''';
+    END IF;
+    IF fecha != 'null' THEN
+     v_query := v_query || ' AND  to_date(fp.fecha,''dd/mm/yy'') = to_date('''||fecha||''',''dd/mm/yy'')';
+    END IF;
+    
+    v_query := v_query ||' order by o.idObra, fp.fecha';
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
+create or replace PROCEDURE FT_libreto(buscador varchar2, REC_CUR OUT SYS_REFCURSOR) is
+  v_query     VARCHAR2(2550);
+  obra varchar2(2000);
+  idioma varchar2(2000);
+  fecha varchar2(2000);
+  
+BEGIN
+    obra:= split(buscador ,1,',');
+    idioma:= split(buscador ,2,',');
+    fecha:= split(buscador ,3,',');
+  v_query := 'select o.idObra "ID", lower(o.nombre) "OBRA", to_char(fp.fecha, ''dd/mm/yyyy hh:mi:ssam'') "PRESENTACION", i.nombre
+                from obra o, fecha_presentacion fp, libreto l, IDIOMA i idioma 
+                where  fp.fkObra = o.idObra and l.fkObra = o.idObra and l.fkidioma = i.ididioma ';
+                                    
+    IF obra != 'null' THEN
+     v_query := v_query || ' AND  lower(o.nombre)(o.idObra) like ''%'||obra||'%''';
+    END IF;
+    IF idioma != 'null' THEN
+     v_query := v_query || ' AND  i.nombre(o.idObra) like''%'||idioma||'%''';
+    END IF;
+    IF fecha != 'null' THEN
+     v_query := v_query || ' AND  to_date(fp.fecha,''dd/mm/yy'') = to_date('''||fecha||''',''dd/mm/yy'')';
+    END IF;
+    
+    
+ 
+  OPEN REC_CUR FOR v_query;
+
+END;
+/
