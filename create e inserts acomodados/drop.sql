@@ -130,6 +130,7 @@ drop sequence SEQIA;
 drop sequence SEQri;
 drop sequence SEQrvp;
 drop sequence SEQva;
+drop sequence SEQPAGOD;
 
 drop type TELEFONOS;
 drop type TELEFONO;
