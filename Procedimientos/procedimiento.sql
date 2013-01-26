@@ -2889,6 +2889,25 @@ commit;
 
 END;
 /
+create or replace PROCEDURE pagoTrabajadores is
+
+CURSOR BUSQUEDA IS select t.idtrabajador id, tc.sueldo
+                        from trabajador t, trabajador_cargo tc
+                        where tc.fktrabajador = t.idtrabajador;
+
+trabajador BUSQUEDA % ROWTYPE;
+
+BEGIN
+
+FOR trabajador IN BUSQUEDA LOOP
+
+    INSERT INTO HISTORIAL_PAGO (IDHP, FECHA, MONTO, FKTRABAJADOR)
+    VALUES (SEQHP.nextval, sysdate, trabajador.sueldo, trabajador.id);
+
+END LOOP;
+
+END;
+/
 
  
 
