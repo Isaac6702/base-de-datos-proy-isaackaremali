@@ -752,7 +752,7 @@ create table HISTORIAL_PAGO (
     idHP                    number(10)                          not null,
     fecha                   date                                not null,
     monto                   number(12,2)                        not null,
-    fkFP                    number(10)                          not null,
+    fkFP                    number(10)                          ,
     fkTrabajador            number(10)                                  ,
     fkMusico                number(10)                                  ,
     fkBailarin              number(10)                                  ,
